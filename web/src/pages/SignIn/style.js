@@ -11,6 +11,7 @@ export const Container = styled.div`
 
   .content-logo {
     margin: 42px 0;
+    padding: 64px;
     display: flex;
     justify-content: center;
   }
@@ -33,6 +34,10 @@ export const Container = styled.div`
       display: flex;
       flex-direction: row;
       align-content: center;
+
+      .content-logo {
+        padding: 0;
+      }
 
       .content-login {
         padding: 64px;
