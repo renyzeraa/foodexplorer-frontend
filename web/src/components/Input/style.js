@@ -7,8 +7,6 @@ export const Container = styled.div`
 
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
   color: ${({ theme }) => theme.COLORS.GRAY_300};
-  border: 1px solid #ffffff;
-  border-radius: 5px;
 
   > input {
     font-family: 'Roboto', sans-serif;
@@ -24,7 +22,8 @@ export const Container = styled.div`
     color: ${({ theme }) => theme.COLORS.WHITE};
     background-color: transparent;
 
-    border: 0;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
 
     &:placeholder {
       color: ${({ theme }) => theme.COLORS.GRAY_300};
