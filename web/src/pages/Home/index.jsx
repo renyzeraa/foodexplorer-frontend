@@ -1,6 +1,9 @@
 import { Container } from './style'
 import { Header } from '../../components/Header'
+import { Footer } from '../../components/Footer'
 import fruits from '../../assets/fruits-header.svg'
+import { Card } from '../../components/Card'
+import bolodamasco from '../../assets/pratos/bolodamasco.png'
 
 export function Home() {
   return (
@@ -16,7 +19,95 @@ export function Home() {
             <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
           </div>
         </header>
+        <section className="content">
+          <h1>Pratos principais</h1>
+          <div className="cards">
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+          </div>
+        </section>
+        <section className="content">
+          <h1>Sobremesas</h1>
+          <div className="cards">
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+          </div>
+        </section>
+        <section className="content">
+          <h1>Bebidas</h1>
+          <div className="cards">
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+            <Card
+              title="Bolo de Damasco"
+              description="Damascos frescos em uma massa sem glúten."
+              price="19,97"
+              img={bolodamasco}
+            ></Card>
+          </div>
+        </section>
       </main>
+      <Footer></Footer>
     </Container>
   )
 }
