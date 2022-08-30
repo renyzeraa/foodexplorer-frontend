@@ -4,7 +4,7 @@ export const Container = styled.div`
   margin: 0 24px;
   display: grid;
   align-items: center;
-
+  height: 100vh;
   .content-logo img {
     width: 100%;
   }
