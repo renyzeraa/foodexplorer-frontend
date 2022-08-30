@@ -80,7 +80,7 @@ export const Container = styled.div`
       position: absolute;
     }
     .menu-bg {
-      z-index: 1;
+      z-index: 2;
       width: 0;
       height: 0;
       margin: 30px 0 20px 0;
@@ -90,7 +90,7 @@ export const Container = styled.div`
       border: 1px solid #2485e938;
     }
     #menu-bar {
-      z-index: 2;
+      z-index: 3;
     }
     .change-bg {
       width: 150px;
