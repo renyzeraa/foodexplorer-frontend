@@ -6,6 +6,7 @@ export const Container = styled.main`
   flex-direction: column;
 
   section {
+    width: 100%;
     height: 100vh;
     padding: 0 24px;
     margin-top: 48px;
@@ -25,7 +26,7 @@ export const Container = styled.main`
         display: flex;
         align-items: center;
         font-weight: 500;
-        font-size: 24px;
+        font-size: 16px;
         font-family: 'Poppins', sans-serif;
         color: ${({ theme }) => theme.COLORS.GRAY_200};
       }
@@ -41,7 +42,7 @@ export const Container = styled.main`
         border-collapse: collapse;
         font-family: 'Roboto', sans-serif;
 
-        thead th {
+        thead tr td {
           border-bottom: 2px solid ${({ theme }) => theme.COLORS.BACKGROUND_700};
           border-right: 2px solid ${({ theme }) => theme.COLORS.BACKGROUND_700};
           padding: 16px 12px;
@@ -52,7 +53,7 @@ export const Container = styled.main`
           color: ${({ theme }) => theme.COLORS.GRAY_100};
         }
 
-        thead th:last-child {
+        thead tr td:last-child {
           border-right: none;
         }
 
@@ -70,7 +71,7 @@ export const Container = styled.main`
           border-right: none;
         }
 
-        tr:last-child td {
+        tbody tr:last-child td {
           border-bottom: none;
         }
       }

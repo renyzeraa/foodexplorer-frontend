@@ -17,10 +17,12 @@ export function Demand() {
         <div className="table-wrapper">
           <table>
             <thead>
-              <th>Status</th>
-              <th>Código</th>
-              <th>Detalhamento</th>
-              <th>Data e hora</th>
+              <tr>
+                <td>Status</td>
+                <td>Código</td>
+                <td>Detalhamento</td>
+                <td>Data e hora</td>
+              </tr>
             </thead>
             <tbody>
               <tr>
