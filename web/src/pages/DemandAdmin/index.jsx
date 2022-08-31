@@ -3,13 +3,13 @@ import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { AiOutlineLeft } from 'react-icons/ai'
 
-export function Demand() {
+export function DemandAdmin() {
   return (
     <Container>
       <Header />
       <section>
         <div className="header">
-          <h1>Meus pedidos</h1>
+          <h1>Pedidos</h1>
           <a href="#">
             <AiOutlineLeft /> voltar
           </a>
@@ -27,8 +27,11 @@ export function Demand() {
             <tbody>
               <tr>
                 <td>
-                  <p>🔴</p>
-                  Pendente
+                  <select>
+                    <option value="">🔴 Pendente</option>
+                    <option value="">🟡 Preparando</option>
+                    <option value="">🟢 Entregue</option>
+                  </select>
                 </td>
                 <td>04</td>
                 <td>
@@ -39,7 +42,11 @@ export function Demand() {
               </tr>
               <tr>
                 <td>
-                  <p>🟡</p>Preparando
+                  <select>
+                    <option value="">🔴 Pendente</option>
+                    <option value="">🟡 Preparando</option>
+                    <option value="">🟢 Entregue</option>
+                  </select>
                 </td>
                 <td>03</td>
                 <td>
@@ -50,7 +57,11 @@ export function Demand() {
               </tr>
               <tr>
                 <td>
-                  <p>🟢</p>Entregue
+                  <select>
+                    <option value="">🔴 Pendente</option>
+                    <option value="">🟡 Preparando</option>
+                    <option value="">🟢 Entregue</option>
+                  </select>
                 </td>
                 <td>02</td>
                 <td>

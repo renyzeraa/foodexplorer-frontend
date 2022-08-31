@@ -11,12 +11,13 @@ import { SignUp } from './pages/SignUp'
 import { Details } from './pages/Details'
 import { Payment } from './pages/Payment'
 import { Demand } from './pages/Demand'
+import { DemandAdmin } from './pages/DemandAdmin'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Demand />
+      <DemandAdmin />
     </ThemeProvider>
   </React.StrictMode>
 )
