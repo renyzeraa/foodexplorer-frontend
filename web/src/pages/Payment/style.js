@@ -150,9 +150,8 @@ export const Container = styled.div`
       justify-content: space-between;
       height: 100vh;
       .container {
-        h2 {
-          padding-left: 24px;
-        }
+        padding: 0;
+
         .demand {
           width: 410px;
           margin: 0;

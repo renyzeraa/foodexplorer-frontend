@@ -14,7 +14,7 @@ export function Details() {
     <Container>
       <Header></Header>
       <main>
-        <a href="">
+        <a href="#">
           <AiOutlineLeft /> voltar
         </a>
         <section className="content-img">
