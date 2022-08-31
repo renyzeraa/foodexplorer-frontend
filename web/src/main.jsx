@@ -9,12 +9,13 @@ import { Home } from './pages/Home'
 import { SignIn } from './pages/SignIn'
 import { SignUp } from './pages/SignUp'
 import { Details } from './pages/Details'
+import { Payment } from './pages/Payment'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <Details />
+      <Payment />
     </ThemeProvider>
   </React.StrictMode>
 )
