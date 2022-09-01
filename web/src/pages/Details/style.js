@@ -19,8 +19,10 @@ export const Container = styled.div`
 
     .content-img {
       margin: 40px 0;
+      display: flex;
+      justify-content: center;
       img {
-        width: 100%;
+        width: 80%;
       }
     }
 

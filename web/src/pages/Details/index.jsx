@@ -4,9 +4,9 @@ import { Footer } from '../../components/Footer'
 import { Button } from '../../components/Button'
 import { AiOutlineLeft, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import molla from '../../assets/pratos/molla.png'
-import rabanete from '../../assets/igredientes/rapanete.png'
+import rabanete from '../../assets/igredientes/rabanete.png'
 import alface from '../../assets/igredientes/alface.png'
-import paofeio from '../../assets/igredientes/paofeio.png'
+import paofeio from '../../assets/igredientes/pao.png'
 import tomate from '../../assets/igredientes/tomate.png'
 import { MdPieChartOutline } from 'react-icons/md'
 
@@ -29,7 +29,7 @@ export function Details() {
           <div className="makings">
             <ul>
               <li>
-                <img src={prato} alt="" />
+                <img src={rabanete} alt="" />
                 <p>rabanete</p>
               </li>
               <li>
