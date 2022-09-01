@@ -16,19 +16,20 @@ export const Container = styled.div`
 
   padding: 0 8px 0 0;
 
-  > input {
+  .react-datalist-input__textbox {
+    border: none;
+
     height: 40px;
-    max-width: 80px;
+    max-width: 100px;
     padding: 8px;
     color: ${({ theme }) => theme.COLORS.WHITE};
     background-color: transparent;
-    border: none;
-
     font-weight: 400;
     font-size: 16px;
     line-height: 19px;
     font-family: 'Roboto', sans-serif;
-    &::placeholder {
+
+    ::placeholder {
       color: ${({ theme }) => theme.COLORS.GRAY_300};
     }
 
@@ -36,6 +37,12 @@ export const Container = styled.div`
       outline: none;
     }
   }
+
+  .react-datalist-input__listbox {
+    background-color: ${({ theme }) => theme.COLORS.RED};
+    color: black;
+  }
+
   > button {
     border: none;
     background: none;
