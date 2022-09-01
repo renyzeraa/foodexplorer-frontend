@@ -1,14 +1,15 @@
 import { Container } from './style'
 import { Header } from '../../components/Header'
+import { HeaderAdmin } from '../../components/HeaderAdmin'
 import { Footer } from '../../components/Footer'
 import fruits from '../../assets/fruits-header.svg'
 import { Card } from '../../components/Card'
-import bolodamasco from '../../assets/pratos/bolodamasco.png'
+import bolodamasco from '../../assets/pratos/molla.png'
 
-export function Home() {
+export function Home({ admin = true }) {
   return (
     <Container>
-      <Header></Header>
+      {admin ? <HeaderAdmin /> : <Header />}
       <main>
         <header>
           <div className="img-content">

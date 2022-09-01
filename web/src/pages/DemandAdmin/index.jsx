@@ -1,12 +1,12 @@
 import { Container } from './style'
-import { Header } from '../../components/Header'
+import { HeaderAdmin } from '../../components/HeaderAdmin'
 import { Footer } from '../../components/Footer'
 import { AiOutlineLeft } from 'react-icons/ai'
 
 export function DemandAdmin() {
   return (
     <Container>
-      <Header />
+      <HeaderAdmin show={false} />
       <section>
         <div className="header">
           <h1>Pedidos</h1>

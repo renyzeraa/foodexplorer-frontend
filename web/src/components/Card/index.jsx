@@ -10,7 +10,7 @@ import { Button } from '../Button'
 export function Card({ title, price, img, description, ...rest }) {
   return (
     <Container {...rest}>
-      <button className="btn-fav">
+      <button className="btn-fav ">
         <AiOutlineHeart />
       </button>
       <div className="container">

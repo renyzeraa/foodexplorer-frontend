@@ -1,6 +1,6 @@
 import { Container } from './style'
 
-import { Header } from '../../components/Header'
+import { HeaderAdmin } from '../../components/HeaderAdmin'
 import { Footer } from '../../components/Footer'
 import { Input } from '../../components/Input'
 import { Ingredient } from '../../components/Ingredient'
@@ -11,7 +11,7 @@ import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 export function Create() {
   return (
     <Container>
-      <Header />
+      <HeaderAdmin />
       <section>
         <div className="header">
           <h1>Editar prato</h1>
