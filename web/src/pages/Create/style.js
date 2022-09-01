@@ -40,6 +40,7 @@ export const Container = styled.main`
       display: flex;
       flex-direction: column;
       gap: 20px;
+      margin-bottom: 128px;
       .content-img {
         margin: 0;
       }
@@ -130,6 +131,12 @@ export const Container = styled.main`
       margin: 48px auto;
 
       .content-wrapper {
+        margin-bottom: 64px;
+        .button-submit {
+          width: 350px;
+          margin: 0 0 0 auto;
+        }
+
         .content {
           display: flex;
           gap: 20px;
@@ -145,7 +152,6 @@ export const Container = styled.main`
           display: flex;
           div:first-child {
             .ingredient {
-              flex-wrap: unset;
               width: 700px;
             }
           }

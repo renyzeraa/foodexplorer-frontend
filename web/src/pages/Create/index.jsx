@@ -39,6 +39,7 @@ export function Create() {
               <label htmlFor="">Ingredientes</label>
               <div className="ingredient">
                 <Ingredient value="tomate" />
+                <Ingredient value="tomate" />
                 <Ingredient isNew={true} placeholder="Adicionar" />
               </div>
             </div>
@@ -52,8 +53,9 @@ export function Create() {
             <label htmlFor="">Descrição</label>
             <TextArea placeholder="Fale brevemente sobre o prato, seus ingredientes e composição" />
           </div>
-
-          <Input className="submit" type="submit" value="Adicionar pedido" />
+          <div className="button-submit">
+            <Input className="submit" type="submit" value="Adicionar pedido" />
+          </div>
         </div>
       </section>
       <Footer />
