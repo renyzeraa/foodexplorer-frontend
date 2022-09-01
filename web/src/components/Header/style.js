@@ -93,8 +93,8 @@ export const Container = styled.div`
       z-index: 3;
     }
     .change-bg {
-      width: 150px;
-      height: 395px;
+      width: 180px;
+      height: 480px;
       transform: translate(7%, -39%);
     }
     .change .bar {
@@ -155,10 +155,30 @@ export const Container = styled.div`
         padding: 12px 12px 12px 0;
       }
 
-      svg:last-child {
+      .cart {
+        margin: 0 16px 0 0;
+        font-size: 28px;
+        position: relative;
+        span {
+          position: absolute;
+
+          left: 18px;
+          top: -8px;
+          background-color: red;
+          border-radius: 50%;
+          font-size: 14px;
+          width: 18px;
+          height: 18px;
+
+          text-align: center;
+          color: ${({ theme }) => theme.COLORS.WHITE};
+          font-weight: bold;
+        }
+      }
+
+      .signout {
         margin-left: 16px;
-        width: 24px;
-        height: 24px;
+        font-size: 24px;
       }
     }
   }

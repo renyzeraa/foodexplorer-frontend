@@ -6,6 +6,8 @@ import { BiSearch, BiReceipt, BiMenuAltRight } from 'react-icons/bi'
 import { GoSignOut } from 'react-icons/go'
 import { IoMdClose } from 'react-icons/io'
 import { MdFavorite } from 'react-icons/md'
+import { TiShoppingCart } from 'react-icons/ti'
+
 export function Header({ menu = false, ...rest }) {
   function onClickMenu() {
     document.getElementById('menu').classList.toggle('change')
@@ -39,6 +41,12 @@ export function Header({ menu = false, ...rest }) {
               </a>
             </li>
             <li>
+              <a href="">
+                Compras
+                <TiShoppingCart />
+              </a>
+            </li>
+            <li>
               <a href="#">
                 Pedidos
                 <BiReceipt />
@@ -69,8 +77,13 @@ export function Header({ menu = false, ...rest }) {
             placeholder="Busque seu prato"
           ></Input>
         </div>
+        <a className="cart" href="">
+          <span className="count-itens">1</span>
+          <TiShoppingCart />
+        </a>
+
         <Button icon={BiReceipt} title="Meu pedido" cont="0"></Button>
-        <a href="#">
+        <a className="signout" href="#">
           <GoSignOut />
         </a>
       </main>
