@@ -12,7 +12,8 @@ export function Ingredient({ isNew, value, onClick, ...rest }) {
       <DatalistInput
         value={value}
         inputProps={{
-          readOnly: !isNew
+          readOnly: !isNew,
+          disabled: !isNew
         }}
         {...rest}
         placeholder="Digite"
