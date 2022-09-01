@@ -8,6 +8,7 @@ import rabanete from '../../assets/igredientes/rapanete.png'
 import alface from '../../assets/igredientes/alface.png'
 import paofeio from '../../assets/igredientes/paofeio.png'
 import tomate from '../../assets/igredientes/tomate.png'
+import { MdPieChartOutline } from 'react-icons/md'
 
 export function Details() {
   return (
@@ -28,7 +29,7 @@ export function Details() {
           <div className="makings">
             <ul>
               <li>
-                <img src={rabanete} alt="" />
+                <img src={prato} alt="" />
                 <p>rabanete</p>
               </li>
               <li>
