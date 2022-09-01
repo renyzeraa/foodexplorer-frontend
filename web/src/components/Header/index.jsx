@@ -8,7 +8,7 @@ import { IoMdClose } from 'react-icons/io'
 import { MdFavorite } from 'react-icons/md'
 import { TiShoppingCart } from 'react-icons/ti'
 
-export function Header({ menu = false, ...rest }) {
+export function Header({ ...rest }) {
   function onClickMenu() {
     document.getElementById('menu').classList.toggle('change')
     document.getElementById('nav').classList.toggle('change')
