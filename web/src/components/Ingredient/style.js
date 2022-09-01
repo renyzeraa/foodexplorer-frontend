@@ -41,6 +41,32 @@ export const Container = styled.div`
   .react-datalist-input__listbox {
     background-color: ${({ theme }) => theme.COLORS.RED};
     color: black;
+    border: none;
+    border-radius: 10px;
+    max-height: 200px;
+    overflow-y: auto;
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: rgba(0, 0, 0, 0);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: white;
+      border-radius: 100px;
+    }
+
+    ::-webkit-scrollbar-button:start:decrement {
+      display: block;
+      background-color: transparent;
+    }
+  }
+
+  .react-datalist-input__listbox-option {
+    border: none;
+    border-radius: 10px;
   }
 
   > button {
