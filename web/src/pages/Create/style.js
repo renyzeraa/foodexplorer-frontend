@@ -7,7 +7,7 @@ export const Container = styled.main`
 
   section {
     width: 100%;
-    height: 100vh;
+
     padding: 0 24px;
     margin-top: 48px;
     .header {
@@ -51,7 +51,7 @@ export const Container = styled.main`
         gap: 8px;
       }
 
-      .price-igredientes {
+      .price-ingredientes {
         display: grid;
         gap: 32px;
         label {
@@ -61,6 +61,7 @@ export const Container = styled.main`
 
       .price {
         width: 100%;
+        display: grid;
       }
 
       label:nth-child(2) {
@@ -95,6 +96,7 @@ export const Container = styled.main`
       }
 
       textarea {
+        margin-top: 8px;
         margin-bottom: 28px;
       }
 
@@ -121,6 +123,7 @@ export const Container = styled.main`
         display: flex;
         gap: 8px;
         flex-wrap: wrap;
+        margin-top: 8px;
       }
     }
   }
@@ -148,11 +151,25 @@ export const Container = styled.main`
           margin-top: 0;
         }
 
-        .price-igredientes {
+        .price-ingredientes {
           display: flex;
           div:first-child {
             .ingredient {
-              width: 700px;
+              width: 620px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  @media (min-width: 1100px) {
+    section {
+      .content-wrapper {
+        .price-igredientes {
+          div:first-child {
+            .ingredient {
+              width: 820px;
             }
           }
         }

@@ -34,7 +34,7 @@ export function Create() {
               <Input type="text" placeholder="Ex.: Salada Ceasar" />
             </div>
           </div>
-          <div className="price-igredientes">
+          <div className="price-ingredientes">
             <div>
               <label htmlFor="">Ingredientes</label>
               <div className="ingredient">
@@ -45,13 +45,13 @@ export function Create() {
             </div>
             <div className="price">
               <label htmlFor="">Preço</label>
-              <Input className="price" type="text" placeholder="R$ 00,00" />
+              <Input className="price" type="text" placeholder="R$ 00.00" />
             </div>
           </div>
 
           <div>
             <label htmlFor="">Descrição</label>
-            <TextArea placeholder="Fale brevemente sobre o prato, seus ingredientes e composição" />
+            <TextArea placeholder="Fale brevemente sobre o prato. Exemplo: Rabanetes, folhas verdes e molho agridoce salpicados com gergelim. " />
           </div>
           <div className="button-submit">
             <Input className="submit" type="submit" value="Adicionar pedido" />
