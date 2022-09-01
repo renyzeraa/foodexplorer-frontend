@@ -38,9 +38,9 @@ export function Create() {
             <div>
               <label htmlFor="">Ingredientes</label>
               <div className="ingredient">
-                <Ingredient value="tomate" />
-                <Ingredient value="tomate" />
-                <Ingredient isNew={true} placeholder="Adicionar" />
+                <Ingredient value="Tomate" />
+                <Ingredient value="Tomate" />
+                <Ingredient isNew placeholder="Adicionar" />
               </div>
             </div>
             <div className="price">
