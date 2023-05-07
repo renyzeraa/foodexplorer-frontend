@@ -2,10 +2,8 @@ import { Container } from './style'
 import logo from '../../assets/logo.svg'
 import { Input } from '../Input'
 import { Button } from '../Button'
-import { BiSearch, BiReceipt, BiMenuAltRight } from 'react-icons/bi'
+import { BiSearch, BiReceipt } from 'react-icons/bi'
 import { GoSignOut } from 'react-icons/go'
-import { IoMdClose } from 'react-icons/io'
-import { MdFavorite } from 'react-icons/md'
 import { TiShoppingCart } from 'react-icons/ti'
 
 export function Header({ ...rest }) {

@@ -26,7 +26,6 @@ export const Container = styled.div`
         }
 
         .input {
-            padding: 0 28px;
             margin: 54px 0 36px;
 
             > div {
@@ -56,32 +55,24 @@ export const Container = styled.div`
         }
 
         .nav {
+            padding: 0 28px;
             transition: 0.3s ease;
             display: none;
 
             li {
-                list-style: none;
-                padding: 16px 0;
-                padding-left: 28px;
-                a {
-                    color: #fff;
-                    text-decoration: none;
-                    display: flex;
-                    align-items: center;
-                    justify-content: right;
-                    gap: 8px;
-                    font-size: 17px;
+                border-bottom: 1px solid #192227;
+                &:nth-child(n + 1) {
+                    padding: 16px 0;
                 }
+
                 a {
-                    color: #fff;
-                    text-decoration: none;
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-start;
-                    gap: 8px;
-                    font-size: 17px;
+                    font-family: 'Poppins';
+                    font-weight: 300;
+                    font-size: 24px;
+                    line-height: 140%;
+                    color: ${({ theme }) => theme.COLORS.GRAY_100};
                     &:hover {
-                        font-weight: bold;
+                        font-weight: 400;
                     }
                 }
             }
