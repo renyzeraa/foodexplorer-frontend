@@ -15,9 +15,15 @@ export function SignUp() {
                     <Form>
                         <h1>Crie sua conta</h1>
                         <p htmlFor="">Seu nome</p>
-                        <Input placeholder="Fulano da Silva" type="text" />
+                        <Input
+                            placeholder="Exemplo: João de Souza"
+                            type="text"
+                        />
                         <p htmlFor="">Email</p>
-                        <Input placeholder="exemplo@exemplo.com" type="text" />
+                        <Input
+                            placeholder="Exemplo: exemplo@exemplo.com"
+                            type="text"
+                        />
                         <p>Senha</p>
                         <Input
                             placeholder="No mínimo 6 caracteres"

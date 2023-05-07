@@ -16,7 +16,10 @@ export function SignIn() {
                         <h1>Faça login</h1>
 
                         <p htmlFor="">Email</p>
-                        <Input placeholder="exemplo@exemplo.com" type="text" />
+                        <Input
+                            placeholder="Exemplo: exemplo@exemplo.com"
+                            type="text"
+                        />
                         <p>Senha</p>
                         <Input
                             placeholder="No mínimo 6 caracteres"
