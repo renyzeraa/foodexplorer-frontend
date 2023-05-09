@@ -3,13 +3,18 @@ import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import fruits from '../../assets/fruits-header.svg'
 import { Card } from '../../components/Card'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import { Pagination, Navigation } from 'swiper'
 
 import bolodamasco from '../../assets/pratos/molla.png'
 
 export function Home({ admin = true }) {
     return (
         <Container>
-            {admin ? <Header /> : <Header />}
+            <Header />
             <main>
                 <header>
                     <div className="img-content">
@@ -24,90 +29,171 @@ export function Home({ admin = true }) {
                     </div>
                 </header>
                 <section className="content">
-                    <h1>Pratos principais</h1>
+                    <h1>Refeições</h1>
                     <div className="cards">
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
+                        <Swiper
+                            spaceBetween={40}
+                            className="mySwiper"
+                            slidesPerView={3}
+                            navigation={true}
+                            modules={[Pagination, Navigation]}
+                        >
+                            <SwiperSlide className="card">
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                    isAdmin={admin}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide className="card">
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                        </Swiper>
                     </div>
                 </section>
                 <section className="content">
                     <h1>Sobremesas</h1>
                     <div className="cards">
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
+                        <Swiper
+                            spaceBetween={40}
+                            className="mySwiper"
+                            slidesPerView={3}
+                            navigation={true}
+                            modules={[Pagination, Navigation]}
+                        >
+                            <SwiperSlide className="card">
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                        </Swiper>
                     </div>
                 </section>
                 <section className="content">
                     <h1>Bebidas</h1>
                     <div className="cards">
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
-                        <Card
-                            title="Bolo de Damasco"
-                            description="Damascos frescos em uma massa sem glúten."
-                            price="19,97"
-                            img={bolodamasco}
-                        ></Card>
+                        <Swiper
+                            spaceBetween={40}
+                            className="mySwiper"
+                            slidesPerView={3}
+                            navigation={true}
+                            modules={[Pagination, Navigation]}
+                        >
+                            <SwiperSlide className="card">
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                        </Swiper>
                     </div>
                 </section>
             </main>

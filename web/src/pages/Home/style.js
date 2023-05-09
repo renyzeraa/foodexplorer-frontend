@@ -51,37 +51,16 @@ export const Container = styled.div`
                 font-family: 'Poppins', sans-serif;
                 font-weight: 500;
                 font-size: 32px;
-                margin-bottom: 40px;
+                margin-bottom: 23px;
             }
 
             .cards {
-                display: flex;
-                gap: 30px;
-                overflow-x: scroll;
-                overflow-y: hidden;
-                max-width: 1100px;
-                box-shadow: 0 0 3em 0px #316661;
-                border-radius: 10px;
-                padding: 12px;
-
-                ::-webkit-scrollbar {
-                    background-color: transparent;
-                    height: 8px;
-                }
-                ::-webkit-scrollbar-track {
-                    background-color: transparent;
-                }
-                ::-webkit-scrollbar-thumb {
-                    background-color: ${({ theme }) => theme.COLORS.PRICE};
-                    border-radius: 20px;
-                }
-                ::-webkit-scrollbar-button:start:decrement {
-                    width: 50px;
-                    background-color: transparent;
-                }
-                ::-webkit-scrollbar-button:end:increment {
-                    width: 50px;
-                    background-color: transparent;
+                .swiper {
+                    .swiper-wrapper {
+                        .swiper-slide {
+                            margin-right: 0px !important;
+                        }
+                    }
                 }
             }
         }
