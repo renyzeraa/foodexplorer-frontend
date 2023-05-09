@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    background: ${({ theme }) => theme.COLORS.BACKGROUND_700};
+    background: ${({ theme }) => theme.COLORS.BACKGROUND_800};
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     font-size: 16px;
@@ -179,30 +179,52 @@ export const Container = styled.div`
             padding: 21px 24px;
             display: flex;
 
-            justify-content: space-around;
+            justify-content: space-between;
             margin: 0 auto;
             align-items: center;
 
             a {
                 color: ${({ theme }) => theme.COLORS.GRAY_200};
-                font-weight: 400;
-                font-size: 16px;
+            }
+
+            .admin-links {
+                margin: 0px 24px;
+            }
+
+            .logo-content.admin {
+                position: relative;
+                ::after {
+                    content: 'admin';
+                    font-family: 'Roboto';
+                    position: absolute;
+                    bottom: -9px;
+                    right: -1px;
+                    font-style: normal;
+                    font-size: 12px;
+                    color: ${({ theme }) => theme.COLORS.PRICE};
+                }
             }
 
             a img {
                 width: 141px;
-                margin-right: 16px;
             }
 
             .input {
-                width: 400px;
-                margin-right: 16px;
+                width: 298px;
+                margin: 0px 24px;
+                > div {
+                    background-color: ${({ theme }) =>
+                        theme.COLORS.BACKGROUND_700};
+                    border: none;
+                }
+            }
+
+            .input.admin {
+                width: 500px;
             }
 
             button {
-                width: 216px;
-                display: flex;
-                padding: 12px 12px 12px 0;
+                width: 179px;
             }
 
             .cart {
@@ -224,11 +246,6 @@ export const Container = styled.div`
                     color: ${({ theme }) => theme.COLORS.WHITE};
                     font-weight: bold;
                 }
-            }
-
-            .signout {
-                margin-left: 16px;
-                font-size: 24px;
             }
         }
     }

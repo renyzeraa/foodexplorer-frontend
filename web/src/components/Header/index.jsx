@@ -94,27 +94,61 @@ export function Header({ admin = false, ...rest }) {
             </main>
 
             <main className="desktop">
-                <a href="#">
-                    <img src={logo} alt="" />
-                </a>
+                {admin ? (
+                    <Link className="logo-content admin" to="/">
+                        <img src={logo} alt="" />
+                    </Link>
+                ) : (
+                    <Link className="logo-content " to="/">
+                        <img src={logo} alt="" />
+                    </Link>
+                )}
 
-                <a href="#">Meus Favoritos</a>
-                <div className="input">
-                    <Input
-                        icon={BiSearch}
-                        type="text"
-                        placeholder="Busque seu prato"
-                    ></Input>
-                </div>
-                <a className="cart" href="">
-                    <span className="count-itens">9</span>
-                    <TiShoppingCart />
-                </a>
+                {admin ? (
+                    <div className="input admin">
+                        <Input
+                            icon={BiSearch}
+                            type="text"
+                            placeholder="Busque por pratos ou ingredientes"
+                        ></Input>
+                    </div>
+                ) : (
+                    <div className="input">
+                        <Input
+                            icon={BiSearch}
+                            type="text"
+                            placeholder="Busque por pratos ou ingredientes"
+                        ></Input>
+                    </div>
+                )}
 
-                <Button icon={BiReceipt} title="Meu pedido" cont={3}></Button>
-                <a className="signout" href="#">
-                    <GoSignOut />
-                </a>
+                {admin ? (
+                    <>
+                        <Link className="admin-links" to="/demand">
+                            Pedidos
+                        </Link>
+                        <Button
+                            className="admin-links"
+                            title="Novo Prato"
+                        ></Button>
+                        <Link className="admin-links" to="/">
+                            <GoSignOut />
+                        </Link>
+                    </>
+                ) : (
+                    <>
+                        <Link to="/favorites">Meus Favoritos</Link>
+                        <Link to="/demand">Histórico de pedidos</Link>
+                        <Button
+                            icon={TbReceipt}
+                            title="Pedidos"
+                            cont={3}
+                        ></Button>
+                        <Link className="signout" to="/">
+                            <GoSignOut />
+                        </Link>
+                    </>
+                )}
             </main>
         </Container>
     )

@@ -15,7 +15,7 @@ export function AppRoutes() {
             <Route path="/demand" element={<Demand />} />
             <Route path="/demandadmin" element={<DemandAdmin />} />
             <Route path="/create" element={<Create />} />
-            {/* <Route path="/Favorites" element={<Favorites />} /> */}
+            {/* <Route path="/favorites" element={<Favorites />} /> */}
         </Routes>
     )
 }

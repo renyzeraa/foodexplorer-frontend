@@ -35,4 +35,9 @@ export default createGlobalStyle`
   button:hover, a:hover {
     filter: brightness(0.9);
   }
+
+  svg {
+    font-size: 24px;
+    color: ${({ theme }) => theme.COLORS.WHITE}; 
+  }
 `
