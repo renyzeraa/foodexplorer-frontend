@@ -7,11 +7,34 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import { Pagination, Navigation } from 'swiper'
+
+import React from 'react'
+import SwiperCore, { Navigation, Pagination } from 'swiper'
+import 'swiper/swiper-bundle.css'
+
+SwiperCore.use([Navigation, Pagination])
 
 import bolodamasco from '../../assets/pratos/molla.png'
 
 export function Home({ admin = true }) {
+    const breakpoints = {
+        // quando a largura da tela for menor ou igual a 640 pixels
+        550: {
+            slidesPerView: 2,
+            spaceBetween: 15
+        },
+        // quando a largura da tela for menor ou igual a 768 pixels
+        768: {
+            slidesPerView: 3,
+            spaceBetween: 15
+        },
+        // quando a largura da tela for maior que 768 pixels
+        1024: {
+            slidesPerView: 4,
+            spaceBetween: 15
+        }
+    }
+
     return (
         <Container>
             <Header />
@@ -30,15 +53,16 @@ export function Home({ admin = true }) {
                 </header>
                 <section className="content">
                     <h1>Refeições</h1>
-                    <div className="cards">
+                    <div className="cards-content">
                         <Swiper
-                            spaceBetween={40}
+                            spaceBetween={20}
                             className="mySwiper"
-                            slidesPerView={3}
+                            slidesPerView={1}
+                            breakpoints={breakpoints}
                             navigation={true}
                             modules={[Pagination, Navigation]}
                         >
-                            <SwiperSlide className="card">
+                            <SwiperSlide>
                                 <Card
                                     title="Bolo de Damasco"
                                     description="Damascos frescos em uma massa sem glúten."
@@ -47,14 +71,6 @@ export function Home({ admin = true }) {
                                     isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
-                            <SwiperSlide className="card">
-                                <Card
-                                    title="Bolo de Damasco"
-                                    description="Damascos frescos em uma massa sem glúten."
-                                    price="19,97"
-                                    img={bolodamasco}
-                                ></Card>
-                            </SwiperSlide>
                             <SwiperSlide>
                                 <Card
                                     title="Bolo de Damasco"
@@ -85,6 +101,15 @@ export function Home({ admin = true }) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                ></Card>
+                            </SwiperSlide>
+                            <SwiperSlide>
+                                <Card
+                                    title="Bolo de Damasco"
+                                    description="Damascos frescos em uma massa sem glúten."
+                                    price="19,97"
+                                    img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                         </Swiper>
@@ -94,13 +119,14 @@ export function Home({ admin = true }) {
                     <h1>Sobremesas</h1>
                     <div className="cards">
                         <Swiper
-                            spaceBetween={40}
+                            spaceBetween={20}
                             className="mySwiper"
-                            slidesPerView={3}
+                            slidesPerView={1}
+                            breakpoints={breakpoints}
                             navigation={true}
                             modules={[Pagination, Navigation]}
                         >
-                            <SwiperSlide className="card">
+                            <SwiperSlide>
                                 <Card
                                     title="Bolo de Damasco"
                                     description="Damascos frescos em uma massa sem glúten."
@@ -147,13 +173,14 @@ export function Home({ admin = true }) {
                     <h1>Bebidas</h1>
                     <div className="cards">
                         <Swiper
-                            spaceBetween={40}
+                            spaceBetween={20}
                             className="mySwiper"
-                            slidesPerView={3}
+                            slidesPerView={1}
+                            breakpoints={breakpoints}
                             navigation={true}
                             modules={[Pagination, Navigation]}
                         >
-                            <SwiperSlide className="card">
+                            <SwiperSlide>
                                 <Card
                                     title="Bolo de Damasco"
                                     description="Damascos frescos em uma massa sem glúten."

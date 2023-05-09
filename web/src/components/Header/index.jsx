@@ -2,9 +2,8 @@ import { Container } from './style'
 import logo from '../../assets/logo.svg'
 import { Input } from '../Input'
 import { Button } from '../Button'
-import { BiSearch, BiReceipt } from 'react-icons/bi'
+import { BiSearch } from 'react-icons/bi'
 import { GoSignOut } from 'react-icons/go'
-import { TiShoppingCart } from 'react-icons/ti'
 import { TbReceipt } from 'react-icons/tb'
 import { Link } from 'react-router-dom'
 
@@ -127,10 +126,13 @@ export function Header({ admin = false, ...rest }) {
                         <Link className="admin-links" to="/demand">
                             Pedidos
                         </Link>
-                        <Button
-                            className="admin-links"
-                            title="Novo Prato"
-                        ></Button>
+                        <Link to="/create">
+                            <Button
+                                className="admin-links"
+                                title="Novo Prato"
+                            ></Button>
+                        </Link>
+
                         <Link className="admin-links" to="/">
                             <GoSignOut />
                         </Link>
@@ -139,11 +141,14 @@ export function Header({ admin = false, ...rest }) {
                     <>
                         <Link to="/favorites">Meus Favoritos</Link>
                         <Link to="/demand">Histórico de pedidos</Link>
-                        <Button
-                            icon={TbReceipt}
-                            title="Pedidos"
-                            cont={3}
-                        ></Button>
+                        <Link to="/demand">
+                            <Button
+                                icon={TbReceipt}
+                                title="Pedidos"
+                                cont={3}
+                            ></Button>
+                        </Link>
+
                         <Link className="signout" to="/">
                             <GoSignOut />
                         </Link>

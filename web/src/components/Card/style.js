@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-    width: 300px;
+    /* width: 300px; */
     background: ${({ theme }) => theme.COLORS.BACKGROUND_CARD};
     border-radius: 8px;
     position: relative;

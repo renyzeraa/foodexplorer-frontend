@@ -53,16 +53,6 @@ export const Container = styled.div`
                 font-size: 32px;
                 margin-bottom: 23px;
             }
-
-            .cards {
-                .swiper {
-                    .swiper-wrapper {
-                        .swiper-slide {
-                            margin-right: 0px !important;
-                        }
-                    }
-                }
-            }
         }
 
         .content:last-child {
