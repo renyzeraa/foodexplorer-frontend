@@ -26,7 +26,7 @@ export function Card({
         <Container {...rest}>
             <button className="btn-fav " onClick={handleFavorite}>
                 {isAdmin ? (
-                    <Link>
+                    <Link to="/details">
                         <TbPencil />
                     </Link>
                 ) : favorite ? (

@@ -37,7 +37,7 @@ export function Home({ admin = true }) {
 
     return (
         <Container>
-            <Header />
+            <Header admin />
             <main>
                 <header>
                     <div className="img-content">

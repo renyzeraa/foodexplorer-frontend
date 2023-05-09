@@ -6,7 +6,8 @@ export default {
         BACKGROUND_750: '#1E1E1E',
         BACKGROUND_700: '#0D1D25',
         BACKGROUND_CARD: '#0b4e7038',
-
+        BACKGROUND_INGREDIENT: '#192227',
+        
         GRAY_100: '#E1E1E6',
         GRAY_200: '#C4C4CC',
         GRAY_300: '#999591',
