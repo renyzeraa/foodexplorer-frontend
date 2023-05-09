@@ -13,6 +13,10 @@ export default createGlobalStyle`
   font-family: 'Poppins', sans-serif;
   font-family: 'Roboto', sans-serif; 
   */
+:root {
+  --swiper-theme-color: ${({ theme }) => theme.COLORS.WHITE};
+  --swiper-navigation-size: 30px;
+}
 
   body {
     background: ${({ theme }) => theme.COLORS.BACKGROUND_900}; 

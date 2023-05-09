@@ -225,6 +225,8 @@ export const Container = styled.div`
 
             button {
                 width: 179px;
+                padding: 12px 18px;
+                margin-right: 12px;
             }
 
             .cart {
