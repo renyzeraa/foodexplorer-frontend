@@ -5,20 +5,30 @@ import { Button } from '../Button'
 import { BiSearch, BiReceipt } from 'react-icons/bi'
 import { GoSignOut } from 'react-icons/go'
 import { TiShoppingCart } from 'react-icons/ti'
+import { TbReceipt } from 'react-icons/tb'
+import { Link } from 'react-router-dom'
 
-export function Header({ ...rest }) {
+export function Header({ admin = false, ...rest }) {
     function onClickMenu() {
-        document.getElementById('menu').classList.toggle('change')
-        document.getElementById('nav').classList.toggle('change')
-        document.getElementById('menu-bg').classList.toggle('change-bg')
+        document.getElementById('menu') &&
+            document.getElementById('menu').classList.toggle('change')
+        document.getElementById('nav') &&
+            document.getElementById('nav').classList.toggle('change')
+        document.getElementById('menu-bg') &&
+            document.getElementById('menu-bg').classList.toggle('change-bg')
+        document.querySelector('.logo-header') &&
+            document.querySelector('.logo-header').classList.toggle('change')
+        document.querySelector('.icon-receipt') &&
+            document.querySelector('.icon-receipt').classList.toggle('change')
     }
 
     return (
         <Container {...rest}>
             <main className="mobile">
-                <a href="#">
+                <Link className="logo-header" to="/">
                     <img src={logo} alt="" />
-                </a>
+                    {admin ? <span className="admin-logo">admin</span> : []}
+                </Link>
 
                 <div id="menu-bar">
                     <div id="menu" onClick={onClickMenu}>
@@ -27,30 +37,60 @@ export function Header({ ...rest }) {
                         <div id="bar3" className="bar"></div>
                     </div>
 
-                    <ul className="nav" id="nav">
-                        <div className="input">
-                            <Input
-                                icon={BiSearch}
-                                type="text"
-                                placeholder="Busque por pratos ou ingredientes"
-                            ></Input>
-                        </div>
-                        <li>
-                            <a href="#">Favoritos</a>
-                        </li>
-                        <li>
-                            <a href="">Compras</a>
-                        </li>
-                        <li>
-                            <a href="#">Pedidos</a>
-                        </li>
-                        <li>
-                            <a href="#">Sair</a>
-                        </li>
-                    </ul>
+                    {admin ? (
+                        <ul className="nav" id="nav">
+                            <div className="input">
+                                <Input
+                                    icon={BiSearch}
+                                    type="text"
+                                    placeholder="Busque por pratos ou ingredientes"
+                                ></Input>
+                            </div>
+                            <li>
+                                <Link href="/create">Novo Prato</Link>
+                            </li>
+
+                            <li>
+                                <Link href="/demand">Pedidos</Link>
+                            </li>
+                            <li>
+                                <Link href="#">Sair</Link>
+                            </li>
+                        </ul>
+                    ) : (
+                        <ul className="nav" id="nav">
+                            <div className="input">
+                                <Input
+                                    icon={BiSearch}
+                                    type="text"
+                                    placeholder="Busque por pratos ou ingredientes"
+                                ></Input>
+                            </div>
+                            <li>
+                                <a href="/favorites">Favoritos</a>
+                            </li>
+                            <li>
+                                <a href="/payment">Compras</a>
+                            </li>
+                            <li>
+                                <a href="/demand">Pedidos</a>
+                            </li>
+                            <li>
+                                <a href="#">Sair</a>
+                            </li>
+                        </ul>
+                    )}
                 </div>
                 <div className="menu-bg" id="menu-bg"></div>
                 <div className="menu-bg" id="menu-bg"></div>
+                {admin ? (
+                    []
+                ) : (
+                    <Link className="icon-receipt" to="/demand">
+                        <span className="count-itens">9</span>
+                        <TbReceipt />
+                    </Link>
+                )}
             </main>
 
             <main className="desktop">
@@ -67,11 +107,11 @@ export function Header({ ...rest }) {
                     ></Input>
                 </div>
                 <a className="cart" href="">
-                    <span className="count-itens">1</span>
+                    <span className="count-itens">9</span>
                     <TiShoppingCart />
                 </a>
 
-                <Button icon={BiReceipt} title="Meu pedido" cont="0"></Button>
+                <Button icon={BiReceipt} title="Meu pedido" cont={3}></Button>
                 <a className="signout" href="#">
                     <GoSignOut />
                 </a>

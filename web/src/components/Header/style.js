@@ -19,10 +19,27 @@ export const Container = styled.div`
         padding: 0 24px;
         align-items: center;
         justify-content: space-evenly;
+        position: relative;
+        .logo-header {
+            display: flex;
+            align-items: flex-end;
+            position: absolute;
+            z-index: 4;
+            img {
+                width: 141px;
+                margin-right: 8px;
+            }
+            .admin-logo {
+                font-family: 'Roboto', sans-serif;
+                font-weight: 400;
+                font-size: 12px;
+                line-height: 160%;
+                color: ${({ theme }) => theme.COLORS.PRICE};
+            }
+        }
 
-        a img {
-            width: 141px;
-            margin-right: 16px;
+        .logo-header.change {
+            display: none;
         }
 
         .input {
@@ -116,6 +133,35 @@ export const Container = styled.div`
         .change {
             display: block;
         }
+
+        .icon-receipt {
+            position: absolute;
+            right: 24px;
+            z-index: 3;
+
+            & svg {
+                font-size: 24px;
+            }
+            .count-itens {
+                position: absolute;
+
+                left: 12px;
+                top: -8px;
+                background-color: ${({ theme }) => theme.COLORS.RED};
+                border-radius: 50%;
+                font-size: 14px;
+                width: 18px;
+                height: 18px;
+
+                text-align: center;
+                color: ${({ theme }) => theme.COLORS.WHITE};
+                font-weight: bold;
+            }
+        }
+
+        .icon-receipt.change {
+            display: none;
+        }
     }
 
     @media (min-width: 800px) {
@@ -163,12 +209,12 @@ export const Container = styled.div`
                 margin: 0 16px 0 0;
                 font-size: 28px;
                 position: relative;
-                span {
+                .count-itens {
                     position: absolute;
 
                     left: 18px;
                     top: -8px;
-                    background-color: red;
+                    background-color: ${({ theme }) => theme.COLORS.RED};
                     border-radius: 50%;
                     font-size: 14px;
                     width: 18px;
