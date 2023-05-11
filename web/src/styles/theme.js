@@ -19,6 +19,7 @@ export default {
 
         PRICE: '#82F3FF',
 
-        RED: '#92000E'
+        RED: '#92000E',
+        TOMATO: '#AB4D55'
     }
 }

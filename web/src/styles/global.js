@@ -32,7 +32,7 @@ export default createGlobalStyle`
   }
   
   button, a {
-    cursor: pointer;
+    cursor: pointer !important;
     transition: filter 0.2s;
   }
 

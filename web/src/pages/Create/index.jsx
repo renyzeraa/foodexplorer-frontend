@@ -1,45 +1,55 @@
 import { Container } from './style'
+import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Input } from '../../components/Input'
 import { Ingredient } from '../../components/Ingredient'
 import { TextArea } from '../../components/TextArea'
-
+import { Link } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 
-export function Create({ admin = true }) {
+export function Create({ admin = true, isNew = true }) {
     return (
         <Container>
             <Header admin />
             <section>
                 <div className="header">
-                    <h1>Editar prato</h1>
-                    <a href="#">
+                    <Link to="/">
                         <AiOutlineLeft /> voltar
-                    </a>
+                    </Link>
+                    <h1>{isNew ? <p>Novo prato</p> : <p>Editar prato</p>}</h1>
                 </div>
-                <div className="content-wrapper">
+                <form className="content-wrapper" action="">
                     <div className="content">
                         <div className="content-img">
                             <label htmlFor="">Imagem do prato</label>
                             <label htmlFor="product">
                                 <AiOutlineUpload />
-                                Selecione imagem
+                                {isNew ? (
+                                    <p>Selecione imagem</p>
+                                ) : (
+                                    <p>Selecione imagem para alterá-la</p>
+                                )}
                                 <input type="file" id="product" />
                             </label>
                         </div>
-                        <div className="name">
+                        <div className="name-category">
                             <label htmlFor="">Nome</label>
                             <Input
                                 type="text"
                                 placeholder="Ex.: Salada Ceasar"
                             />
+                            <label htmlFor="">Categoria</label>
+                            <select name="" id="">
+                                <option value="refeicao">Refeição</option>
+                                <option value="sobremesa">Sobremesa</option>
+                                <option value="bebida">Bebida</option>
+                            </select>
                         </div>
                     </div>
                     <div className="price-ingredientes">
-                        <div>
+                        <div className="content-ingredientes">
                             <label htmlFor="">Ingredientes</label>
                             <div className="ingredient">
-                                <Ingredient value="Tomate" />
                                 <Ingredient value="Tomate" />
                                 <Ingredient isNew placeholder="Adicionar" />
                             </div>
@@ -59,13 +69,29 @@ export function Create({ admin = true }) {
                         <TextArea placeholder="Fale brevemente sobre o prato. Exemplo: Rabanetes, folhas verdes e molho agridoce salpicados com gergelim. " />
                     </div>
                     <div className="button-submit">
-                        <Input
-                            className="submit"
-                            type="submit"
-                            value="Adicionar pedido"
-                        />
+                        {isNew ? (
+                            <div className="edit-plate">
+                                <Input
+                                    className="delete"
+                                    type="submit"
+                                    value="Excluir prato"
+                                />
+
+                                <Input
+                                    className="submit"
+                                    type="submit"
+                                    value="Salvar alterações"
+                                />
+                            </div>
+                        ) : (
+                            <Input
+                                className="submit"
+                                type="submit"
+                                value="Salvar alterações"
+                            />
+                        )}
                     </div>
-                </div>
+                </form>
             </section>
             <Footer />
         </Container>

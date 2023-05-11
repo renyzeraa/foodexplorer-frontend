@@ -1,22 +1,21 @@
 import { Container } from './style'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
-import fruits from '../../assets/fruits-header.svg'
 import { Card } from '../../components/Card'
+import fruits from '../../assets/fruits-header.svg'
+/*swiper lib*/
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-
 import React from 'react'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import 'swiper/swiper-bundle.css'
-
 SwiperCore.use([Navigation, Pagination])
 
 import bolodamasco from '../../assets/pratos/molla.png'
 
-export function Home({ admin = true }) {
+export function Home({ admin = false }) {
     const breakpoints = {
         // quando a largura da tela for menor ou igual a 640 pixels
         550: {

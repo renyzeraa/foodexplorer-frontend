@@ -35,6 +35,5 @@ export const Container = styled.div`
 
     @media (min-width: 768px) {
         background-color: ${({ theme }) => theme.COLORS.BACKGROUND_800};
-        border: 1px solid #ffffff;
     }
 `
