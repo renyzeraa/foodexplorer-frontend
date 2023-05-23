@@ -4,13 +4,38 @@ import { Footer } from '../../components/Footer'
 import { AiOutlineLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 
+const arrayPedidos = [
+    {
+        id: 1,
+        situacao: 'pendente',
+        dateTime: '20/05 às 18h00',
+        pedido: [
+            {
+                idPedido: 1,
+                quantidade: 2,
+                nomePedido: 'Salada Radish'
+            },
+            {
+                idPedido: 2,
+                quantidade: 1,
+                nomePedido: 'Pudim'
+            },
+            {
+                idPedido: 3,
+                quantidade: 2,
+                nomePedido: 'Torradas de Parma'
+            }
+        ]
+    }
+]
+
 export function Demand() {
     return (
         <Container>
             <Header />
             <section>
                 <div className="header">
-                    <h1>Meus pedidos</h1>
+                    <h1>Histórico de Pedidos</h1>
                     <Link to="/">
                         <AiOutlineLeft /> voltar
                     </Link>
@@ -62,6 +87,21 @@ export function Demand() {
                             </tr>
                         </tbody>
                     </table>
+                </div>
+                <div className="cards-wrapper">
+                    <div className="card">
+                        <header>
+                            <span className="number">000001</span>
+                            <span>
+                                <span className="status"></span>Pendente
+                            </span>
+                            <span className="horario">20/05 às 18h00</span>
+                        </header>
+                        <span className="pedido">
+                            1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de
+                            Canela, 1 x Suco de Maracujá
+                        </span>
+                    </div>
                 </div>
             </section>
             <Footer />

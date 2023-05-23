@@ -15,6 +15,17 @@ SwiperCore.use([Navigation, Pagination])
 
 import bolodamasco from '../../assets/pratos/molla.png'
 
+/*
+        id: 
+        title:
+        description:
+        ingredients
+        value:
+        user_id:
+        created_at:
+        updated_at:
+    */
+
 export function Home({ admin = false }) {
     const breakpoints = {
         // quando a largura da tela for menor ou igual a 640 pixels
