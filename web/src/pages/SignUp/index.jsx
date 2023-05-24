@@ -36,7 +36,6 @@ export function SignUp() {
                     alert('Não foi possível cadastrar este usuário')
                 }
             })
-        console.log(name, email, password)
     }
 
     return (
