@@ -7,7 +7,6 @@ function AuthProvider({ children }) {
     async function signIn({ email, password }) {
         try {
             const response = await api.post('/sessions', { email, password })
-            console.log(response, email, password)
             const { user, token } = response.data
             api.defaults.headers.common['Authorization'] = `Bearer ${token}`
             setData({ user, token })
