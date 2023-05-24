@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 
 export function SignIn() {
-    const [email, setEmail] = useState()
-    const [password, setPassword] = useState()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const { signIn } = useAuth()
 
     function handleSignIn() {
