@@ -6,8 +6,11 @@ import { BiSearch } from 'react-icons/bi'
 import { GoSignOut } from 'react-icons/go'
 import { TbReceipt } from 'react-icons/tb'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../hooks/auth'
 
 export function Header({ admin = false, ...rest }) {
+    const { signOut } = useAuth()
+
     function onClickMenu() {
         document.getElementById('menu') &&
             document.getElementById('menu').classList.toggle('change')
@@ -53,7 +56,7 @@ export function Header({ admin = false, ...rest }) {
                                 <Link href="/demand">Pedidos</Link>
                             </li>
                             <li>
-                                <Link href="#">Sair</Link>
+                                <Link onClick={signOut}>Sair</Link>
                             </li>
                         </ul>
                     ) : (
@@ -133,7 +136,7 @@ export function Header({ admin = false, ...rest }) {
                             ></Button>
                         </Link>
 
-                        <Link className="admin-links" to="/">
+                        <Link className="admin-links" onClick={signOut}>
                             <GoSignOut />
                         </Link>
                     </>
@@ -149,7 +152,7 @@ export function Header({ admin = false, ...rest }) {
                             ></Button>
                         </Link>
 
-                        <Link className="signout" to="/">
+                        <Link className="signout" onClick={signOut}>
                             <GoSignOut />
                         </Link>
                     </>
