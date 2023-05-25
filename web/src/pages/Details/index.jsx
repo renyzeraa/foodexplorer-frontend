@@ -5,8 +5,11 @@ import { Button } from '../../components/Button'
 import { AiOutlineLeft, AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import molla from '../../assets/pratos/molla.png'
 import { Link } from 'react-router-dom'
+import { useAuth } from '../../hooks/auth'
 
-export function Details({ admin = false }) {
+export function Details({}) {
+    const { user } = useAuth()
+    const admin = user.isAdmin
     return (
         <Container>
             <Header admin={admin}></Header>

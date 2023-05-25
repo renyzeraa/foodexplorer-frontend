@@ -12,7 +12,7 @@ import React from 'react'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import 'swiper/swiper-bundle.css'
 SwiperCore.use([Navigation, Pagination])
-
+import { useAuth } from '../../hooks/auth'
 import bolodamasco from '../../assets/pratos/molla.png'
 
 /*
@@ -26,7 +26,10 @@ import bolodamasco from '../../assets/pratos/molla.png'
         updated_at:
     */
 
-export function Home({ admin = false }) {
+export function Home({}) {
+    const { user } = useAuth()
+    const admin = user.isAdmin
+
     const breakpoints = {
         // quando a largura da tela for menor ou igual a 640 pixels
         550: {
@@ -47,7 +50,7 @@ export function Home({ admin = false }) {
 
     return (
         <Container>
-            <Header admin />
+            <Header admin={admin} />
             <main>
                 <header>
                     <div className="img-content">

@@ -6,11 +6,14 @@ import { Ingredient } from '../../components/Ingredient'
 import { TextArea } from '../../components/TextArea'
 import { Link } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
+import { useAuth } from '../../hooks/auth'
 
-export function Create({ admin = true, isNew = true }) {
+export function Create({ isNew = true }) {
+    const { user } = useAuth()
+    const admin = user.isAdmin
     return (
         <Container>
-            <Header admin />
+            <Header admin={admin} />
             <section>
                 <div className="header">
                     <Link to="/">

@@ -8,9 +8,9 @@ import { TbReceipt } from 'react-icons/tb'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 
-export function Header({ admin = false, ...rest }) {
-    const { signOut } = useAuth()
-
+export function Header({ ...rest }) {
+    const { signOut, user } = useAuth()
+    const admin = user.isAdmin
     function onClickMenu() {
         document.getElementById('menu') &&
             document.getElementById('menu').classList.toggle('change')
