@@ -1,3 +1,5 @@
+import React from 'react'
+import { useAuth } from '../../hooks/auth'
 import { Container } from './style'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
@@ -8,11 +10,10 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/css'
 import 'swiper/css/pagination'
 import 'swiper/css/navigation'
-import React from 'react'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import 'swiper/swiper-bundle.css'
 SwiperCore.use([Navigation, Pagination])
-import { useAuth } from '../../hooks/auth'
+
 import bolodamasco from '../../assets/pratos/molla.png'
 
 /*
