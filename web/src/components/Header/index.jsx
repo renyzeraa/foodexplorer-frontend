@@ -10,7 +10,7 @@ import { useAuth } from '../../hooks/auth'
 
 export function Header({ ...rest }) {
     const { signOut, user } = useAuth()
-    const admin = user.isAdmin
+    const admin = /*user.isAdmin*/ true
     function onClickMenu() {
         document.getElementById('menu') &&
             document.getElementById('menu').classList.toggle('change')
@@ -49,7 +49,7 @@ export function Header({ ...rest }) {
                                 ></Input>
                             </div>
                             <li>
-                                <Link href="/create">Novo Prato</Link>
+                                <Link href="/plates">Novo Prato</Link>
                             </li>
 
                             <li>
@@ -129,7 +129,7 @@ export function Header({ ...rest }) {
                         <Link className="admin-links" to="/demand">
                             Pedidos
                         </Link>
-                        <Link to="/create">
+                        <Link to="/plates">
                             <Button
                                 className="admin-links"
                                 title="Novo Prato"

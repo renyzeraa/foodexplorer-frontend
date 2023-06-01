@@ -29,7 +29,7 @@ import bolodamasco from '../../assets/pratos/molla.png'
 
 export function Home({}) {
     const { user } = useAuth()
-    const admin = user.isAdmin
+    const admin = /*user.isAdmin*/ true
 
     const breakpoints = {
         // quando a largura da tela for menor ou igual a 640 pixels
