@@ -7,10 +7,30 @@ import { TextArea } from '../../components/TextArea'
 import { Link } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 import { useAuth } from '../../hooks/auth'
+import { useState } from 'react'
 
-export function Create({ isNew = true }) {
+export function Plate({ isNew = true }) {
     const { user } = useAuth()
     const admin = user.isAdmin
+    const plate = {}
+    const [imgFile, setImgFile] = useState(plate.picture)
+
+    async function handleUpdate() {
+        const plate = {
+            title,
+            description,
+            value,
+            ingredients,
+            picture: imgFile
+        }
+        await updatePlate({ plate })
+    }
+
+    function handleChangeAvatar(oEv) {
+        const file = oEv.target.files[0]
+        setImgFile(file)
+    }
+
     return (
         <Container>
             <Header admin={admin} />
@@ -32,7 +52,11 @@ export function Create({ isNew = true }) {
                                 ) : (
                                     <p>Selecione imagem para alterá-la</p>
                                 )}
-                                <input type="file" id="product" />
+                                <input
+                                    type="file"
+                                    id="product"
+                                    onChange={handleChangeAvatar}
+                                />
                             </label>
                         </div>
                         <div className="name-category">
