@@ -16,17 +16,6 @@ SwiperCore.use([Navigation, Pagination])
 
 import bolodamasco from '../../assets/pratos/molla.png'
 
-/*
-        id: 
-        title:
-        description:
-        ingredients
-        value:
-        user_id:
-        created_at:
-        updated_at:
-    */
-
 export function Home({}) {
     const { user } = useAuth()
     const admin = /*user.isAdmin*/ true
@@ -91,6 +80,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -99,6 +89,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -107,6 +98,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -115,6 +107,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -146,6 +139,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -154,6 +148,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -162,6 +157,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -170,6 +166,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -178,6 +175,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                         </Swiper>
@@ -200,6 +198,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -208,6 +207,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -216,6 +216,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -224,6 +225,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                             <SwiperSlide>
@@ -232,6 +234,7 @@ export function Home({}) {
                                     description="Damascos frescos em uma massa sem glúten."
                                     price="19,97"
                                     img={bolodamasco}
+                                    isAdmin={admin}
                                 ></Card>
                             </SwiperSlide>
                         </Swiper>
