@@ -34,7 +34,7 @@ function AuthProvider({ children }) {
         const user = localStorage.getItem('@foodexplorer:user')
         const token = localStorage.getItem('@foodexplorer:token')
         if (user && token) {
-            api.defaults.headers.common['Authorization'] = `Bearer ${token}`
+            api.defaults.headers['Authorization'] = `Bearer ${token}`
 
             setData({ token, user: JSON.parse(user) })
         }
