@@ -40,6 +40,26 @@ export function Plate({ isNew = true }) {
 
   async function handleNewPlate(e) {
     e.preventDefault()
+
+    if (!title) {
+      return alert('É necessário inserir um nome ao Prato!')
+    }
+    if (!categories) {
+      return alert('É necessário definir uma categoria para o Prato!')
+    }
+    if (newIngredients) {
+      return alert('Possui um ingrediente não inserido!')
+    }
+    if (ingredients.length) {
+      return alert('É necessário inserir pelo menos um ingrediente ao Prato!')
+    }
+    if (!value) {
+      return alert('É valor do Prato é obrigatório!')
+    }
+    if (!description) {
+      return alert('É obrigatório tem uma descrição do Prato!')
+    }
+
     const plate = {
       title,
       description,
