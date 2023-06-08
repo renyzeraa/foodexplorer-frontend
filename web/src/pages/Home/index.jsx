@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useAuth } from '../../hooks/auth'
 import { Container } from './style'
 import { Header } from '../../components/Header'
@@ -15,10 +15,15 @@ import 'swiper/swiper-bundle.css'
 SwiperCore.use([Navigation, Pagination])
 
 import bolodamasco from '../../assets/pratos/molla.png'
+import { api } from '../../services/api'
 
 export function Home({}) {
   const { user } = useAuth()
   const admin = /*user.isAdmin*/ true
+
+  const [search, setSearch] = useState('')
+
+  const [plates, setPlates] = useState([])
 
   const breakpoints = {
     // quando a largura da tela for menor ou igual a 550 pixels
@@ -38,9 +43,18 @@ export function Home({}) {
     }
   }
 
+  useEffect(() => {
+    async function fetchNotes() {
+      const response = await api.get(`/plates?title=${search}`)
+      setPlates(response.data)
+      console.log(response.data)
+    }
+    fetchNotes()
+  }, [search])
+
   return (
     <Container>
-      <Header admin={admin} />
+      <Header admin={admin} onChange={oEv => setSearch(oEv.target.value)} />
       <main>
         <header>
           <div className="img-content">
@@ -62,76 +76,20 @@ export function Home({}) {
               navigation={true}
               modules={[Pagination, Navigation]}
             >
-              {/* {plates.map(plate => {
-                plate.category_id == 0 ? (
+              {plates.map(plate =>
+                plate.category_id === 1 ? (
                   <SwiperSlide>
                     <Card
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
-                      img={picture}
                       isAdmin={admin}
                     ></Card>
                   </SwiperSlide>
                 ) : (
                   []
                 )
-              })} */}
-
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
+              )}
             </Swiper>
           </div>
         </section>
@@ -146,51 +104,20 @@ export function Home({}) {
               navigation={true}
               modules={[Pagination, Navigation]}
             >
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
+              {plates.map(plate =>
+                plate.category_id === 2 ? (
+                  <SwiperSlide>
+                    <Card
+                      title={plate.title}
+                      description={plate.description}
+                      price={plate.value}
+                      isAdmin={admin}
+                    ></Card>
+                  </SwiperSlide>
+                ) : (
+                  []
+                )
+              )}
             </Swiper>
           </div>
         </section>
@@ -205,51 +132,20 @@ export function Home({}) {
               navigation={true}
               modules={[Pagination, Navigation]}
             >
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
+              {plates.map(plate =>
+                plate.category_id === 3 ? (
+                  <SwiperSlide>
+                    <Card
+                      title={plate.title}
+                      description={plate.description}
+                      price={plate.value}
+                      isAdmin={admin}
+                    ></Card>
+                  </SwiperSlide>
+                ) : (
+                  []
+                )
+              )}
             </Swiper>
           </div>
         </section>

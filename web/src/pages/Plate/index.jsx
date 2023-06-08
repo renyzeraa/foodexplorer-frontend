@@ -130,9 +130,9 @@ export function Plate({ isNew = true }) {
                 id=""
                 onChange={oEv => setCategories(oEv.target.value)}
               >
-                <option value="0">Refeição</option>
-                <option value="1">Sobremesa</option>
-                <option value="2">Bebida</option>
+                <option value="1">Refeição</option>
+                <option value="2">Sobremesa</option>
+                <option value="3">Bebida</option>
               </select>
             </div>
           </div>
