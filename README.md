@@ -14,6 +14,10 @@ Tanto o admin quanto o usuário poderão buscar os pratos por nome e/ou ingredie
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white) ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
+### Deploy do Projeto 🚀
+
+<a href='https://foodexplorer-eight.vercel.app/' target='_blank'>FoodExplorer 🥙</a>
+
 ### Contato
 
 <img align="left" src="https://www.github.com/renyzeraa.png?size=150">
