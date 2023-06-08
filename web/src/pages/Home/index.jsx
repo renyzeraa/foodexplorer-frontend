@@ -62,6 +62,22 @@ export function Home({}) {
               navigation={true}
               modules={[Pagination, Navigation]}
             >
+              {/* {plates.map(plate => {
+                plate.category_id == 0 ? (
+                  <SwiperSlide>
+                    <Card
+                      title={plate.title}
+                      description={plate.description}
+                      price={plate.value}
+                      img={picture}
+                      isAdmin={admin}
+                    ></Card>
+                  </SwiperSlide>
+                ) : (
+                  []
+                )
+              })} */}
+
               <SwiperSlide>
                 <Card
                   title="Bolo de Damasco"
