@@ -32,7 +32,7 @@ export function Plate({ isNew = true }) {
       description,
       value,
       ingredients,
-      categories,
+      category_id: categories,
       picture: imgFile
     }
     await updatePlate({ plate })
@@ -50,7 +50,7 @@ export function Plate({ isNew = true }) {
     if (newIngredients) {
       return alert('Possui um ingrediente não inserido!')
     }
-    if (ingredients.length) {
+    if (!ingredients.length) {
       return alert('É necessário inserir pelo menos um ingrediente ao Prato!')
     }
     if (!value) {
@@ -65,10 +65,12 @@ export function Plate({ isNew = true }) {
       description,
       value,
       ingredients,
-      categories,
+      category_id: categories,
       picture: ''
     }
+    console.log('faz o post')
     await api.post('/plates', plate)
+    console.log(plate)
   }
 
   function handleAddIngredient() {
