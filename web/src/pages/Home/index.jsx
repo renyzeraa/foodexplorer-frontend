@@ -1,43 +1,36 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useAuth } from '../../hooks/auth'
-import { Container } from './style'
-import { Header } from '../../components/Header'
-import { Footer } from '../../components/Footer'
-import { Card } from '../../components/Card'
-import fruits from '../../assets/fruits-header.svg'
-/*swiper lib*/
-import { Swiper, SwiperSlide } from 'swiper/react'
-import 'swiper/css'
-import 'swiper/css/pagination'
-import 'swiper/css/navigation'
-import SwiperCore, { Navigation, Pagination } from 'swiper'
+import { useAuth } from '../../hooks/auth';
+import { Container } from './style';
+import { Header } from '../../components/Header';
+import { Footer } from '../../components/Footer';
+import { Card } from '../../components/Card';
+import fruits from '../../assets/fruits-header.svg';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
 import 'swiper/swiper-bundle.css'
-SwiperCore.use([Navigation, Pagination])
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import SwiperCore, { Navigation, Pagination } from 'swiper';
+import 'swiper/swiper-bundle.css';
+SwiperCore.use([Navigation, Pagination]);
 
-import bolodamasco from '../../assets/pratos/molla.png'
+export function Home() {
+  const { user } = useAuth();
+  const admin = /*user.isAdmin*/ true;
+  const [plates, setPlates] = useState([]);
 
-export function Home({ }) {
-  const { user } = useAuth()
-  const admin = /*user.isAdmin*/ true
-  /*   const [plates, setPlates] = useState([]);
-  
-    useEffect(() => {
-      fetchPlates();
-    }, []);
-  
-    const fetchPlates = async () => {
-      try {
-        const response = await axios.get('/plates');
-        setPlates(response.data);
-      } catch (error) {
-        console.error('Error fetching plates:', error);
-      }
-    };
-  
-   */
-
-
+  useEffect(() => {
+    fetchPlates();
+  }, []);
+  const fetchPlates = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/plates');
+      setPlates(response.data);
+    } catch (error) {
+      console.error('Error fetching plates:', error);
+    }
+  };
   const breakpoints = {
     // quando a largura da tela for menor ou igual a 550 pixels
     550: {
@@ -80,76 +73,18 @@ export function Home({ }) {
               navigation={true}
               modules={[Pagination, Navigation]}
             >
-              {/* {plates.map(plate => {
-                plate.category_id == 0 ? (
-                  <SwiperSlide>
+              {plates
+                .filter((plate) => plate.category_id === 1)
+                .map((plate) => (
+                  <SwiperSlide key={plate.id}>
                     <Card
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
-                      img={picture}
-                      isAdmin={admin}
-                    ></Card>
+                      img={plate.picture}
+                    />
                   </SwiperSlide>
-                ) : (
-                  []
-                )
-              })} */}
-
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
+                ))}
             </Swiper>
           </div>
         </section>
@@ -164,53 +99,22 @@ export function Home({ }) {
               navigation={true}
               modules={[Pagination, Navigation]}
             >
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
+              {plates
+                .filter((plate) => plate.category_id === 2)
+                .map((plate) => (
+                  <SwiperSlide key={plate.id}>
+                    <Card
+                      title={plate.title}
+                      description={plate.description}
+                      price={plate.value}
+                      img={plate.picture}
+                      isAdmin={admin}
+                    />
+                  </SwiperSlide>
+                ))}
             </Swiper>
           </div>
+
         </section>
         <section className="content">
           <h1>Bebidas</h1>
@@ -223,56 +127,25 @@ export function Home({ }) {
               navigation={true}
               modules={[Pagination, Navigation]}
             >
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
-              <SwiperSlide>
-                <Card
-                  title="Bolo de Damasco"
-                  description="Damascos frescos em uma massa sem glúten."
-                  price="19,97"
-                  img={bolodamasco}
-                  isAdmin={admin}
-                ></Card>
-              </SwiperSlide>
+              {plates
+                .filter((plate) => plate.category_id === 4)
+                .map((plate) => (
+                  <SwiperSlide key={plate.id}>
+                    <Card
+                      title={plate.title}
+                      description={plate.description}
+                      price={plate.value}
+                      img={plate.picture}
+                      isAdmin={admin}
+                    />
+                  </SwiperSlide>
+                ))}
             </Swiper>
           </div>
         </section>
+
       </main>
       <Footer></Footer>
-    </Container>
+    </Container >
   )
 }
