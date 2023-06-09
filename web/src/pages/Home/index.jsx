@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios';
 import { useAuth } from '../../hooks/auth'
 import { Container } from './style'
 import { Header } from '../../components/Header'
@@ -16,9 +17,26 @@ SwiperCore.use([Navigation, Pagination])
 
 import bolodamasco from '../../assets/pratos/molla.png'
 
-export function Home({}) {
+export function Home({ }) {
   const { user } = useAuth()
   const admin = /*user.isAdmin*/ true
+  /*   const [plates, setPlates] = useState([]);
+  
+    useEffect(() => {
+      fetchPlates();
+    }, []);
+  
+    const fetchPlates = async () => {
+      try {
+        const response = await axios.get('/plates');
+        setPlates(response.data);
+      } catch (error) {
+        console.error('Error fetching plates:', error);
+      }
+    };
+  
+   */
+
 
   const breakpoints = {
     // quando a largura da tela for menor ou igual a 550 pixels
