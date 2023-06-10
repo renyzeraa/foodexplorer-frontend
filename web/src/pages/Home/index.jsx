@@ -14,10 +14,9 @@ import SwiperCore, { Navigation, Pagination } from 'swiper'
 import 'swiper/swiper-bundle.css'
 SwiperCore.use([Navigation, Pagination])
 
-import bolodamasco from '../../assets/pratos/molla.png'
 import { api } from '../../services/api'
 
-export function Home({}) {
+export function Home() {
   const { user } = useAuth()
   const admin = /*user.isAdmin*/ true
 
@@ -44,13 +43,16 @@ export function Home({}) {
   }
 
   useEffect(() => {
-    async function fetchNotes() {
-      const response = await api.get(`/plates?title=${search}`)
-      setPlates(response.data)
-      console.log(response.data)
-    }
-    fetchNotes()
+    fetchPlates()
   }, [search])
+  const fetchPlates = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/plates')
+      setPlates(response.data)
+    } catch (error) {
+      console.error('Error fetching plates:', error)
+    }
+  }
 
   return (
     <Container>
@@ -76,20 +78,19 @@ export function Home({}) {
               navigation={true}
               modules={[Pagination, Navigation]}
             >
-              {plates.map(plate =>
-                plate.category_id === 1 ? (
-                  <SwiperSlide>
+              {plates
+                .filter(plate => plate.category_id === 1)
+                .map(plate => (
+                  <SwiperSlide key={plate.id}>
                     <Card
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
+                      // img={plate.picture}
                       isAdmin={admin}
-                    ></Card>
+                    />
                   </SwiperSlide>
-                ) : (
-                  []
-                )
-              )}
+                ))}
             </Swiper>
           </div>
         </section>
@@ -104,20 +105,19 @@ export function Home({}) {
               navigation={true}
               modules={[Pagination, Navigation]}
             >
-              {plates.map(plate =>
-                plate.category_id === 2 ? (
-                  <SwiperSlide>
+              {plates
+                .filter(plate => plate.category_id === 2)
+                .map(plate => (
+                  <SwiperSlide key={plate.id}>
                     <Card
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
+                      // img={plate.picture}
                       isAdmin={admin}
-                    ></Card>
+                    />
                   </SwiperSlide>
-                ) : (
-                  []
-                )
-              )}
+                ))}
             </Swiper>
           </div>
         </section>
@@ -132,20 +132,19 @@ export function Home({}) {
               navigation={true}
               modules={[Pagination, Navigation]}
             >
-              {plates.map(plate =>
-                plate.category_id === 3 ? (
-                  <SwiperSlide>
+              {plates
+                .filter(plate => plate.category_id === 3)
+                .map(plate => (
+                  <SwiperSlide key={plate.id}>
                     <Card
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
+                      // img={plate.picture}
                       isAdmin={admin}
-                    ></Card>
+                    />
                   </SwiperSlide>
-                ) : (
-                  []
-                )
-              )}
+                ))}
             </Swiper>
           </div>
         </section>
