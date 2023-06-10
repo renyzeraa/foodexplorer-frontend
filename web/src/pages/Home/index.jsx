@@ -49,9 +49,21 @@ export function Home() {
     }
   }
 
+  useEffect(() => {
+    fetchPlates()
+  }, [search])
+  const fetchPlates = async () => {
+    try {
+      const response = await api.get(`/plates?title=${search}`)
+      setPlates(response.data)
+    } catch (error) {
+      console.error('Error fetching plates:', error)
+    }
+  }
+
   return (
     <Container>
-      <Header admin={admin} />
+      <Header admin={admin} onChange={oEv => setSearch(oEv.target.value)} />
       <main>
         <header>
           <div className="img-content">
@@ -76,6 +88,7 @@ export function Home() {
               {plates
                 .filter((plate) => plate.category_id === 1)
                 .map((plate) => (
+
                   <SwiperSlide key={plate.id}>
                     <Card
                       title={plate.title}
@@ -102,12 +115,14 @@ export function Home() {
               {plates
                 .filter((plate) => plate.category_id === 2)
                 .map((plate) => (
+
                   <SwiperSlide key={plate.id}>
                     <Card
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
                       img={plate.picture}
+
                       isAdmin={admin}
                     />
                   </SwiperSlide>
@@ -128,14 +143,13 @@ export function Home() {
               modules={[Pagination, Navigation]}
             >
               {plates
-                .filter((plate) => plate.category_id === 4)
-                .map((plate) => (
+                .filter(plate => plate.category_id === 3)
+                .map(plate => (
                   <SwiperSlide key={plate.id}>
                     <Card
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
-                      img={plate.picture}
                       isAdmin={admin}
                     />
                   </SwiperSlide>
