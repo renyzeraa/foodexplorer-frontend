@@ -13,7 +13,7 @@ import 'swiper/css/navigation'
 import SwiperCore, { Navigation, Pagination } from 'swiper'
 import 'swiper/swiper-bundle.css'
 SwiperCore.use([Navigation, Pagination])
-
+import axios from 'axios'
 import { api } from '../../services/api'
 
 export function Home() {
@@ -47,7 +47,7 @@ export function Home() {
   }, [search])
   const fetchPlates = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/plates')
+      const response = await api.get(`/plates?title=${search}`)
       setPlates(response.data)
     } catch (error) {
       console.error('Error fetching plates:', error)
@@ -86,7 +86,7 @@ export function Home() {
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
-                      // img={plate.picture}
+                      img={plate.picture}
                       isAdmin={admin}
                     />
                   </SwiperSlide>

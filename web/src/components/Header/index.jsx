@@ -10,7 +10,7 @@ import { useAuth } from '../../hooks/auth'
 
 export function Header({ fnSearch, ...rest }) {
   const { signOut, user } = useAuth()
-  const admin = /*user.isAdmin*/ true
+  const admin = user.isAdmin
   function onClickMenu() {
     document.getElementById('menu') &&
       document.getElementById('menu').classList.toggle('change')
