@@ -1,36 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useAuth } from '../../hooks/auth';
-import { Container } from './style';
-import { Header } from '../../components/Header';
-import { Footer } from '../../components/Footer';
-import { Card } from '../../components/Card';
-import fruits from '../../assets/fruits-header.svg';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+import React, { useEffect, useState } from 'react'
+import { useAuth } from '../../hooks/auth'
+import { Container } from './style'
+import { Header } from '../../components/Header'
+import { Footer } from '../../components/Footer'
+import { Card } from '../../components/Card'
+import fruits from '../../assets/fruits-header.svg'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/css'
 import 'swiper/swiper-bundle.css'
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import SwiperCore, { Navigation, Pagination } from 'swiper';
-import 'swiper/swiper-bundle.css';
-SwiperCore.use([Navigation, Pagination]);
-
+import 'swiper/css/pagination'
+import 'swiper/css/navigation'
+import SwiperCore, { Navigation, Pagination } from 'swiper'
+import 'swiper/swiper-bundle.css'
+SwiperCore.use([Navigation, Pagination])
+import { api } from '../../services/api'
 export function Home() {
-  const { user } = useAuth();
-  const admin = /*user.isAdmin*/ true;
-  const [plates, setPlates] = useState([]);
+  const { user } = useAuth()
+  const admin = /*user.isAdmin*/ true
+  const [plates, setPlates] = useState([])
 
   useEffect(() => {
-    fetchPlates();
-  }, []);
+    fetchPlates()
+  }, [])
   const fetchPlates = async () => {
     try {
-      const response = await axios.get('http://localhost:3000/plates');
-      setPlates(response.data);
+      const response = await api.get('/plates')
+      setPlates(response.data)
     } catch (error) {
-      console.error('Error fetching plates:', error);
+      console.error('Error fetching plates:', error)
     }
-  };
+  }
   const breakpoints = {
     // quando a largura da tela for menor ou igual a 550 pixels
     550: {
@@ -74,8 +73,8 @@ export function Home() {
               modules={[Pagination, Navigation]}
             >
               {plates
-                .filter((plate) => plate.category_id === 1)
-                .map((plate) => (
+                .filter(plate => plate.category_id === 1)
+                .map(plate => (
                   <SwiperSlide key={plate.id}>
                     <Card
                       title={plate.title}
@@ -100,8 +99,8 @@ export function Home() {
               modules={[Pagination, Navigation]}
             >
               {plates
-                .filter((plate) => plate.category_id === 2)
-                .map((plate) => (
+                .filter(plate => plate.category_id === 2)
+                .map(plate => (
                   <SwiperSlide key={plate.id}>
                     <Card
                       title={plate.title}
@@ -114,7 +113,6 @@ export function Home() {
                 ))}
             </Swiper>
           </div>
-
         </section>
         <section className="content">
           <h1>Bebidas</h1>
@@ -128,8 +126,8 @@ export function Home() {
               modules={[Pagination, Navigation]}
             >
               {plates
-                .filter((plate) => plate.category_id === 4)
-                .map((plate) => (
+                .filter(plate => plate.category_id === 4)
+                .map(plate => (
                   <SwiperSlide key={plate.id}>
                     <Card
                       title={plate.title}
@@ -143,9 +141,8 @@ export function Home() {
             </Swiper>
           </div>
         </section>
-
       </main>
       <Footer></Footer>
-    </Container >
+    </Container>
   )
 }
