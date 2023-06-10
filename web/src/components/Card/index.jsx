@@ -23,7 +23,9 @@ export function Card({
 
   function handleFavorite() {}
 
-  const imgPlate = img ? `${api.defaults.baseURL}/files/${img}` : ''
+
+  const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
+
 
   return (
     <Container {...rest}>
