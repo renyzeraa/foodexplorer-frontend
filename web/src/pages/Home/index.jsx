@@ -81,6 +81,7 @@ export function Home() {
                       description={plate.description}
                       price={plate.value}
                       img={plate.picture}
+                      isAdmin={admin}
                     />
                   </SwiperSlide>
                 ))}
