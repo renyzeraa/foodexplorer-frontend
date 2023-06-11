@@ -4,7 +4,7 @@ import { Footer } from '../../components/Footer'
 import { Input } from '../../components/Input'
 import { Ingredient } from '../../components/Ingredient'
 import { TextArea } from '../../components/TextArea'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 import { useAuth } from '../../hooks/auth'
 import { useState } from 'react'
@@ -26,7 +26,6 @@ export function Plate({ isNew = true }) {
   const [ingredients, setIngredients] = useState([])
   const [newIngredients, setNewIngredients] = useState('')
 
-
   async function handleUpdate() {
     const plate = {
       title,
@@ -40,42 +39,40 @@ export function Plate({ isNew = true }) {
   }
 
   async function handleNewPlate(e) {
-    e.preventDefault();
+    e.preventDefault()
 
     if (!title) {
-      return alert('É necessário inserir um nome ao Prato!');
-    }
-    if (!categories) {
-      return alert('É necessário definir uma categoria para o Prato!');
+      return alert('É necessário inserir um nome ao Prato!')
     }
     if (newIngredients) {
-      return alert('Possui um ingrediente não inserido!');
+      return alert('Possui um ingrediente não inserido!')
     }
     if (!ingredients.length) {
-      return alert('É necessário inserir pelo menos um ingrediente ao Prato!');
+      return alert('É necessário inserir pelo menos um ingrediente ao Prato!')
     }
     if (!value) {
-      return alert('É valor do Prato é obrigatório!');
+      return alert('É valor do Prato é obrigatório!')
     }
     if (!description) {
-      return alert('É obrigatório ter uma descrição do Prato!');
+      return alert('É obrigatório ter uma descrição do Prato!')
     }
 
-    const formData = new FormData();
-    formData.append('title', title);
-    formData.append('description', description);
-    formData.append('value', value);
-    formData.append('ingredients', ingredients.join(','));
-    formData.append('categories', categories.toString());
-    formData.append('picture', imgFile);
-    formData.append('Content-Type', 'multipart/form-data');
+    const formData = new FormData()
+    formData.append('title', title)
+    formData.append('description', description)
+    formData.append('value', value)
+    formData.append('ingredients', ingredients.join(','))
+    formData.append('categories', categories.toString())
+    formData.append('picture', imgFile)
+    formData.append('Content-Type', 'multipart/form-data')
 
     try {
-      await api.post('/plates', formData);
-      console.log('Prato enviado com sucesso!');
+      await api.post('/plates', formData)
+      console.log('Prato enviado com sucesso!')
     } catch (error) {
-      console.error('Erro ao enviar o Prato:', error);
+      console.error('Erro ao enviar o Prato:', error)
     }
+    Navigate('/')
   }
 
   function handleAddIngredient() {
@@ -135,10 +132,10 @@ export function Plate({ isNew = true }) {
                 id=""
                 onChange={oEv => setCategories(oEv.target.value)}
               >
-                <option>Refeicao</option>
-                <option>Sobremesa</option>
-                <option>Doces</option>
-                <option>Bebidas</option>
+                <option value="Refeicao">Refeição</option>
+                <option value="Sobremesa">Sobremesa</option>
+                <option value="Doces">Doces</option>
+                <option value="Bebidas">Bebidas</option>
               </select>
             </div>
           </div>
