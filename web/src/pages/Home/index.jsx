@@ -131,6 +131,33 @@ export function Home() {
           </div>
         </section>
         <section className="content">
+          <h1>Doces</h1>
+          <div className="cards">
+            <Swiper
+              spaceBetween={20}
+              className="mySwiper"
+              slidesPerView={1}
+              breakpoints={breakpoints}
+              navigation={true}
+              modules={[Pagination, Navigation]}
+            >
+              {plates
+                .filter(plate => plate.category_id === 3)
+                .map(plate => (
+                  <SwiperSlide key={plate.id}>
+                    <Card
+                      title={plate.title}
+                      description={plate.description}
+                      price={plate.value}
+                      img={plate.picture}
+                      isAdmin={admin}
+                    />
+                  </SwiperSlide>
+                ))}
+            </Swiper>
+          </div>
+        </section>
+        <section className="content">
           <h1>Bebidas</h1>
           <div className="cards">
             <Swiper

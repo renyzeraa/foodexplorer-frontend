@@ -50,11 +50,11 @@ export function Header({ fnSearch, ...rest }) {
                 ></Input>
               </div>
               <li>
-                <Link href="/plates">Novo Prato</Link>
+                <Link to="/plates">Novo Prato</Link>
               </li>
 
               <li>
-                <Link href="/demand">Pedidos</Link>
+                <Link to="/demand">Pedidos</Link>
               </li>
               <li>
                 <Link onClick={signOut}>Sair</Link>
@@ -70,16 +70,16 @@ export function Header({ fnSearch, ...rest }) {
                 ></Input>
               </div>
               <li>
-                <a href="/favorites">Favoritos</a>
+                <Link to="/favorites">Favoritos</Link>
               </li>
               <li>
-                <a href="/payment">Compras</a>
+                <Link to="/payment">Compras</Link>
               </li>
               <li>
-                <a href="/demand">Pedidos</a>
+                <Link to="/demand">Pedidos</Link>
               </li>
               <li>
-                <a href="#">Sair</a>
+                <Link onClick={signOut}>Sair</Link>
               </li>
             </ul>
           )}
