@@ -16,7 +16,7 @@ export function Plate({ isNew = true }) {
   const admin = user.isAdmin
   const plate = {}
 
-  const [imgFile, setImgFile] = useState(plate.picture)
+  const [picture, setPicture] = useState(null)
 
   const [title, setTitle] = useState(plate.title)
   const [description, setDescription] = useState(plate.description)
@@ -44,6 +44,7 @@ export function Plate({ isNew = true }) {
     if (!title) {
       return alert('É necessário inserir um nome ao Prato!')
     }
+
     if (newIngredients) {
       return alert('Possui um ingrediente não inserido!')
     }
@@ -86,7 +87,7 @@ export function Plate({ isNew = true }) {
 
   function handleChangeImg(oEv) {
     const file = oEv.target.files[0]
-    setImgFile(file)
+    setPicture(file)
   }
 
   function handleRemoveIngredient(deleted) {
