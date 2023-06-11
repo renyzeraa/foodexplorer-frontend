@@ -22,6 +22,8 @@ export function Header({ fnSearch, ...rest }) {
       document.querySelector('.logo-header').classList.toggle('change')
     document.querySelector('.icon-receipt') &&
       document.querySelector('.icon-receipt').classList.toggle('change')
+    document.getElementById('menu-bar') &&
+      document.getElementById('menu-bar').classList.toggle('change')
   }
 
   return (
@@ -52,12 +54,13 @@ export function Header({ fnSearch, ...rest }) {
               <li>
                 <Link to="/plates">Novo Prato</Link>
               </li>
-
               <li>
                 <Link to="/demand">Pedidos</Link>
               </li>
               <li>
-                <Link onClick={signOut}>Sair</Link>
+                <Link to="/" onClick={signOut}>
+                  Sair
+                </Link>
               </li>
             </ul>
           ) : (
@@ -79,7 +82,9 @@ export function Header({ fnSearch, ...rest }) {
                 <Link to="/demand">Pedidos</Link>
               </li>
               <li>
-                <Link onClick={signOut}>Sair</Link>
+                <Link to="/" onClick={signOut}>
+                  Sair
+                </Link>
               </li>
             </ul>
           )}
@@ -134,7 +139,7 @@ export function Header({ fnSearch, ...rest }) {
               <Button className="admin-links" title="Novo Prato"></Button>
             </Link>
 
-            <Link className="admin-links" onClick={signOut}>
+            <Link className="admin-links" to="/" onClick={signOut}>
               <GoSignOut />
             </Link>
           </>
@@ -146,7 +151,7 @@ export function Header({ fnSearch, ...rest }) {
               <Button icon={TbReceipt} title="Pedidos" cont={3}></Button>
             </Link>
 
-            <Link className="signout" onClick={signOut}>
+            <Link className="signout" to="/" onClick={signOut}>
               <GoSignOut />
             </Link>
           </>

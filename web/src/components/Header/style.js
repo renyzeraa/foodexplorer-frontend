@@ -94,6 +94,7 @@ export const Container = styled.div`
         }
       }
     }
+
     .menu-bg,
     #menu-bar {
       top: 0;
@@ -115,6 +116,8 @@ export const Container = styled.div`
     #menu-bar {
       z-index: 3;
       width: 100%;
+    }
+    #menu-bar.change {
       position: fixed;
     }
     .change-bg {
