@@ -17,7 +17,7 @@ import { api } from '../../services/api'
 
 export function Home() {
   const { user } = useAuth()
-  const admin = /*user.isAdmin*/ true
+  const admin = user.isAdmin
   const [plates, setPlates] = useState([])
 
   useEffect(() => {
@@ -78,6 +78,7 @@ export function Home() {
                 .map(plate => (
                   <SwiperSlide key={plate.id}>
                     <Card
+                      CardId={plate.id}
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
@@ -105,6 +106,7 @@ export function Home() {
                 .map(plate => (
                   <SwiperSlide key={plate.id}>
                     <Card
+                      CardId={plate.id}
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
@@ -132,6 +134,7 @@ export function Home() {
                 .map(plate => (
                   <SwiperSlide key={plate.id}>
                     <Card
+                      CardId={plate.id}
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}
@@ -159,6 +162,7 @@ export function Home() {
                 .map(plate => (
                   <SwiperSlide key={plate.id}>
                     <Card
+                      CardId={plate.id}
                       title={plate.title}
                       description={plate.description}
                       price={plate.value}

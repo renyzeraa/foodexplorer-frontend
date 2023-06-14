@@ -1,27 +1,50 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Container } from './style'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Input } from '../../components/Input'
 import { Ingredient } from '../../components/Ingredient'
 import { TextArea } from '../../components/TextArea'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 
 import { api } from '../../services/api'
 
 export function EditPlate({}) {
-  const plate = {}
+  const params = useParams()
+  let ingredientsBd = []
+  const [picture, setPicture] = useState()
 
-  const [picture, setPicture] = useState(plate.picture)
-
-  const [title, setTitle] = useState(plate.title)
-  const [description, setDescription] = useState(plate.description)
-  const [value, setValue] = useState(plate.value)
-  const [categories, setCategories] = useState(plate.categories)
+  const [title, setTitle] = useState()
+  const [description, setDescription] = useState()
+  const [value, setValue] = useState()
+  const [categories, setCategories] = useState()
 
   const [ingredients, setIngredients] = useState([])
   const [newIngredients, setNewIngredients] = useState('')
+
+  function handlePlate(plate) {
+    setTitle(plate[0].title)
+    setDescription(plate[0].description)
+    setCategories(plate[0].category_id)
+    setValue(plate[0].value)
+    const aIngredients = JSON.parse(plate[0].ingredients)
+    for (let item of aIngredients) {
+      console.log(ingredientsBd)
+      const sName = ingredientsBd[item].name
+      setIngredients(prevState => [...prevState, sName])
+    }
+  }
+
+  useEffect(() => {
+    async function fetchPlate() {
+      let response = await api.get('/ingredients')
+      ingredientsBd = response.data
+      response = await api.get(`/plates/${params.id}`)
+      handlePlate(response.data)
+    }
+    fetchPlate()
+  }, [])
 
   async function handleUpdate(e) {
     e.preventDefault()
@@ -105,6 +128,7 @@ export function EditPlate({}) {
               <label htmlFor="">Nome</label>
               <Input
                 type="text"
+                value={title}
                 placeholder="Ex.: Salada Ceasar"
                 onChange={oEv => setTitle(oEv.target.value)}
               />
@@ -112,12 +136,13 @@ export function EditPlate({}) {
               <select
                 name=""
                 id=""
+                value={categories}
                 onChange={oEv => setCategories(oEv.target.value)}
               >
-                <option value="Refeicao">Refeição</option>
-                <option value="Sobremesa">Sobremesa</option>
-                <option value="Doces">Doces</option>
-                <option value="Bebidas">Bebidas</option>
+                <option value="1">Refeição</option>
+                <option value="2">Sobremesa</option>
+                <option value="3">Doces</option>
+                <option value="4">Bebidas</option>
               </select>
             </div>
           </div>
@@ -147,6 +172,7 @@ export function EditPlate({}) {
                 className="price"
                 type="text"
                 placeholder="R$ 00.00"
+                value={value}
                 onChange={oEv => setValue(oEv.target.value)}
               />
             </div>
@@ -156,6 +182,7 @@ export function EditPlate({}) {
             <label htmlFor="">Descrição</label>
             <TextArea
               placeholder="Fale brevemente sobre o prato. Exemplo: Rabanetes, folhas verdes e molho agridoce salpicados com gergelim."
+              value={description}
               onChange={oEv => setDescription(oEv.target.value)}
             />
           </div>

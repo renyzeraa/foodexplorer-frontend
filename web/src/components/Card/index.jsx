@@ -7,10 +7,11 @@ import {
 } from 'react-icons/ai'
 import { TbPencil } from 'react-icons/tb'
 import { Button } from '../Button'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 
 export function Card({
+  CardId,
   title,
   price,
   img,
@@ -21,21 +22,25 @@ export function Card({
 }) {
   const favorite = false
 
+  const navigate = useNavigate()
+
+  function handlePlate(idCard) {
+    navigate(`/plates/${idCard}`)
+  }
   function handleFavorite() {}
-
-
   const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
 
-
   return (
-    <Container {...rest}>
+    <Container {...rest} CardId={CardId}>
       <button className="btn-fav " onClick={handleFavorite}>
         {isAdmin ? (
-          <Link to="/details">
+          <Link onClick={() => handlePlate(CardId)}>
             <TbPencil />
           </Link>
         ) : favorite ? (
-          <AiFillHeart />
+          <Link>
+            <AiFillHeart />
+          </Link>
         ) : (
           <AiOutlineHeart />
         )}
