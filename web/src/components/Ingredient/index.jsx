@@ -2,9 +2,19 @@ import { Container } from './style'
 import { useState } from 'react'
 import { FiPlus, FiX } from 'react-icons/fi'
 import DatalistInput from 'react-datalist-input'
+import { api } from '../../services/api'
 
 export function Ingredient({ isNew, value, onClick, ...rest }) {
   const [ingredients, setIngredients] = useState([])
+
+  async function updateIngredient() {
+    const response = await api.get('/ingredients')
+    const aIngredients = response.data.map((item, idx) => ({
+      id: String(idx),
+      value: item.name
+    }))
+    setIngredients(aIngredients)
+  }
 
   return (
     <Container isNew={isNew}>
@@ -17,8 +27,8 @@ export function Ingredient({ isNew, value, onClick, ...rest }) {
         inputMode="text"
         {...rest}
         placeholder="Digite"
-        onSelect={item => setIngredients([...ingredients, item.value])}
-        items={[]}
+        onClick={updateIngredient}
+        items={ingredients}
       />
 
       <button type="button" onClick={onClick}>
