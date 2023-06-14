@@ -1,42 +1,26 @@
+import { useState } from 'react'
 import { Container } from './style'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Input } from '../../components/Input'
 import { Ingredient } from '../../components/Ingredient'
 import { TextArea } from '../../components/TextArea'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
-import { useAuth } from '../../hooks/auth'
-import { useState } from 'react'
-
 import { api } from '../../services/api'
 
-export function Plate({ isNew = true }) {
-  const { user } = useAuth()
-  const admin = user.isAdmin
-  const plate = {}
+export function Plate({}) {
+  const navigate = useNavigate()
 
-  const [picture, setPicture] = useState(null)
+  const [picture, setPicture] = useState()
 
-  const [title, setTitle] = useState(plate.title)
-  const [description, setDescription] = useState(plate.description)
-  const [value, setValue] = useState(plate.value)
-  const [categories, setCategories] = useState(plate.categories)
+  const [title, setTitle] = useState()
+  const [description, setDescription] = useState()
+  const [value, setValue] = useState()
+  const [categories, setCategories] = useState()
 
   const [ingredients, setIngredients] = useState([])
   const [newIngredients, setNewIngredients] = useState('')
-
-  async function handleUpdate() {
-    const plate = {
-      title,
-      description,
-      value,
-      ingredients,
-      categories,
-      picture
-    }
-    await updatePlate({ plate })
-  }
 
   async function handleNewPlate(e) {
     e.preventDefault()
@@ -44,7 +28,6 @@ export function Plate({ isNew = true }) {
     if (!title) {
       return alert('É necessário inserir um nome ao Prato!')
     }
-
     if (newIngredients) {
       return alert('Possui um ingrediente não inserido!')
     }
@@ -58,22 +41,22 @@ export function Plate({ isNew = true }) {
       return alert('É obrigatório ter uma descrição do Prato!')
     }
 
-    const formData = new FormData()
-    formData.append('title', title)
-    formData.append('description', description)
-    formData.append('value', value)
-    formData.append('ingredients', ingredients.join(','))
-    formData.append('categories', categories.toString())
-    formData.append('picture', imgFile)
-    formData.append('Content-Type', 'multipart/form-data')
+    const oFormData = new FormData()
+    oFormData.append('title', title)
+    oFormData.append('description', description)
+    oFormData.append('value', value)
+    oFormData.append('ingredients', ingredients.join(','))
+    oFormData.append('categories', String(categories))
+    oFormData.append('picture', picture)
+    oFormData.append('Content-Type', 'multipart/form-data')
 
     try {
-      await api.post('/plates', formData)
-      console.log('Prato enviado com sucesso!')
+      await api.post('/plates', oFormData)
+      alert('Prato criado com sucesso !')
+      navigate('/')
     } catch (error) {
       console.error('Erro ao enviar o Prato:', error)
     }
-    Navigate('/')
   }
 
   function handleAddIngredient() {
@@ -98,13 +81,15 @@ export function Plate({ isNew = true }) {
 
   return (
     <Container>
-      <Header admin={admin} />
+      <Header admin />
       <section>
         <div className="header">
           <Link to="/">
             <AiOutlineLeft /> voltar
           </Link>
-          <h1>{isNew ? <p>Novo prato</p> : <p>Editar prato</p>}</h1>
+          <h1>
+            <p>Novo prato</p>
+          </h1>
         </div>
         <form className="content-wrapper" action="">
           <div className="content">
@@ -112,11 +97,7 @@ export function Plate({ isNew = true }) {
               <label htmlFor="">Imagem do prato</label>
               <label htmlFor="product">
                 <AiOutlineUpload />
-                {isNew ? (
-                  <p>Selecione imagem</p>
-                ) : (
-                  <p>Selecione imagem para alterá-la</p>
-                )}
+                <p>Selecione imagem</p>
                 <input type="file" id="product" onChange={handleChangeImg} />
               </label>
             </div>
@@ -179,24 +160,12 @@ export function Plate({ isNew = true }) {
             />
           </div>
           <div className="button-submit">
-            {!isNew ? (
-              <div className="edit-plate">
-                <Input className="delete" type="submit" value="Excluir prato" />
-
-                <Input
-                  className="submit"
-                  type="submit"
-                  value="Salvar alterações"
-                />
-              </div>
-            ) : (
-              <Input
-                className="submit"
-                type="submit"
-                value="Criar Prato"
-                onClick={handleNewPlate}
-              />
-            )}
+            <Input
+              className="submit"
+              type="submit"
+              value="Criar Prato"
+              onClick={handleNewPlate}
+            />
           </div>
         </form>
       </section>
