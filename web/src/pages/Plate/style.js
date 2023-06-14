@@ -145,7 +145,7 @@ export const Container = styled.main`
         .submit {
           background: ${({ theme }) => theme.COLORS.TOMATO};
           border-radius: 10px;
-
+          cursor: pointer;
           :hover {
             filter: brightness(1.2);
           }
