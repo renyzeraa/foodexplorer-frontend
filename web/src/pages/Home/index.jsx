@@ -14,20 +14,25 @@ import SwiperCore, { Navigation, Pagination } from 'swiper'
 import 'swiper/swiper-bundle.css'
 SwiperCore.use([Navigation, Pagination])
 import { api } from '../../services/api'
+import { Loading } from '../../components/Loading'
 
 export function Home() {
   const { user } = useAuth()
   const admin = user.isAdmin
   const [plates, setPlates] = useState([])
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     fetchPlates()
   }, [])
   const fetchPlates = async () => {
     try {
+      setLoading(true)
       const response = await api.get('/plates')
       setPlates(response.data)
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       console.error('Error fetching plates:', error)
     }
   }
@@ -51,6 +56,7 @@ export function Home() {
 
   return (
     <Container>
+      {loading && <Loading></Loading>}
       <Header admin={admin} onChange={oEv => setSearch(oEv.target.value)} />
       <main>
         <header>

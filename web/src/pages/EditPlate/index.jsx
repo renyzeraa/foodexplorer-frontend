@@ -5,14 +5,16 @@ import { Footer } from '../../components/Footer'
 import { Input } from '../../components/Input'
 import { Ingredient } from '../../components/Ingredient'
 import { TextArea } from '../../components/TextArea'
-import { Link, Navigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
-
+import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
 
 export function EditPlate({}) {
   const params = useParams()
+  const navigate = useNavigate()
   let ingredientsBd = []
+  let bIsAtualized = false
   const [picture, setPicture] = useState()
 
   const [title, setTitle] = useState()
@@ -23,25 +25,40 @@ export function EditPlate({}) {
   const [ingredients, setIngredients] = useState([])
   const [newIngredients, setNewIngredients] = useState('')
 
+  const [loading, setLoading] = useState(false)
+
   function handlePlate(plate) {
+    if (bIsAtualized) {
+      return
+    }
     setTitle(plate[0].title)
-    setDescription(plate[0].description)
     setCategories(plate[0].category_id)
     setValue(plate[0].value)
-    const aIngredients = JSON.parse(plate[0].ingredients)
-    for (let item of aIngredients) {
-      console.log(ingredientsBd)
-      const sName = ingredientsBd[item].name
-      setIngredients(prevState => [...prevState, sName])
+    if (!ingredients.length) {
+      const aIngredients = JSON.parse(plate[0].ingredients)
+      for (let item of aIngredients) {
+        const sName = ingredientsBd[item].name
+        setIngredients(prevState => [...prevState, sName])
+      }
     }
+    const sDescricao = String(plate[0].description)
+    setDescription(sDescricao)
   }
 
   useEffect(() => {
     async function fetchPlate() {
-      let response = await api.get('/ingredients')
-      ingredientsBd = response.data
-      response = await api.get(`/plates/${params.id}`)
-      handlePlate(response.data)
+      try {
+        setLoading(true)
+        let response = await api.get('/ingredients')
+        ingredientsBd = response.data
+        response = await api.get(`/plates/${params.id}`)
+        handlePlate(response.data)
+        setLoading(false)
+        bIsAtualized = true
+      } catch (error) {
+        setLoading(false)
+        console.error(error.message)
+      }
     }
     fetchPlate()
   }, [])
@@ -70,14 +87,20 @@ export function EditPlate({}) {
     formData.append('description', description)
     formData.append('value', value)
     formData.append('ingredients', ingredients.join(','))
-    formData.append('categories', String(categories))
-    formData.append('picture', picture)
+    formData.append('category_id', String(categories))
+    if (typeof picture == 'object') {
+      formData.append('picture', picture)
+    }
     formData.append('Content-Type', 'multipart/form-data')
 
     try {
-      await api.post('/plates', formData)
-      Navigate('/')
+      setLoading(true)
+      await api.put(`/plates/${params.id}`, formData)
+      navigate('/')
+      setLoading(false)
+      alert('Prato atualizado com sucesso!')
     } catch (error) {
+      setLoading(false)
       console.error('Erro ao enviar o Prato:', error)
     }
   }
@@ -104,6 +127,7 @@ export function EditPlate({}) {
 
   return (
     <Container>
+      {loading && <Loading />}
       <Header admin />
       <section>
         <div className="header">

@@ -7,11 +7,12 @@ import { Ingredient } from '../../components/Ingredient'
 import { TextArea } from '../../components/TextArea'
 import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
+import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
 
 export function Plate({}) {
   const navigate = useNavigate()
-
+  const [loading, setLoading] = useState(false)
   const [picture, setPicture] = useState()
 
   const [title, setTitle] = useState()
@@ -51,10 +52,13 @@ export function Plate({}) {
     oFormData.append('Content-Type', 'multipart/form-data')
 
     try {
+      setLoading(true)
       await api.post('/plates', oFormData)
-      alert('Prato criado com sucesso !')
       navigate('/')
+      setLoading(false)
+      alert('Prato criado com sucesso !')
     } catch (error) {
+      setLoading(false)
       console.error('Erro ao enviar o Prato:', error)
     }
   }
@@ -81,6 +85,7 @@ export function Plate({}) {
 
   return (
     <Container>
+      {loading && <Loading></Loading>}
       <Header admin />
       <section>
         <div className="header">
