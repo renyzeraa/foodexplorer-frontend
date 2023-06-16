@@ -63,6 +63,10 @@ export function Plate({ }) {
     }
   }
 
+  function handleFormSubmit(e) {
+    e.preventDefault()
+  }
+
   function handleAddIngredient() {
     setIngredients(prevState => [...prevState, newIngredients])
     setNewIngredients('')
@@ -96,7 +100,7 @@ export function Plate({ }) {
             <p>Novo prato</p>
           </h1>
         </div>
-        <form className="content-wrapper" action="">
+        <form className="content-wrapper" onSubmit={handleFormSubmit} action="">
           <div className="content">
             <div className="content-img">
               <label htmlFor="">Imagem do prato</label>
