@@ -10,7 +10,7 @@ import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
 
-export function Plate({}) {
+export function Plate({ }) {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [picture, setPicture] = useState()
@@ -18,7 +18,7 @@ export function Plate({}) {
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [value, setValue] = useState()
-  const [categories, setCategories] = useState()
+  const [categories, setCategories] = useState("Refeicao")
 
   const [ingredients, setIngredients] = useState([])
   const [newIngredients, setNewIngredients] = useState('')
@@ -117,7 +117,7 @@ export function Plate({}) {
               <select
                 name=""
                 id=""
-                onChange={oEv => setCategories(oEv.target.value)}
+                onChange={oEv => setCategories(oEv.target.value || "Refeicao")}
               >
                 <option value="Refeicao">Refeição</option>
                 <option value="Sobremesa">Sobremesa</option>
