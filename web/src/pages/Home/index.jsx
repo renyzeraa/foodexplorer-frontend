@@ -54,6 +54,10 @@ export function Home() {
     }
   }
 
+  function loadingCard(bLoad) {
+    setLoading(bLoad)
+  }
+
   return (
     <Container>
       {loading && <Loading></Loading>}
@@ -90,6 +94,7 @@ export function Home() {
                       price={plate.value}
                       img={plate.picture}
                       isAdmin={admin}
+                      fnLoading={loadingCard}
                     />
                   </SwiperSlide>
                 ))}
@@ -118,6 +123,7 @@ export function Home() {
                       price={plate.value}
                       img={plate.picture}
                       isAdmin={admin}
+                      fnLoading={loadingCard}
                     />
                   </SwiperSlide>
                 ))}
@@ -146,6 +152,7 @@ export function Home() {
                       price={plate.value}
                       img={plate.picture}
                       isAdmin={admin}
+                      fnLoading={loadingCard}
                     />
                   </SwiperSlide>
                 ))}
@@ -173,6 +180,7 @@ export function Home() {
                       description={plate.description}
                       price={plate.value}
                       isAdmin={admin}
+                      fnLoading={loadingCard}
                     />
                   </SwiperSlide>
                 ))}
