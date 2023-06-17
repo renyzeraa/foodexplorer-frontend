@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
+import { Button } from '../../components/Button'
 
 export function Plate({}) {
   const navigate = useNavigate()
@@ -170,10 +171,9 @@ export function Plate({}) {
             />
           </div>
           <div className="button-submit">
-            <Input
+            <Button
               className="submit"
-              type="text"
-              value="Criar Prato"
+              title="Criar Prato"
               onClick={handleNewPlate}
             />
           </div>

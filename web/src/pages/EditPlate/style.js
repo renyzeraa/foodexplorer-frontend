@@ -134,20 +134,22 @@ export const Container = styled.main`
         .edit-plate {
           display: flex;
           gap: 32px;
-          cursor: pointer;
-          input {
+
+          .delete,
+          .submit {
             cursor: pointer;
+            padding: 8px;
+          }
+
+          .delete {
+            background: ${({ theme }) => theme.COLORS.BACKGROUND_700};
+          }
+          .submit {
+            background: ${({ theme }) => theme.COLORS.TOMATO};
+
             :hover {
               filter: brightness(1.2);
             }
-          }
-        }
-        .submit {
-          background: ${({ theme }) => theme.COLORS.TOMATO};
-          border-radius: 10px;
-
-          :hover {
-            filter: brightness(1.2);
           }
         }
       }
