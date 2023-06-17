@@ -9,6 +9,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
+import { Button } from '../../components/Button'
 
 export function EditPlate({}) {
   const params = useParams()
@@ -125,6 +126,26 @@ export function EditPlate({}) {
     )
   }
 
+  function handleSelectItem(oItem) {
+    setNewIngredients(oItem.value)
+  }
+
+  async function handleRemovePlate() {
+    const confirm = window.confirm('Deseja realmente deletar este prato?')
+    if (confirm) {
+      try {
+        setLoading(true)
+        await api.delete(`/plates/${params.id}`)
+        alert('Prato excluído com sucesso !')
+        navigate('/')
+        setLoading(false)
+      } catch (error) {
+        setLoading(false)
+        console.error(error)
+      }
+    }
+  }
+
   return (
     <Container>
       {loading && <Loading />}
@@ -187,6 +208,7 @@ export function EditPlate({}) {
                   value={newIngredients}
                   onChange={handleNewIngredient}
                   onClick={handleAddIngredient}
+                  onSelect={oItem => handleSelectItem(oItem)}
                 />
               </div>
             </div>
@@ -212,12 +234,15 @@ export function EditPlate({}) {
           </div>
           <div className="button-submit">
             <div className="edit-plate">
-              <Input className="delete" type="submit" value="Excluir prato" />
-              <Input
+              <Button
+                className="delete"
+                title="Excluir prato"
+                onClick={handleRemovePlate}
+              />
+              <Button
                 className="submit"
-                type="submit"
+                title="Salvar alterações"
                 onClick={oEv => handleUpdate(oEv)}
-                value="Salvar alterações"
               />
             </div>
           </div>

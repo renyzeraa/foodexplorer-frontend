@@ -83,6 +83,10 @@ export function Plate({}) {
     )
   }
 
+  function handleSelectItem(oItem) {
+    setNewIngredients(oItem.value)
+  }
+
   return (
     <Container>
       {loading && <Loading></Loading>}
@@ -143,6 +147,7 @@ export function Plate({}) {
                   value={newIngredients}
                   onChange={handleNewIngredient}
                   onClick={handleAddIngredient}
+                  onSelect={oItem => handleSelectItem(oItem)}
                 />
               </div>
             </div>
@@ -167,7 +172,7 @@ export function Plate({}) {
           <div className="button-submit">
             <Input
               className="submit"
-              type="submit"
+              type="text"
               value="Criar Prato"
               onClick={handleNewPlate}
             />
