@@ -9,7 +9,8 @@ import { TbPencil } from 'react-icons/tb'
 import { Button } from '../Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
-
+import { Loading } from '../Loading'
+import { useState } from 'react'
 export function Card({
   CardId,
   title,
@@ -21,17 +22,20 @@ export function Card({
   ...rest
 }) {
   const favorite = false
-
+  const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
   function handlePlate(idCard) {
+    setLoading(true)
     navigate(`/plates/${idCard}`)
+    setLoading(false)
   }
   function handleFavorite() {}
   const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
 
   return (
     <Container {...rest} CardId={CardId}>
+      {loading && <Loading></Loading>}
       <button className="btn-fav " onClick={handleFavorite}>
         {isAdmin ? (
           <Link onClick={() => handlePlate(CardId)}>
