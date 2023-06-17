@@ -9,6 +9,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
+import { Button } from '../../components/Button'
 
 export function Plate({ }) {
   const navigate = useNavigate()
@@ -87,6 +88,10 @@ export function Plate({ }) {
     )
   }
 
+  function handleSelectItem(oItem) {
+    setNewIngredients(oItem.value)
+  }
+
   return (
     <Container>
       {loading && <Loading></Loading>}
@@ -100,7 +105,14 @@ export function Plate({ }) {
             <p>Novo prato</p>
           </h1>
         </div>
-        <form className="content-wrapper" onSubmit={handleFormSubmit} action="">
+       // <form className="content-wrapper" onSubmit={handleFormSubmit} action=""> alteração tua ou minha, deixei comentado pra backup
+        <form
+          className="content-wrapper"
+          action=""
+          onSubmit={oEv => {
+            oEv.preventDefault()
+          }}
+        >
           <div className="content">
             <div className="content-img">
               <label htmlFor="">Imagem do prato</label>
@@ -147,6 +159,7 @@ export function Plate({ }) {
                   value={newIngredients}
                   onChange={handleNewIngredient}
                   onClick={handleAddIngredient}
+                  onSelect={oItem => handleSelectItem(oItem)}
                 />
               </div>
             </div>
@@ -169,10 +182,9 @@ export function Plate({ }) {
             />
           </div>
           <div className="button-submit">
-            <Input
+            <Button
               className="submit"
-              type="submit"
-              value="Criar Prato"
+              title="Criar Prato"
               onClick={handleNewPlate}
             />
           </div>

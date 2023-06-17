@@ -4,7 +4,7 @@ import { FiPlus, FiX } from 'react-icons/fi'
 import DatalistInput from 'react-datalist-input'
 import { api } from '../../services/api'
 
-export function Ingredient({ isNew, value, onClick, ...rest }) {
+export function Ingredient({ isNew, value, onClick, onSelect, ...rest }) {
   const [ingredients, setIngredients] = useState([])
 
   async function updateIngredient() {
@@ -29,6 +29,7 @@ export function Ingredient({ isNew, value, onClick, ...rest }) {
         placeholder="Digite"
         onClick={updateIngredient}
         items={ingredients}
+        onSelect={onSelect}
       />
 
       <button type="button" onClick={onClick}>
