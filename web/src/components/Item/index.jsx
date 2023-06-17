@@ -1,11 +1,10 @@
 import { Container } from './style'
-import molla from '../../assets/pratos/molla.png'
 
 export function Item() {
   return (
     <Container>
       <div className="container">
-        <img src={molla} alt="" />
+        <img src={''} alt="" />
         <section>
           <div className="content">
             <p>
