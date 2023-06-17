@@ -15,7 +15,7 @@ export function EditPlate({}) {
   const params = useParams()
   const navigate = useNavigate()
   let ingredientsBd = []
-  let bIsAtualized = false
+  let bIsActualized = false
   const [picture, setPicture] = useState()
 
   const [title, setTitle] = useState()
@@ -29,7 +29,7 @@ export function EditPlate({}) {
   const [loading, setLoading] = useState(false)
 
   function handlePlate(plate) {
-    if (bIsAtualized) {
+    if (bIsActualized) {
       return
     }
     setTitle(plate[0].title)
@@ -55,7 +55,7 @@ export function EditPlate({}) {
         response = await api.get(`/plates/${params.id}`)
         handlePlate(response.data)
         setLoading(false)
-        bIsAtualized = true
+        bIsActualized = true
       } catch (error) {
         setLoading(false)
         console.error(error.message)

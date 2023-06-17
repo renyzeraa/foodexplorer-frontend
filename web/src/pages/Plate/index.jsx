@@ -64,10 +64,6 @@ export function Plate({}) {
     }
   }
 
-  function handleFormSubmit(e) {
-    e.preventDefault()
-  }
-
   function handleAddIngredient() {
     setIngredients(prevState => [...prevState, newIngredients])
     setNewIngredients('')
