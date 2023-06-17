@@ -11,7 +11,7 @@ import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
 import { Button } from '../../components/Button'
 
-export function Plate({}) {
+export function Plate({ }) {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [picture, setPicture] = useState()
@@ -19,7 +19,7 @@ export function Plate({}) {
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [value, setValue] = useState()
-  const [categories, setCategories] = useState()
+  const [categories, setCategories] = useState("Refeicao")
 
   const [ingredients, setIngredients] = useState([])
   const [newIngredients, setNewIngredients] = useState('')
@@ -64,6 +64,10 @@ export function Plate({}) {
     }
   }
 
+  function handleFormSubmit(e) {
+    e.preventDefault()
+  }
+
   function handleAddIngredient() {
     setIngredients(prevState => [...prevState, newIngredients])
     setNewIngredients('')
@@ -101,6 +105,7 @@ export function Plate({}) {
             <p>Novo prato</p>
           </h1>
         </div>
+       // <form className="content-wrapper" onSubmit={handleFormSubmit} action=""> alteração tua ou minha, deixei comentado pra backup
         <form
           className="content-wrapper"
           action=""
@@ -128,7 +133,7 @@ export function Plate({}) {
               <select
                 name=""
                 id=""
-                onChange={oEv => setCategories(oEv.target.value)}
+                onChange={oEv => setCategories(oEv.target.value || "Refeicao")}
               >
                 <option value="Refeicao">Refeição</option>
                 <option value="Sobremesa">Sobremesa</option>
