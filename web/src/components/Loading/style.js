@@ -7,10 +7,13 @@ export const Container = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  pointer-events: none;
+  z-index: 99999;
+  pointer-events: unset;
   .loading-spinner {
     border: 4px solid #f3f3f3;
     border-top: 4px solid #3498db;
