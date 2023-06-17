@@ -101,7 +101,13 @@ export function Plate({}) {
             <p>Novo prato</p>
           </h1>
         </div>
-        <form className="content-wrapper" action="">
+        <form
+          className="content-wrapper"
+          action=""
+          onSubmit={oEv => {
+            oEv.preventDefault()
+          }}
+        >
           <div className="content">
             <div className="content-img">
               <label htmlFor="">Imagem do prato</label>
