@@ -14,13 +14,17 @@ export const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 99999;
   pointer-events: unset;
+  gap: 12px;
   .loading-spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #3498db;
     border-radius: 50%;
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     animation: spin 1s linear infinite;
+  }
+  p {
+    font-family: 'Poppins', sans-serif;
   }
 
   @keyframes spin {

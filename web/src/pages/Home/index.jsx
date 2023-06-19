@@ -21,21 +21,23 @@ export function Home() {
   const admin = user.isAdmin
   const [plates, setPlates] = useState([])
   const [loading, setLoading] = useState(false)
+  const [search, setSearch] = useState('')
 
   useEffect(() => {
-    fetchPlates()
-  }, [])
-  const fetchPlates = async () => {
-    try {
+    async function searchPlate() {
       setLoading(true)
-      const response = await api.get('/plates')
+      const response = await api.get(`/plates?title=${search}`)
       setPlates(response.data)
       setLoading(false)
+    }
+    try {
+      searchPlate()
     } catch (error) {
       setLoading(false)
-      console.error('Error fetching plates:', error)
+      console.error(error.message)
     }
-  }
+  }, [search])
+
   const breakpoints = {
     // quando a largura da tela for menor ou igual a 550 pixels
     550: {
@@ -58,10 +60,14 @@ export function Home() {
     setLoading(bLoad)
   }
 
+  function handleSearchPlate(oEv) {
+    setSearch(oEv.target.value)
+  }
+
   return (
     <Container>
       {loading && <Loading></Loading>}
-      <Header admin={admin} onChange={oEv => setSearch(oEv.target.value)} />
+      <Header admin={admin} fnChange={handleSearchPlate} />
       <main>
         <header>
           <div className="img-content">
