@@ -1,6 +1,6 @@
 import { Container } from './style'
 
-export function Input({ icon: Icon = false, ...rest }) {
+export function Input({ icon: Icon, ...rest }) {
   return (
     <Container>
       {Icon && <Icon size={20} />}

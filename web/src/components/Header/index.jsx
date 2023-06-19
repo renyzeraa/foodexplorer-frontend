@@ -1,14 +1,14 @@
 import { Container } from './style'
 import logo from '../../assets/logo.svg'
-import { Input } from '../Input'
 import { Button } from '../Button'
 import { BiSearch } from 'react-icons/bi'
 import { GoSignOut } from 'react-icons/go'
 import { TbReceipt } from 'react-icons/tb'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
+import { InputSearch } from '../InputSearch'
 
-export function Header({ fnSearch, ...rest }) {
+export function Header({ fnChange, ...rest }) {
   const { signOut, user } = useAuth()
   const admin = user.isAdmin
   function onClickMenu() {
@@ -26,6 +26,11 @@ export function Header({ fnSearch, ...rest }) {
       document.getElementById('menu-bar').classList.toggle('change')
   }
 
+  function handleFnSearch(oEv) {
+    if (typeof fnChange === 'function') {
+      fnChange(oEv)
+    }
+  }
   return (
     <Container {...rest}>
       <main className="mobile">
@@ -44,12 +49,12 @@ export function Header({ fnSearch, ...rest }) {
           {admin ? (
             <ul className="nav" id="nav">
               <div className="input">
-                <Input
+                <InputSearch
                   icon={BiSearch}
                   type="text"
                   placeholder="Busque por pratos ou ingredientes"
-                  onChange={fnSearch}
-                ></Input>
+                  fnChange={handleFnSearch}
+                ></InputSearch>
               </div>
               <li>
                 <Link to="/plates">Novo Prato</Link>
@@ -66,11 +71,12 @@ export function Header({ fnSearch, ...rest }) {
           ) : (
             <ul className="nav" id="nav">
               <div className="input">
-                <Input
+                <InputSearch
                   icon={BiSearch}
                   type="text"
                   placeholder="Busque por pratos ou ingredientes"
-                ></Input>
+                  fnChange={handleFnSearch}
+                ></InputSearch>
               </div>
               <li>
                 <Link to="/favorites">Favoritos</Link>
@@ -112,24 +118,14 @@ export function Header({ fnSearch, ...rest }) {
           </Link>
         )}
 
-        {admin ? (
-          <div className="input admin">
-            <Input
-              icon={BiSearch}
-              type="text"
-              placeholder="Busque por pratos ou ingredientes"
-            ></Input>
-          </div>
-        ) : (
-          <div className="input">
-            <Input
-              icon={BiSearch}
-              type="text"
-              placeholder="Busque por pratos ou ingredientes"
-            ></Input>
-          </div>
-        )}
-
+        <div className={admin ? 'input admin' : ' input'}>
+          <InputSearch
+            icon={BiSearch}
+            type="text"
+            placeholder="Busque por pratos ou ingredientes"
+            fnChange={handleFnSearch}
+          ></InputSearch>
+        </div>
         {admin ? (
           <>
             <Link className="admin-links" to="/demand">
