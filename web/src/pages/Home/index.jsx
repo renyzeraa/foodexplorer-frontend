@@ -67,7 +67,7 @@ export function Home() {
   return (
     <Container>
       {loading && <Loading></Loading>}
-      <Header admin={admin} fnChange={handleSearchPlate} />
+      <Header admin={admin} fnChange={oEv => handleSearchPlate(oEv)} />
       <main>
         <header>
           <div className="img-content">

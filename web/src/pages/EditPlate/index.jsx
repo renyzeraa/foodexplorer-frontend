@@ -32,17 +32,17 @@ export function EditPlate({}) {
     if (bIsActualized) {
       return
     }
-    setTitle(plate[0].title)
-    setCategories(plate[0].category_id)
-    setValue(plate[0].value)
+    setTitle(plate.title)
+    setCategories(plate.category_id)
+    setValue(plate.value)
     if (!ingredients.length) {
-      const aIngredients = JSON.parse(plate[0].ingredients)
+      const aIngredients = JSON.parse(plate.ingredients)
       for (let item of aIngredients) {
         const sName = ingredientsBd[item].name
         setIngredients(prevState => [...prevState, sName])
       }
     }
-    const sDescricao = String(plate[0].description)
+    const sDescricao = String(plate.description)
     setDescription(sDescricao)
   }
 
