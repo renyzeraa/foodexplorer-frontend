@@ -22,11 +22,17 @@ export function Home() {
   const [plates, setPlates] = useState([])
   const [loading, setLoading] = useState(false)
   const [search, setSearch] = useState('')
+  const [bHasSnack, setBHasSnack] = useState(false)
+  const [bHasDessert, setBHasDessert] = useState(false)
+  const [bHasCandy, setBHasCandy] = useState(false)
+  const [bHasDrinks, setBHasDrinks] = useState(false)
 
   useEffect(() => {
     async function searchPlate() {
       setLoading(true)
       const response = await api.get(`/plates?title=${search}`)
+      console.log(response.data)
+      handleTitlePlates(response.data)
       setPlates(response.data)
       setLoading(false)
     }
@@ -64,6 +70,30 @@ export function Home() {
     setSearch(oEv.target.value)
   }
 
+  /**
+   * Ira verificar se possui pratos cadastrados na categoria determinada
+   * @param {Array} aPlates
+   */
+  function handleTitlePlates(aPlates) {
+    for (var oPlate of aPlates) {
+      // se tiver, ira mostrar o titulo correspondente ao prato na home
+      switch (oPlate.category_id) {
+        case 1:
+          setBHasSnack(true)
+          break
+        case 2:
+          setBHasDessert(true)
+          break
+        case 3:
+          setBHasCandy(true)
+          break
+        case 4:
+          setBHasDrinks(true)
+          break
+      }
+    }
+  }
+
   return (
     <Container>
       {loading && <Loading></Loading>}
@@ -78,121 +108,129 @@ export function Home() {
             <p>Sinta o cuidado do preparo com ingredientes selecionados</p>
           </div>
         </header>
-        <section className="content">
-          <h1>Refeições</h1>
-          <div className="cards-content">
-            <Swiper
-              spaceBetween={20}
-              className="mySwiper"
-              slidesPerView={1}
-              breakpoints={breakpoints}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-            >
-              {plates
-                .filter(plate => plate.category_id === 1)
-                .map(plate => (
-                  <SwiperSlide key={plate.id}>
-                    <Card
-                      CardId={plate.id}
-                      title={plate.title}
-                      description={plate.description}
-                      price={plate.value}
-                      img={plate.picture}
-                      isAdmin={admin}
-                      fnLoading={loadingCard}
-                    />
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          </div>
-        </section>
-        <section className="content">
-          <h1>Sobremesas</h1>
-          <div className="cards">
-            <Swiper
-              spaceBetween={20}
-              className="mySwiper"
-              slidesPerView={1}
-              breakpoints={breakpoints}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-            >
-              {plates
-                .filter(plate => plate.category_id === 2)
-                .map(plate => (
-                  <SwiperSlide key={plate.id}>
-                    <Card
-                      CardId={plate.id}
-                      title={plate.title}
-                      description={plate.description}
-                      price={plate.value}
-                      img={plate.picture}
-                      isAdmin={admin}
-                      fnLoading={loadingCard}
-                    />
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          </div>
-        </section>
-        <section className="content">
-          <h1>Doces</h1>
-          <div className="cards">
-            <Swiper
-              spaceBetween={20}
-              className="mySwiper"
-              slidesPerView={1}
-              breakpoints={breakpoints}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-            >
-              {plates
-                .filter(plate => plate.category_id === 3)
-                .map(plate => (
-                  <SwiperSlide key={plate.id}>
-                    <Card
-                      CardId={plate.id}
-                      title={plate.title}
-                      description={plate.description}
-                      price={plate.value}
-                      img={plate.picture}
-                      isAdmin={admin}
-                      fnLoading={loadingCard}
-                    />
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          </div>
-        </section>
-        <section className="content">
-          <h1>Bebidas</h1>
-          <div className="cards">
-            <Swiper
-              spaceBetween={20}
-              className="mySwiper"
-              slidesPerView={1}
-              breakpoints={breakpoints}
-              navigation={true}
-              modules={[Pagination, Navigation]}
-            >
-              {plates
-                .filter(plate => plate.category_id === 4)
-                .map(plate => (
-                  <SwiperSlide key={plate.id}>
-                    <Card
-                      CardId={plate.id}
-                      title={plate.title}
-                      description={plate.description}
-                      price={plate.value}
-                      isAdmin={admin}
-                      fnLoading={loadingCard}
-                    />
-                  </SwiperSlide>
-                ))}
-            </Swiper>
-          </div>
-        </section>
+        {bHasSnack && (
+          <section className="content">
+            <h1>Refeições</h1>
+            <div className="cards-content">
+              <Swiper
+                spaceBetween={20}
+                className="mySwiper"
+                slidesPerView={1}
+                breakpoints={breakpoints}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+              >
+                {plates
+                  .filter(plate => plate.category_id === 1)
+                  .map(plate => (
+                    <SwiperSlide key={plate.id}>
+                      <Card
+                        CardId={plate.id}
+                        title={plate.title}
+                        description={plate.description}
+                        price={plate.value}
+                        img={plate.picture}
+                        isAdmin={admin}
+                        fnLoading={loadingCard}
+                      />
+                    </SwiperSlide>
+                  ))}
+              </Swiper>
+            </div>
+          </section>
+        )}
+        {bHasDessert && (
+          <section className="content">
+            <h1>Sobremesas</h1>
+            <div className="cards">
+              <Swiper
+                spaceBetween={20}
+                className="mySwiper"
+                slidesPerView={1}
+                breakpoints={breakpoints}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+              >
+                {plates
+                  .filter(plate => plate.category_id === 2)
+                  .map(plate => (
+                    <SwiperSlide key={plate.id}>
+                      <Card
+                        CardId={plate.id}
+                        title={plate.title}
+                        description={plate.description}
+                        price={plate.value}
+                        img={plate.picture}
+                        isAdmin={admin}
+                        fnLoading={loadingCard}
+                      />
+                    </SwiperSlide>
+                  ))}
+              </Swiper>
+            </div>
+          </section>
+        )}
+        {bHasCandy && (
+          <section className="content">
+            <h1>Doces</h1>
+            <div className="cards">
+              <Swiper
+                spaceBetween={20}
+                className="mySwiper"
+                slidesPerView={1}
+                breakpoints={breakpoints}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+              >
+                {plates
+                  .filter(plate => plate.category_id === 3)
+                  .map(plate => (
+                    <SwiperSlide key={plate.id}>
+                      <Card
+                        CardId={plate.id}
+                        title={plate.title}
+                        description={plate.description}
+                        price={plate.value}
+                        img={plate.picture}
+                        isAdmin={admin}
+                        fnLoading={loadingCard}
+                      />
+                    </SwiperSlide>
+                  ))}
+              </Swiper>
+            </div>
+          </section>
+        )}
+        {bHasDrinks && (
+          <section className="content">
+            <h1>Bebidas</h1>
+            <div className="cards">
+              <Swiper
+                spaceBetween={20}
+                className="mySwiper"
+                slidesPerView={1}
+                breakpoints={breakpoints}
+                navigation={true}
+                modules={[Pagination, Navigation]}
+              >
+                {plates
+                  .filter(plate => plate.category_id === 4)
+                  .map(plate => (
+                    <SwiperSlide key={plate.id}>
+                      <Card
+                        CardId={plate.id}
+                        title={plate.title}
+                        description={plate.description}
+                        price={plate.value}
+                        isAdmin={admin}
+                        fnLoading={loadingCard}
+                      />
+                    </SwiperSlide>
+                  ))}
+              </Swiper>
+            </div>
+          </section>
+        )}
       </main>
       <Footer></Footer>
     </Container>
