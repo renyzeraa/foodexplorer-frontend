@@ -30,8 +30,7 @@ export function Home() {
   useEffect(() => {
     async function searchPlate() {
       setLoading(true)
-      const response = await api.get(`/plates?title=${search}`)
-      console.log(response.data)
+      const response = await api.get(`/plates/search?title=${search}`)
       handleTitlePlates(response.data)
       setPlates(response.data)
       setLoading(false)
@@ -99,7 +98,7 @@ export function Home() {
       {loading && <Loading></Loading>}
       <Header admin={admin} fnChange={oEv => handleSearchPlate(oEv)} />
       <main>
-        <header>
+        <header className="header-content">
           <div className="img-content">
             <img src={fruits} alt="" />
           </div>
