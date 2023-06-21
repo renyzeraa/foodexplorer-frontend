@@ -24,6 +24,7 @@ export const Container = styled.div`
       margin: 0px auto 16px;
       width: 176px;
       height: 176px;
+      cursor: pointer;
     }
     .product-title {
       font-weight: 700;

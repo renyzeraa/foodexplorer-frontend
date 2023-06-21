@@ -31,6 +31,12 @@ export function Card({
   function handleFavorite() {}
   const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
 
+  function handleDetails(idCard) {
+    fnLoading && fnLoading(true)
+    navigate(`/details/${idCard}`)
+    fnLoading && fnLoading(false)
+  }
+
   return (
     <Container {...rest} CardId={CardId}>
       <button className="btn-fav " onClick={handleFavorite}>
@@ -47,7 +53,13 @@ export function Card({
         )}
       </button>
       <div className="container">
-        <img src={imgPlate} alt="" />
+        <img
+          src={imgPlate}
+          title="Clique para saber mais sobre o Prato"
+          alt=""
+          onClick={() => handleDetails(CardId)}
+        />
+
         <h1 className="product-title">{title}</h1>
         <p className="description">{description}</p>
         <h1 className="price-title">R$ {price}</h1>
