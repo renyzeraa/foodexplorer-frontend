@@ -81,7 +81,9 @@ export function Details({}) {
           <h1>{title}</h1>
           <p>{description}</p>
           <ul className="makings">
-            {ingredients.map(oIng => oIng && <li>{oIng}</li>)}
+            {ingredients.map(
+              (oIng, iDx) => oIng && <li key={String(iDx)}>{oIng}</li>
+            )}
           </ul>
           {admin ? (
             <Button title="Editar prato" onClick={handleNavigate}></Button>

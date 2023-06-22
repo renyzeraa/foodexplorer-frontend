@@ -86,6 +86,7 @@ export const Container = styled.div`
   @media (min-width: 800px) {
     main {
       margin-top: 124px;
+      min-height: 70%;
       .header-content {
         height: 260px;
         .img-content {

@@ -146,6 +146,22 @@ export function EditPlate({}) {
     }
   }
 
+  const handleInputChange = event => {
+    const { value } = event.target
+
+    // Remove tudo exceto dígitos e ponto decimal
+    const numericValue = value.replace(/[^\d.]/g, '')
+
+    // Formata o valor para o formato de moeda
+    const formattedValue = new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(numericValue)
+
+    // Atualiza o campo de input com o valor formatado
+    event.target.value = formattedValue
+  }
+
   return (
     <Container>
       {loading && <Loading />}
@@ -185,8 +201,6 @@ export function EditPlate({}) {
               />
               <label htmlFor="">Categoria</label>
               <select
-                name=""
-                id=""
                 value={categories}
                 onChange={oEv => setCategories(oEv.target.value)}
               >
@@ -221,9 +235,7 @@ export function EditPlate({}) {
             <div className="price">
               <label htmlFor="">Preço</label>
               <Input
-                className="price"
                 type="text"
-                placeholder="R$ 00.00"
                 value={value}
                 onChange={oEv => setValue(oEv.target.value)}
               />
