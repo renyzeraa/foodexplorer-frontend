@@ -63,9 +63,7 @@ export function Header({ fnChange, ...rest }) {
                 <Link to="/demand">Pedidos</Link>
               </li>
               <li>
-                <Link to="/" onClick={signOut}>
-                  Sair
-                </Link>
+                <Link onClick={signOut}>Sair</Link>
               </li>
             </ul>
           ) : (
@@ -88,9 +86,7 @@ export function Header({ fnChange, ...rest }) {
                 <Link to="/demand">Pedidos</Link>
               </li>
               <li>
-                <Link to="/" onClick={signOut}>
-                  Sair
-                </Link>
+                <Link onClick={signOut}>Sair</Link>
               </li>
             </ul>
           )}
@@ -135,7 +131,7 @@ export function Header({ fnChange, ...rest }) {
               <Button className="admin-links" title="Novo Prato"></Button>
             </Link>
 
-            <Link className="admin-links" to="/" onClick={signOut}>
+            <Link className="admin-links" onClick={signOut}>
               <GoSignOut />
             </Link>
           </>
@@ -147,7 +143,7 @@ export function Header({ fnChange, ...rest }) {
               <Button icon={TbReceipt} title="Pedidos" cont={3}></Button>
             </Link>
 
-            <Link className="signout" to="/" onClick={signOut}>
+            <Link className="signout" onClick={signOut}>
               <GoSignOut />
             </Link>
           </>
