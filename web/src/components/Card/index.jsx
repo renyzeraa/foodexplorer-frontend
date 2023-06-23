@@ -9,6 +9,7 @@ import { TbPencil } from 'react-icons/tb'
 import { Button } from '../Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
+import { useState } from 'react'
 export function Card({
   CardId,
   title,
@@ -20,7 +21,8 @@ export function Card({
   fnLoading,
   ...rest
 }) {
-  const favorite = false
+  const [countPlate, setCountPlate] = useState('00')
+  const [favorite, setFavorite] = useState(false)
   const navigate = useNavigate()
 
   function handlePlate(idCard) {
@@ -28,7 +30,10 @@ export function Card({
     navigate(`/plates/${idCard}`)
     fnLoading && fnLoading(false)
   }
-  function handleFavorite() {}
+  function handleFavorite() {
+    // aqui vai ter a funcao que add e remove dos favoritos o prato
+    setFavorite(!favorite)
+  }
   const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
 
   function handleDetails(idCard) {
@@ -37,19 +42,38 @@ export function Card({
     fnLoading && fnLoading(false)
   }
 
+  function handleMinusPlate() {
+    let xValue = parseInt(countPlate)
+    xValue--
+    if (xValue < 1) {
+      xValue = '00'
+    } else if (xValue <= 9) {
+      xValue = '0' + xValue
+    }
+    setCountPlate(String(xValue))
+  }
+  function handlePlusPlate() {
+    let xValue = parseInt(countPlate)
+    xValue++
+    if (xValue <= 9) {
+      xValue = String('0' + xValue)
+    } else {
+      String(xValue)
+    }
+    setCountPlate(xValue)
+  }
+
   return (
     <Container {...rest} CardId={CardId}>
-      <button className="btn-fav " onClick={handleFavorite}>
+      <button className="btn-fav ">
         {isAdmin ? (
           <Link onClick={() => handlePlate(CardId)}>
             <TbPencil />
           </Link>
-        ) : favorite ? (
-          <Link>
-            <AiFillHeart />
-          </Link>
         ) : (
-          <AiOutlineHeart />
+          <Link onClick={handleFavorite}>
+            {favorite ? <AiFillHeart /> : <AiOutlineHeart />}
+          </Link>
         )}
       </button>
       <div className="container">
@@ -68,11 +92,11 @@ export function Card({
             []
           ) : (
             <>
-              <button className="btn">
+              <button className="btn" onClick={handleMinusPlate}>
                 <AiOutlineMinus />
               </button>
-              <span className="count-item">00</span>
-              <button className="btn">
+              <span className="count-item">{countPlate}</span>
+              <button className="btn" onClick={handlePlusPlate}>
                 <AiOutlinePlus />
               </button>
               <Button title="incluir"></Button>

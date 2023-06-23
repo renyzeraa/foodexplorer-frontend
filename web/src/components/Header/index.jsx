@@ -11,6 +11,10 @@ import { InputSearch } from '../InputSearch'
 export function Header({ fnChange, ...rest }) {
   const { signOut, user } = useAuth()
   const admin = user.isAdmin
+
+  /**
+   * Método para modificar atributos para abrir o menu hamburger mobile
+   */
   function onClickMenu() {
     document.getElementById('menu') &&
       document.getElementById('menu').classList.toggle('change')
@@ -104,16 +108,9 @@ export function Header({ fnChange, ...rest }) {
       </main>
 
       <main className="desktop">
-        {admin ? (
-          <Link className="logo-content admin" to="/">
-            <img src={logo} alt="" />
-          </Link>
-        ) : (
-          <Link className="logo-content " to="/">
-            <img src={logo} alt="" />
-          </Link>
-        )}
-
+        <Link className={admin ? 'logo-content admin' : 'logo-content'} to="/">
+          <img src={logo} alt="food explorer logo" />
+        </Link>
         <div className={admin ? 'input admin' : ' input'}>
           <InputSearch
             icon={BiSearch}
