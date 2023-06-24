@@ -14,18 +14,22 @@ export function Favorites() {
 
   useEffect(() => {
     async function searchPlatesFav() {
-      const response = await api.get('/favorites/favorite_plates')
-      setPlatesFav(response.data)
+      try {
+        setLoading(true)
+        const response = await api.get('/favorites/favorite_plates')
+        // setPlatesFav(response.data)
+        setLoading(false)
+      } catch (error) {
+        setLoading(false)
+        console.error(error.message)
+      }
     }
-    try {
-      setLoading(true)
-      searchPlatesFav()
-      setLoading(false)
-    } catch (error) {
-      setLoading(false)
-      console.error(error.message)
-    }
+    searchPlatesFav()
   }, [])
+
+  function loadingCard(bLoad) {
+    setLoading(bLoad)
+  }
 
   return (
     <Container>
@@ -40,11 +44,31 @@ export function Favorites() {
         </header>
         <main className="content-favorites">
           <PlateFav title="Feijão Com Arroz" plateId="1"></PlateFav>
-          <PlateFav title="Pipoca Salgada"></PlateFav>
-          <PlateFav title="Canjica"></PlateFav>
-          <PlateFav title="Peixe Tofu"></PlateFav>
-          <PlateFav title="Salada Ravello"></PlateFav>
-          <PlateFav title="Pipoca Doce"></PlateFav>
+          <PlateFav
+            title="Pipoca Salgada"
+            plateId="3"
+            fnLoading={loadingCard}
+          ></PlateFav>
+          <PlateFav
+            title="Canjica"
+            plateId="3"
+            fnLoading={loadingCard}
+          ></PlateFav>
+          <PlateFav
+            title="Peixe Tofu"
+            plateId="4"
+            fnLoading={loadingCard}
+          ></PlateFav>
+          <PlateFav
+            title="Salada Ravello"
+            plateId="5"
+            fnLoading={loadingCard}
+          ></PlateFav>
+          <PlateFav
+            title="Pipoca Doce"
+            plateId="6"
+            fnLoading={loadingCard}
+          ></PlateFav>
         </main>
       </section>
       <Footer></Footer>
