@@ -5,7 +5,8 @@ export const Container = styled.div`
   gap: 13px;
   padding: 16px 0px;
   align-items: center;
-  width: 250px;
+  width: 100%;
+
   img {
     width: 72px;
     height: 72px;
@@ -39,5 +40,9 @@ export const Container = styled.div`
         font-weight: 600;
       }
     }
+  }
+
+  @media (min-width: 768px) {
+    width: 250px;
   }
 `
