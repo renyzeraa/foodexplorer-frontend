@@ -30,8 +30,38 @@ export function Card({
     navigate(`/plates/${idCard}`)
     fnLoading && fnLoading(false)
   }
+
+  async function addFavPlate() {
+    try {
+      fnLoading && fnLoading(true)
+      await api.post(`/favorites/favorite_plates`, CardId)
+      fnLoading && fnLoading(false)
+      alert('Prato favoritado com sucesso!')
+    } catch (error) {
+      fnLoading && fnLoading(false)
+      console.error(error.message)
+    }
+  }
+  async function removeFavPlate() {
+    try {
+      fnLoading && fnLoading(true)
+      await api.delete(`/favorites/favorite_plates`, CardId)
+      fnLoading && fnLoading(false)
+      alert('Prato removido dos favoritos com sucesso!')
+    } catch (error) {
+      fnLoading && fnLoading(false)
+      console.error(error.message)
+    }
+  }
+
   function handleFavorite() {
-    // aqui vai ter a funcao que add e remove dos favoritos o prato
+    if (!favorite) {
+      // favoritar
+      addFavPlate()
+    } else {
+      // des-favoritar
+      removeFavPlate()
+    }
     setFavorite(!favorite)
   }
   const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
@@ -49,6 +79,8 @@ export function Card({
       xValue = '00'
     } else if (xValue <= 9) {
       xValue = '0' + xValue
+    } else if (xValue > 98) {
+      xValue = '99'
     }
     setCountPlate(String(xValue))
   }
