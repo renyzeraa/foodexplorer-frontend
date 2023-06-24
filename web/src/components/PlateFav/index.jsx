@@ -14,10 +14,12 @@ export function PlateFav({ title, fnLoading, img, plateId, ...rest }) {
     }
   }
 
+  const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
+
   return (
     <Container {...rest}>
       <img
-        src={img}
+        src={imgPlate}
         alt="imagem do prato favoritado"
         title="Clique para saber mais sobre o Prato."
       />
