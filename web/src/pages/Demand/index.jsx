@@ -3,6 +3,8 @@ import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { AiOutlineLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
+import { CardDemand } from '../../components/CardDemand'
+import { CardDemandAdmin } from '../../components/CardDemandAdmin'
 
 export function Demand() {
   return (
@@ -15,6 +17,33 @@ export function Demand() {
             <AiOutlineLeft /> voltar
           </Link>
         </div>
+        {/* /** mobile */}
+        <div className="cards-wrapper">
+          <CardDemandAdmin
+            iPedido={1}
+            sTimeStamp={'20/05 às 18h00'}
+            sDemand={
+              '1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá'
+            }
+          />
+          <CardDemand
+            iPedido={99}
+            iStatus={0}
+            sTimeStamp={'22/07 às 8h00'}
+            sDemand={
+              '1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá'
+            }
+          />
+          <CardDemand
+            iPedido={3}
+            iStatus={0}
+            sTimeStamp={'12/09 às 12h00'}
+            sDemand={
+              '1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá'
+            }
+          />
+        </div>
+        {/* /** desktop */}
         <div className="table-wrapper">
           <table>
             <thead>
@@ -62,21 +91,6 @@ export function Demand() {
               </tr>
             </tbody>
           </table>
-        </div>
-        <div className="cards-wrapper">
-          <div className="card">
-            <header>
-              <span className="number">000001</span>
-              <span>
-                <span className="status"></span>Pendente
-              </span>
-              <span className="horario">20/05 às 18h00</span>
-            </header>
-            <span className="pedido">
-              1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x
-              Suco de Maracujá
-            </span>
-          </div>
         </div>
       </section>
       <Footer />
