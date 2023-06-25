@@ -81,13 +81,13 @@ export function Header({ fnChange, ...rest }) {
                 ></InputSearch>
               </div>
               <li>
-                <Link to="/favorites">Favoritos</Link>
+                <Link to="/favorites">Meus Favoritos</Link>
               </li>
               <li>
-                <Link to="/payment">Compras</Link>
+                <Link to="/demand">Histórico de Pedidos</Link>
               </li>
               <li>
-                <Link to="/demand">Pedidos</Link>
+                <Link to="/payment">Pagamento</Link>
               </li>
               <li>
                 <Link onClick={signOut}>Sair</Link>
@@ -136,8 +136,8 @@ export function Header({ fnChange, ...rest }) {
           <>
             <Link to="/favorites">Meus Favoritos</Link>
             <Link to="/demand">Histórico de pedidos</Link>
-            <Link to="/demand">
-              <Button icon={TbReceipt} title="Pedidos" cont={3}></Button>
+            <Link to="/payment">
+              <Button icon={TbReceipt} title="Pedidos" count={3}></Button>
             </Link>
 
             <Link className="signout" onClick={signOut}>
