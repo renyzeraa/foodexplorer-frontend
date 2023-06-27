@@ -1,6 +1,13 @@
+import { useState } from 'react'
+import { useAuth } from '../../hooks/auth'
 import { Container } from './style'
 
 export function CardDemand({ iPedido, iStatus, sTimeStamp, sDemand, ...rest }) {
+  const { user } = useAuth()
+  const admin = user.isAdmin
+
+  const [value, setValue] = useState(iStatus)
+
   // ajustar cor e nome do status do pedido
   let sStatus = '🔴'
   let sStatusName = 'Pendente'
@@ -11,7 +18,6 @@ export function CardDemand({ iPedido, iStatus, sTimeStamp, sDemand, ...rest }) {
     sStatus = '🟢'
     sStatusName = 'Pronto'
   }
-
   // ajustar número do pedido
   let sPedido = ''
   if (iPedido <= 9) {
@@ -28,16 +34,34 @@ export function CardDemand({ iPedido, iStatus, sTimeStamp, sDemand, ...rest }) {
     sPedido = String(iPedido)
   }
 
+  function handleSelectValue(xValue) {
+    setValue(xValue)
+  }
+
   return (
     <Container {...rest}>
-      <header className="infos-demand">
+      <header className={admin ? 'infos-demand admin' : 'infos-demand'}>
         <span>{sPedido}</span>
-        <span>
-          <span>{sStatus}</span> {sStatusName}
-        </span>
+        {!admin && (
+          <span>
+            <span>{sStatus}</span> {sStatusName}
+          </span>
+        )}
         <span>{sTimeStamp}</span>
       </header>
-      <span>{sDemand}</span>
+      <span className={admin ? 'demand-text' : ''}>{sDemand}</span>
+      {admin && (
+        <select
+          className="status-demand"
+          defaultValue={0}
+          value={value}
+          onChange={e => handleSelectValue(e.target.value)}
+        >
+          <option value="0">🔴 Pendente</option>
+          <option value="1">🟡 Preparando</option>
+          <option value="2">🟢 Pronto</option>
+        </select>
+      )}
     </Container>
   )
 }

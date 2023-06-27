@@ -9,6 +9,7 @@ export const Container = styled.div`
   font-family: 'Roboto', sans-serif;
   line-height: 160%;
   max-width: 450px;
+
   .infos-demand {
     display: flex;
     align-items: center;
@@ -17,5 +18,21 @@ export const Container = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+    &.admin {
+      justify-content: flex-start;
+    }
+  }
+  .demand-text {
+    display: block;
+    margin-bottom: 16px;
+  }
+  .status-demand {
+    padding: 16px;
+    color: ${({ theme }) => theme.COLORS.GRAY_200};
+    border: none;
+    border-radius: 5px;
+    background: ${({ theme }) => theme.COLORS.BACKGROUND_700};
+    margin-bottom: 16px;
+    width: 100%;
   }
 `
