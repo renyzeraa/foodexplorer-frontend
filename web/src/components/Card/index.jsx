@@ -34,12 +34,12 @@ export function Card({
   async function addFavPlate() {
     try {
       fnLoading && fnLoading(true)
-      await api.post(`/favorites/favorite_plates`, CardId)
+      await api.get(`/favorites/favorite_plates/${CardId}`)
       fnLoading && fnLoading(false)
       alert('Prato favoritado com sucesso!')
     } catch (error) {
       fnLoading && fnLoading(false)
-      console.error(error.message)
+      console.error(error)
     }
   }
   async function removeFavPlate() {

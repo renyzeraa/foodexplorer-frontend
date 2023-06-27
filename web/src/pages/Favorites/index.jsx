@@ -16,12 +16,13 @@ export function Favorites() {
     async function searchPlatesFav() {
       try {
         setLoading(true)
-        const response = await api.get('/favorites/favorite_plates')
+        const response = await api.get('/favorites/favorite_plates/')
+        console.log(response)
         // setPlatesFav(response.data)
         setLoading(false)
       } catch (error) {
         setLoading(false)
-        console.error(error.message)
+        console.error(error)
       }
     }
     searchPlatesFav()
