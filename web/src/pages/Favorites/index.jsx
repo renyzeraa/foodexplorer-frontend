@@ -17,8 +17,7 @@ export function Favorites() {
       try {
         setLoading(true)
         const response = await api.get('/favorites/favorite_plates/')
-        console.log(response)
-        // setPlatesFav(response.data)
+        setPlatesFav(response.data)
         setLoading(false)
       } catch (error) {
         setLoading(false)
@@ -44,32 +43,15 @@ export function Favorites() {
           </Link>
         </header>
         <main className="content-favorites">
-          <PlateFav title="Feijão Com Arroz" plateId="1"></PlateFav>
-          <PlateFav
-            title="Pipoca Salgada"
-            plateId="3"
-            fnLoading={loadingCard}
-          ></PlateFav>
-          <PlateFav
-            title="Canjica"
-            plateId="3"
-            fnLoading={loadingCard}
-          ></PlateFav>
-          <PlateFav
-            title="Peixe Tofu"
-            plateId="4"
-            fnLoading={loadingCard}
-          ></PlateFav>
-          <PlateFav
-            title="Salada Ravello"
-            plateId="5"
-            fnLoading={loadingCard}
-          ></PlateFav>
-          <PlateFav
-            title="Pipoca Doce"
-            plateId="6"
-            fnLoading={loadingCard}
-          ></PlateFav>
+          {platesFav.map(oPlate => (
+            <PlateFav
+              key={oPlate.id}
+              title={oPlate.title}
+              img={oPlate.picture}
+              plateId={oPlate.id}
+              fnLoading={loadingCard}
+            ></PlateFav>
+          ))}
         </main>
       </section>
       <Footer></Footer>

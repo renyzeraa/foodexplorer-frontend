@@ -34,7 +34,7 @@ export function Card({
   async function addFavPlate() {
     try {
       fnLoading && fnLoading(true)
-      await api.get(`/favorites/favorite_plates/${CardId}`)
+      await api.post(`/favorites/favorite_plates/${CardId}`)
       fnLoading && fnLoading(false)
       alert('Prato favoritado com sucesso!')
     } catch (error) {
@@ -45,12 +45,12 @@ export function Card({
   async function removeFavPlate() {
     try {
       fnLoading && fnLoading(true)
-      await api.delete(`/favorites/favorite_plates`, CardId)
+      await api.delete(`/favorites/favorite_plates/${CardId}`)
       fnLoading && fnLoading(false)
       alert('Prato removido dos favoritos com sucesso!')
     } catch (error) {
       fnLoading && fnLoading(false)
-      console.error(error.message)
+      alert(error.message)
     }
   }
 
