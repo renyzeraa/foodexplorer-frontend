@@ -1,10 +1,10 @@
 import { Container } from './style'
 
-export function Input({ icon: Icon, ...rest }) {
+export function Input({ Icon = false, ...rest }) {
   return (
     <Container>
       {Icon && <Icon size={20} />}
-      <input {...rest} />
+      <input defaultValue={' '} {...rest} />
     </Container>
   )
 }

@@ -2,7 +2,13 @@ import { useState } from 'react'
 import { useAuth } from '../../hooks/auth'
 import { Container } from './style'
 
-export function CardDemand({ iPedido, iStatus, sTimeStamp, sDemand, ...rest }) {
+export function CardDemand({
+  iPedido = 0,
+  iStatus = 0,
+  sTimeStamp = '',
+  sDemand = '',
+  ...rest
+}) {
   const { user } = useAuth()
   const admin = user.isAdmin
 
@@ -53,7 +59,6 @@ export function CardDemand({ iPedido, iStatus, sTimeStamp, sDemand, ...rest }) {
       {admin && (
         <select
           className="status-demand"
-          defaultValue={0}
           value={value}
           onChange={e => handleSelectValue(e.target.value)}
         >

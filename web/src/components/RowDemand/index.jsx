@@ -2,7 +2,13 @@ import { useState } from 'react'
 import { useAuth } from '../../hooks/auth'
 import { Row } from './style'
 
-export function RowDemand({ iPedido, iStatus, sTimeStamp, sDemand, ...rest }) {
+export function RowDemand({
+  iPedido = 0,
+  iStatus = 0,
+  sTimeStamp = '',
+  sDemand = '',
+  ...rest
+}) {
   const { user } = useAuth()
   const admin = user.isAdmin
 
