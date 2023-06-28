@@ -11,7 +11,6 @@ import { InputSearch } from '../InputSearch'
 export function Header({ fnChange, ...rest }) {
   const { signOut, user } = useAuth()
   const admin = user.isAdmin
-
   /**
    * Método para modificar atributos para abrir o menu hamburger mobile
    */
@@ -34,6 +33,10 @@ export function Header({ fnChange, ...rest }) {
     if (typeof fnChange === 'function') {
       fnChange(oEv)
     }
+  }
+
+  function handleSignOut() {
+    signOut()
   }
   return (
     <Container {...rest}>
@@ -67,7 +70,9 @@ export function Header({ fnChange, ...rest }) {
                 <Link to="/demand">Pedidos</Link>
               </li>
               <li>
-                <Link onClick={signOut}>Sair</Link>
+                <Link onClick={handleSignOut} to={'/'}>
+                  Sair
+                </Link>
               </li>
             </ul>
           ) : (
@@ -90,7 +95,9 @@ export function Header({ fnChange, ...rest }) {
                 <Link to="/payment">Pagamento</Link>
               </li>
               <li>
-                <Link onClick={signOut}>Sair</Link>
+                <Link onClick={handleSignOut} to={'/'}>
+                  Sair
+                </Link>
               </li>
             </ul>
           )}
@@ -128,7 +135,7 @@ export function Header({ fnChange, ...rest }) {
               <Button className="admin-links" title="Novo Prato"></Button>
             </Link>
 
-            <Link className="admin-links" onClick={signOut}>
+            <Link className="admin-links" onClick={handleSignOut} to={'/'}>
               <GoSignOut />
             </Link>
           </>
@@ -140,7 +147,7 @@ export function Header({ fnChange, ...rest }) {
               <Button icon={TbReceipt} title="Pedidos" count={3}></Button>
             </Link>
 
-            <Link className="signout" onClick={signOut}>
+            <Link className="signout" onClick={handleSignOut} to={'/'}>
               <GoSignOut />
             </Link>
           </>

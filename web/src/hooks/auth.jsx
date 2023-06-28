@@ -1,10 +1,9 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { api } from '../services/api'
-import { Navigate } from 'react-router-dom'
 export const AuthContext = createContext({})
-
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
+
   async function signIn({ email, password }) {
     try {
       const response = await api.post('/sessions', { email, password })
@@ -28,7 +27,6 @@ function AuthProvider({ children }) {
     localStorage.removeItem('@foodexplorer:user')
     localStorage.removeItem('@foodexplorer:token')
     setData({})
-    Navigate('/')
   }
 
   useEffect(() => {
