@@ -33,6 +33,25 @@ export const Container = styled.div`
     }
     .content-favorites {
       display: grid;
+      .alert-no-plates {
+        text-align: center;
+        width: 100%;
+        margin-top: 120px;
+        position: relative;
+        h1 {
+          color: ${({ theme }) => theme.COLORS.GRAY_100};
+          font-family: 'Poppins', sans-serif;
+          font-weight: 500;
+        }
+        .icon-not {
+          position: fixed;
+          color: ${({ theme }) => theme.COLORS.RED};
+          opacity: 0.4;
+          z-index: -1;
+          margin-top: -10px;
+          margin-left: -40px;
+        }
+      }
     }
   }
 
@@ -47,6 +66,11 @@ export const Container = styled.div`
         flex-direction: row;
         flex-wrap: wrap;
         gap: 50px 12px;
+        .alert-no-plates {
+          h1 {
+            font-size: 32px;
+          }
+        }
       }
     }
   }

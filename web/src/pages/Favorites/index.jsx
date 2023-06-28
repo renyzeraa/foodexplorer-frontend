@@ -7,6 +7,7 @@ import { PlateFav } from '../../components/PlateFav'
 import { api } from '../../services/api'
 import { useEffect, useState } from 'react'
 import { Loading } from '../../components/Loading'
+import { MdDoNotDisturbAlt } from 'react-icons/md'
 
 export function Favorites() {
   const [loading, setLoading] = useState(false)
@@ -27,8 +28,18 @@ export function Favorites() {
     searchPlatesFav()
   }, [])
 
-  function loadingCard(bLoad) {
-    setLoading(bLoad)
+  async function removeFavPlate(plateId) {
+    try {
+      setLoading(true)
+      await api.delete(`/favorites/favorite_plates/${plateId}`)
+      const response = await api.get('/favorites/favorite_plates/')
+      setPlatesFav(response.data)
+      setLoading(false)
+      alert('Prato removido dos favoritos com sucesso!')
+    } catch (error) {
+      setLoading(false)
+      alert(error.message)
+    }
   }
 
   return (
@@ -43,15 +54,22 @@ export function Favorites() {
           </Link>
         </header>
         <main className="content-favorites">
-          {platesFav.map(oPlate => (
-            <PlateFav
-              key={oPlate.id}
-              title={oPlate.title}
-              img={oPlate.picture}
-              plateId={oPlate.id}
-              fnLoading={loadingCard}
-            ></PlateFav>
-          ))}
+          {platesFav.length == 0 ? (
+            <div className="alert-no-plates">
+              <h1>Nenhum Prato Localizado</h1>
+              <MdDoNotDisturbAlt size={90} className="icon-not" />
+            </div>
+          ) : (
+            platesFav.map(oPlate => (
+              <PlateFav
+                key={oPlate.id}
+                title={oPlate.title}
+                img={oPlate.picture}
+                plateId={oPlate.id}
+                onClick={removeFavPlate}
+              ></PlateFav>
+            ))
+          )}
         </main>
       </section>
       <Footer></Footer>

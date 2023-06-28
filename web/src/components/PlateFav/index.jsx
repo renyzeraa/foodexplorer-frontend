@@ -1,20 +1,12 @@
 import { api } from '../../services/api'
 import { Container } from './style'
 
-export function PlateFav({ title, fnLoading, img, plateId, ...rest }) {
-  async function removeFavPlate() {
-    try {
-      fnLoading && fnLoading(true)
-      await api.delete(`/favorites/favorite_plates/${plateId}`)
-      fnLoading && fnLoading(false)
-      alert('Prato removido dos favoritos com sucesso!')
-    } catch (error) {
-      fnLoading && fnLoading(false)
-      alert(error.message)
-    }
-  }
-
+export function PlateFav({ title, onClick, img, plateId, ...rest }) {
   const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
+
+  function handleOnClickRem() {
+    onClick && onClick(plateId)
+  }
 
   return (
     <Container {...rest}>
@@ -27,7 +19,7 @@ export function PlateFav({ title, fnLoading, img, plateId, ...rest }) {
         <span className="title-plate" title={title}>
           {title}
         </span>
-        <span className="remove-fav" onClick={removeFavPlate}>
+        <span className="remove-fav" onClick={handleOnClickRem}>
           Remover dos Favoritos
         </span>
       </div>
