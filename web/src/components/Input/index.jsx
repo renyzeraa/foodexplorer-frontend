@@ -4,7 +4,7 @@ export function Input({ Icon = false, ...rest }) {
   return (
     <Container>
       {Icon && <Icon size={20} />}
-      <input defaultValue={' '} {...rest} />
+      <input {...rest} />
     </Container>
   )
 }
