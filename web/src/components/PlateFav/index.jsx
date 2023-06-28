@@ -5,12 +5,12 @@ export function PlateFav({ title, fnLoading, img, plateId, ...rest }) {
   async function removeFavPlate() {
     try {
       fnLoading && fnLoading(true)
-      await api.delete(`/favorites/favorite_plates`, plateId)
+      await api.delete(`/favorites/favorite_plates/${plateId}`)
       fnLoading && fnLoading(false)
       alert('Prato removido dos favoritos com sucesso!')
     } catch (error) {
       fnLoading && fnLoading(false)
-      console.error(error.message)
+      alert(error.message)
     }
   }
 
