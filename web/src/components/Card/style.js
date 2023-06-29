@@ -16,7 +16,7 @@ export const Container = styled.div`
   }
 
   .container {
-    padding: 38px 26px;
+    padding: 20px;
     display: grid;
     text-align: center;
     font-family: 'Roboto', sans-serif;
