@@ -10,6 +10,7 @@ import { Button } from '../Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
 import { useState } from 'react'
+
 export function Card({
   CardId,
   title,
@@ -19,11 +20,36 @@ export function Card({
   onFavorite,
   isAdmin,
   fnLoading,
+  amount,
   ...rest
 }) {
   const [countPlate, setCountPlate] = useState('00')
   const [favorite, setFavorite] = useState(false)
   const navigate = useNavigate()
+
+  async function handleFavoriteFromRequest() {
+    try {
+      const response = await api.get(`/favorites/favorite_plates/`)
+      afterCreateHandleFav(response.data)
+    } catch (e) {
+      if (error.response) {
+        console.log(error.response.data.message)
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível verificar se o prato foi favoritado.')
+      }
+    }
+  }
+  handleFavoriteFromRequest()
+
+  function afterCreateHandleFav(aPlates) {
+    aPlates &&
+      aPlates.forEach(oPlate => {
+        if (oPlate.id == CardId) {
+          setFavorite(true)
+        }
+      })
+  }
 
   function handlePlate(idCard) {
     fnLoading && fnLoading(true)
