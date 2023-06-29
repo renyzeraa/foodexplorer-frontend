@@ -129,6 +129,7 @@ export function Home() {
                         description={plate.description}
                         price={plate.value}
                         img={plate.picture}
+                        // amount={plate.amount}
                         isAdmin={admin}
                         fnLoading={loadingCard}
                       />
@@ -160,6 +161,7 @@ export function Home() {
                         description={plate.description}
                         price={plate.value}
                         img={plate.picture}
+                        // amount={plate.amount}
                         isAdmin={admin}
                         fnLoading={loadingCard}
                       />
@@ -191,6 +193,7 @@ export function Home() {
                         description={plate.description}
                         price={plate.value}
                         img={plate.picture}
+                        // amount={plate.amount}
                         isAdmin={admin}
                         fnLoading={loadingCard}
                       />
