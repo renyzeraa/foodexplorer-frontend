@@ -39,7 +39,12 @@ export function Home() {
       searchPlate()
     } catch (error) {
       setLoading(false)
-      console.error(error.message)
+      if (error.response) {
+        console.log(error.response.data.message)
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível buscar os Pratos.')
+      }
     }
   }, [search])
 

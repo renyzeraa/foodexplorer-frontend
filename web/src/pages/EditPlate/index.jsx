@@ -58,7 +58,12 @@ export function EditPlate({}) {
         bIsActualized = true
       } catch (error) {
         setLoading(false)
-        console.error(error.message)
+        if (error.response) {
+          console.log(error.response.data.message)
+          alert(error.response.data.message)
+        } else {
+          alert('Não foi possível atualizar o Prato atual !')
+        }
       }
     }
     fetchPlate()
@@ -102,7 +107,12 @@ export function EditPlate({}) {
       alert('Prato atualizado com sucesso!')
     } catch (error) {
       setLoading(false)
-      console.error('Erro ao enviar o Prato:', error)
+      if (error.response) {
+        console.log(error.response.data.message)
+        alert(error.response.data.message)
+      } else {
+        alert('Erro ao enviar ao atualizar Prato1')
+      }
     }
   }
 
@@ -141,7 +151,12 @@ export function EditPlate({}) {
         setLoading(false)
       } catch (error) {
         setLoading(false)
-        console.error(error)
+        if (error.response) {
+          console.log(error.response.data.message)
+          alert(error.response.data.message)
+        } else {
+          alert('Não foi possível excluir o Prato.')
+        }
       }
     }
   }

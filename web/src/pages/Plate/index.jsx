@@ -60,7 +60,12 @@ export function Plate({}) {
       alert('Prato criado com sucesso !')
     } catch (error) {
       setLoading(false)
-      console.error('Erro ao enviar o Prato:', error)
+      if (error.response) {
+        console.log(error.response.data.message)
+        alert(error.response.data.message)
+      } else {
+        alert('Erro ao salvar o Prato !')
+      }
     }
   }
 

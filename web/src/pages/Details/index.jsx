@@ -33,7 +33,13 @@ export function Details({}) {
         setLoading(false)
       } catch (error) {
         setLoading(false)
-        console.error(error.message)
+        if (error.response) {
+          alert(error.response.data.message)
+        } else {
+          alert(
+            'Opsss, algo deu de errado e não foi possível carregar os detalhes do Prato.'
+          )
+        }
       }
     }
     fetchPlate()

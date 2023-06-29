@@ -39,7 +39,12 @@ export function Card({
       alert('Prato favoritado com sucesso!')
     } catch (error) {
       fnLoading && fnLoading(false)
-      console.error(error)
+      if (error.response) {
+        console.log(error.response.data.message)
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível favoritar o Prato.')
+      }
     }
   }
   async function removeFavPlate() {
@@ -50,7 +55,11 @@ export function Card({
       alert('Prato removido dos favoritos com sucesso!')
     } catch (error) {
       fnLoading && fnLoading(false)
-      alert(error.message)
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível remover o prato.')
+      }
     }
   }
 

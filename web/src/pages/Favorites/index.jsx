@@ -22,7 +22,12 @@ export function Favorites() {
         setLoading(false)
       } catch (error) {
         setLoading(false)
-        console.error(error)
+        if (error.response) {
+          console.log(error.response.data.message)
+          alert(error.response.data.message)
+        } else {
+          alert('Não foi possível buscar seus Pratos favoritos.')
+        }
       }
     }
     searchPlatesFav()
@@ -38,6 +43,12 @@ export function Favorites() {
       alert('Prato removido dos favoritos com sucesso!')
     } catch (error) {
       setLoading(false)
+      if (error.response) {
+        console.log(error.response.data.message)
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível remover o Prato atual dos favoritos.')
+      }
       alert(error.message)
     }
   }
