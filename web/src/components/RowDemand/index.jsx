@@ -45,12 +45,7 @@ export function RowDemand({
   return (
     <Row {...rest}>
       <td className="status">
-        {!admin && (
-          <span>
-            {sStatus} {sStatusName}
-          </span>
-        )}
-        {admin && (
+        {admin ? (
           <select
             value={value}
             onChange={e => handleSelectValue(e.target.value)}
@@ -60,6 +55,10 @@ export function RowDemand({
             <option value="1">🟡 Preparando</option>
             <option value="2">🟢 Entregue</option>
           </select>
+        ) : (
+          <span>
+            {sStatus} {sStatusName}
+          </span>
         )}
       </td>
       <td>{sPedido}</td>
