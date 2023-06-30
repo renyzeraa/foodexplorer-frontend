@@ -20,7 +20,7 @@ export function Card({
   onFavorite,
   isAdmin,
   fnLoading,
-  amount,
+  amount = 0,
   ...rest
 }) {
   const [countPlate, setCountPlate] = useState('00')
@@ -46,6 +46,17 @@ export function Card({
     aPlates &&
       aPlates.forEach(oPlate => {
         if (oPlate.id == CardId) {
+          if (oPlate.amount && oPlate.amount > 0) {
+            let amount
+            if (oPlate.amount <= 9) {
+              amount = String('0' + oPlate.amount)
+            } else if (xValue > 98) {
+              amount = '99'
+            } else {
+              amount = String(oPlate.amount)
+            }
+            setCountPlate(amount)
+          }
           setFavorite(true)
         }
       })
@@ -114,8 +125,6 @@ export function Card({
       xValue = '00'
     } else if (xValue <= 9) {
       xValue = '0' + xValue
-    } else if (xValue > 98) {
-      xValue = '99'
     }
     setCountPlate(String(xValue))
   }
@@ -124,10 +133,28 @@ export function Card({
     xValue++
     if (xValue <= 9) {
       xValue = String('0' + xValue)
+    } else if (xValue > 98) {
+      xValue = '99'
     } else {
       String(xValue)
     }
     setCountPlate(xValue)
+  }
+
+  async function handleOrderPlate() {
+    try {
+      fnLoading && fnLoading(true)
+      // const response = await api.get(`/orders/${CardId}`)
+      console.log('enviando')
+      fnLoading && fnLoading(false)
+    } catch (error) {
+      fnLoading && fnLoading(false)
+      if (error.response) {
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível remover o prato.')
+      }
+    }
   }
 
   return (
@@ -166,7 +193,7 @@ export function Card({
               <button className="btn" onClick={handlePlusPlate}>
                 <AiOutlinePlus />
               </button>
-              <Button title="incluir"></Button>
+              <Button title="incluir" onClick={handleOrderPlate}></Button>
             </>
           )}
         </div>
