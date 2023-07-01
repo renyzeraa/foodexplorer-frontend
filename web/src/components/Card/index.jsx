@@ -9,7 +9,8 @@ import { TbPencil } from 'react-icons/tb'
 import { Button } from '../Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
-import { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { shoppingCart } from '../ShoppingCart'
 
 export function Card({
   CardId,
@@ -24,6 +25,10 @@ export function Card({
   isFavorite = false,
   ...rest
 }) {
+  // adicionar e remover do carrinho de compras
+  const { productsCart, addProductToCart, removeProductToCart, clearCart } =
+    shoppingCart()
+
   const [countPlate, setCountPlate] = useState('00')
   const [favorite, setFavorite] = useState(isFavorite)
   const navigate = useNavigate()
