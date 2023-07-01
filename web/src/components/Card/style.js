@@ -21,9 +21,10 @@ export const Container = styled.div`
     text-align: center;
     font-family: 'Roboto', sans-serif;
     img {
-      margin: 0px auto 16px;
+      margin: 16px auto 16px;
       width: 176px;
       height: 176px;
+      border-radius: 50%;
       cursor: pointer;
     }
     .product-title {
