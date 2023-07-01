@@ -1,10 +1,11 @@
+import { useContext } from 'react'
 import { createContext, useState } from 'react'
 
-export const CartContext = createContext()
+export const CartContext = createContext({})
 
-export default function CartProvider({ children }) {
+function CartProvider({ children }) {
   const [productsCart, setProductsCart] = useState([])
-
+  console.log(productsCart)
   function addProductToCart(id) {
     const copyProductsCart = [...productsCart]
 
@@ -47,3 +48,10 @@ export default function CartProvider({ children }) {
     </CartContext.Provider>
   )
 }
+
+function shoppingCart() {
+  const context = useContext(CartContext)
+  return context
+}
+
+export { CartProvider, shoppingCart }
