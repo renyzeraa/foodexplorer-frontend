@@ -21,46 +21,12 @@ export function Card({
   isAdmin,
   fnLoading,
   amount = 0,
+  isFavorite = false,
   ...rest
 }) {
   const [countPlate, setCountPlate] = useState('00')
-  const [favorite, setFavorite] = useState(false)
+  const [favorite, setFavorite] = useState(isFavorite)
   const navigate = useNavigate()
-
-  async function handleFavoriteFromRequest() {
-    try {
-      const response = await api.get(`/favorites/favorite_plates/`)
-      afterCreateHandleFav(response.data)
-    } catch (e) {
-      if (error.response) {
-        console.log(error.response.data.message)
-        alert(error.response.data.message)
-      } else {
-        alert('Não foi possível verificar se o prato foi favoritado.')
-      }
-    }
-  }
-  handleFavoriteFromRequest()
-
-  function afterCreateHandleFav(aPlates) {
-    aPlates &&
-      aPlates.forEach(oPlate => {
-        if (oPlate.id == CardId) {
-          if (oPlate.amount && oPlate.amount > 0) {
-            let amount
-            if (oPlate.amount <= 9) {
-              amount = String('0' + oPlate.amount)
-            } else if (xValue > 98) {
-              amount = '99'
-            } else {
-              amount = String(oPlate.amount)
-            }
-            setCountPlate(amount)
-          }
-          setFavorite(true)
-        }
-      })
-  }
 
   function handlePlate(idCard) {
     fnLoading && fnLoading(true)
@@ -82,7 +48,9 @@ export function Card({
       } else {
         alert('Não foi possível favoritar o Prato.')
       }
+      return false
     }
+    return true
   }
   async function removeFavPlate() {
     try {
@@ -97,18 +65,21 @@ export function Card({
       } else {
         alert('Não foi possível remover o prato.')
       }
+      return false
     }
+    return true
   }
 
   function handleFavorite() {
+    let response = false
     if (!favorite) {
       // favoritar
-      addFavPlate()
+      response = addFavPlate()
     } else {
       // des-favoritar
-      removeFavPlate()
+      response = removeFavPlate()
     }
-    setFavorite(!favorite)
+    response && setFavorite(!favorite)
   }
   const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
 

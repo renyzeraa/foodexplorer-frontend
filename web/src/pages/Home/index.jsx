@@ -29,24 +29,43 @@ export function Home() {
 
   useEffect(() => {
     async function searchPlate() {
-      setLoading(true)
-      const response = await api.get(`/plates/search?title=${search}`)
-      handleTitlePlates(response.data)
-      setPlates(response.data)
-      setLoading(false)
-    }
-    try {
-      searchPlate()
-    } catch (error) {
-      setLoading(false)
-      if (error.response) {
-        console.log(error.response.data.message)
-        alert(error.response.data.message)
-      } else {
-        alert('Não foi possível buscar os Pratos.')
+      try {
+        let response
+        let arrayData = []
+        setLoading(true)
+        response = await api.get(`/plates/search?title=${search}`)
+        arrayData.push([...response.data])
+        handleTitlePlates(response.data)
+        response = await api.get(`/favorites/favorite_plates/`)
+        arrayData.push([...response.data])
+        handleViewPlates(arrayData)
+        setLoading(false)
+      } catch (error) {
+        setLoading(false)
+        if (error.response) {
+          console.log(error.response.data.message)
+          alert(error.response.data.message)
+        } else {
+          alert('Não foi possível buscar os Pratos corretamente.')
+        }
       }
     }
+    searchPlate()
   }, [search])
+
+  function handleViewPlates(aData) {
+    let aPlates = aData[0] || []
+    let aFavPlates = aData[1] || []
+    aPlates.forEach(oPlate => {
+      const [plate] = aFavPlates.filter(oPlateFav => oPlate.id == oPlateFav.id)
+      if (plate) {
+        oPlate['favorite'] = true
+      } else {
+        oPlate['favorite'] = false
+      }
+    })
+    setPlates(aPlates)
+  }
 
   const breakpoints = {
     // quando a largura da tela for menor ou igual a 550 pixels
@@ -137,6 +156,7 @@ export function Home() {
                         amount={plate.amount}
                         isAdmin={admin}
                         fnLoading={loadingCard}
+                        isFavorite={plate.favorite}
                       />
                     </SwiperSlide>
                   ))}
