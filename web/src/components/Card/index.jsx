@@ -9,8 +9,7 @@ import { TbPencil } from 'react-icons/tb'
 import { Button } from '../Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
-import React, { useState, useContext } from 'react'
-import { shoppingCart } from '../ShoppingCart'
+import React, { useState } from 'react'
 
 export function Card({
   CardId,
@@ -25,20 +24,24 @@ export function Card({
   isFavorite = false,
   ...rest
 }) {
-  // adicionar e remover do carrinho de compras
-  const { productsCart, addProductToCart, removeProductToCart, clearCart } =
-    shoppingCart()
-
+  /**
+   * Constantes do Card
+   */
   const [countPlate, setCountPlate] = useState('00')
   const [favorite, setFavorite] = useState(isFavorite)
   const navigate = useNavigate()
 
+  /**
+   * Para o admin, o prato poderá ser alterado
+   */
   function handlePlate(idCard) {
     fnLoading && fnLoading(true)
     navigate(`/plates/${idCard}`)
     fnLoading && fnLoading(false)
   }
-
+  /**
+   * Adiciona o prato aos favoritos do usuário
+   */
   async function addFavPlate() {
     try {
       fnLoading && fnLoading(true)
@@ -57,6 +60,9 @@ export function Card({
     }
     return true
   }
+  /**
+   * Remove o prato dos favoritos
+   */
   async function removeFavPlate() {
     try {
       fnLoading && fnLoading(true)
@@ -74,7 +80,9 @@ export function Card({
     }
     return true
   }
-
+  /**
+   * Altera o prato como favoritado ou não
+   */
   function handleFavorite() {
     let response = false
     if (!favorite) {
@@ -88,12 +96,17 @@ export function Card({
   }
   const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
 
+  /**
+   * Ao clicar na imagem leva ate a página de detalhes do prato
+   */
   function handleDetails(idCard) {
     fnLoading && fnLoading(true)
     navigate(`/details/${idCard}`)
     fnLoading && fnLoading(false)
   }
-
+  /**
+   * Diminui a quantidade de prato
+   */
   function handleMinusPlate() {
     let xValue = parseInt(countPlate)
     xValue--
@@ -104,6 +117,9 @@ export function Card({
     }
     setCountPlate(String(xValue))
   }
+  /**
+   * Aumenta a quantidade de prato
+   */
   function handlePlusPlate() {
     let xValue = parseInt(countPlate)
     xValue++
@@ -117,22 +133,12 @@ export function Card({
     setCountPlate(xValue)
   }
 
-  async function handleOrderPlate() {
-    try {
-      fnLoading && fnLoading(true)
-      // const response = await api.get(`/orders/${CardId}`)
-      console.log('enviando')
-      fnLoading && fnLoading(false)
-    } catch (error) {
-      fnLoading && fnLoading(false)
-      if (error.response) {
-        alert(error.response.data.message)
-      } else {
-        alert('Não foi possível remover o prato.')
-      }
-    }
+  function handlePlateToCart() {
+    addProductToCart(CardId)
   }
-
+  /**
+   * O Componente Card
+   */
   return (
     <Container {...rest} CardId={CardId}>
       <button className="btn-fav ">
@@ -169,7 +175,7 @@ export function Card({
               <button className="btn" onClick={handlePlusPlate}>
                 <AiOutlinePlus />
               </button>
-              <Button title="incluir" onClick={handleOrderPlate}></Button>
+              <Button title="incluir" onClick={handlePlateToCart}></Button>
             </>
           )}
         </div>
