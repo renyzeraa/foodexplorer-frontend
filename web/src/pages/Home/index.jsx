@@ -189,6 +189,7 @@ export function Home() {
                         amount={plate.amount}
                         isAdmin={admin}
                         fnLoading={loadingCard}
+                        isFavorite={plate.favorite}
                       />
                     </SwiperSlide>
                   ))}
@@ -221,6 +222,7 @@ export function Home() {
                         amount={plate.amount}
                         isAdmin={admin}
                         fnLoading={loadingCard}
+                        isFavorite={plate.favorite}
                       />
                     </SwiperSlide>
                   ))}
@@ -251,6 +253,7 @@ export function Home() {
                         price={plate.value}
                         isAdmin={admin}
                         fnLoading={loadingCard}
+                        isFavorite={plate.favorite}
                       />
                     </SwiperSlide>
                   ))}
