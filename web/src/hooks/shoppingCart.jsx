@@ -1,26 +1,25 @@
-import { useContext } from 'react'
-import { createContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 export const CartContext = createContext({})
 
 function CartProvider({ children }) {
   const [productsCart, setProductsCart] = useState([])
-  console.log(productsCart)
-  function addProductToCart(id) {
+
+  const addProductToCart = (id, iQnt = 0) => {
     const copyProductsCart = [...productsCart]
 
     const item = copyProductsCart.find(product => product.id === id)
 
     if (!item) {
-      copyProductsCart.push({ id: id, qtd: 1 })
+      copyProductsCart.push({ id: id, qtd: iQnt || 1 })
     } else {
-      item.qtd = item.qtd + 1
+      item.qtd = item.qtd + (1 || iQnt)
     }
-
+    console.log(copyProductsCart)
     setProductsCart(copyProductsCart)
   }
 
-  function removeProductToCart(id) {
+  const removeProductToCart = id => {
     const copyProductsCart = [...productsCart]
 
     const item = copyProductsCart.find(product => product.id === id)
@@ -36,20 +35,20 @@ function CartProvider({ children }) {
     }
   }
 
-  function clearCart() {
+  const clearCart = () => {
     setProductsCart([])
   }
 
   return (
     <CartContext.Provider
-      value={{ productsCart, addProductToCart, removeProductToCart, clearCart }}
+      value={{ clearCart, removeProductToCart, addProductToCart, productsCart }}
     >
       {children}
     </CartContext.Provider>
   )
 }
 
-function shoppingCart() {
+const shoppingCart = () => {
   const context = useContext(CartContext)
   return context
 }

@@ -9,6 +9,7 @@ import { TbPencil } from 'react-icons/tb'
 import { Button } from '../Button'
 import { Link, useNavigate } from 'react-router-dom'
 import { api } from '../../services/api'
+import { shoppingCart } from '../../hooks/shoppingCart'
 import React, { useState } from 'react'
 
 export function Card({
@@ -24,6 +25,11 @@ export function Card({
   isFavorite = false,
   ...rest
 }) {
+  const { clearCart, removeProductToCart, addProductToCart, productsCart } =
+    shoppingCart()
+  const addPlateToCart = (id, qnt) => addProductToCart(id, qnt)
+  const remPlateToCart = id => removeProductToCart(id)
+  const clearTheCart = () => clearCart()
   /**
    * Constantes do Card
    */
@@ -134,7 +140,7 @@ export function Card({
   }
 
   function handlePlateToCart() {
-    addProductToCart(CardId)
+    addPlateToCart(CardId)
   }
   /**
    * O Componente Card
