@@ -25,15 +25,24 @@ export function Card({
   isFavorite = false,
   ...rest
 }) {
-  const { clearCart, removeProductToCart, addProductToCart, productsCart } =
-    shoppingCart()
-  const addPlateToCart = (id, qnt) => addProductToCart(id, qnt)
+  const { removeProductToCart, addProductToCart } = shoppingCart()
+  const addPlateToCart = (id, iQnt, bCheckPlate, bCheckQnt) =>
+    addProductToCart(id, iQnt, bCheckPlate, bCheckQnt)
   const remPlateToCart = id => removeProductToCart(id)
-  const clearTheCart = () => clearCart()
+
+  if (parseInt(amount) > 0) {
+    amount = parseInt(amount)
+    if (amount <= 9) {
+      amount = String('0' + amount)
+    } else if (amount > 98) {
+      amount = '99'
+    }
+    String(amount)
+  }
   /**
    * Constantes do Card
    */
-  const [countPlate, setCountPlate] = useState('00')
+  const [countPlate, setCountPlate] = useState(amount || '00')
   const [favorite, setFavorite] = useState(isFavorite)
   const navigate = useNavigate()
 
@@ -121,7 +130,12 @@ export function Card({
     } else if (xValue <= 9) {
       xValue = '0' + xValue
     }
-    setCountPlate(String(xValue))
+    const response = remPlateToCart(CardId)
+    if (response) {
+      setCountPlate(String(xValue))
+    } else {
+      setCountPlate('01')
+    }
   }
   /**
    * Aumenta a quantidade de prato
@@ -129,6 +143,9 @@ export function Card({
   function handlePlusPlate() {
     let xValue = parseInt(countPlate)
     xValue++
+    if (xValue >= 2) {
+      addPlateToCart(CardId, xValue, true)
+    }
     if (xValue <= 9) {
       xValue = String('0' + xValue)
     } else if (xValue > 98) {
@@ -140,7 +157,13 @@ export function Card({
   }
 
   function handlePlateToCart() {
-    addPlateToCart(CardId)
+    const iAmountPlate = parseInt(countPlate)
+    if (!iAmountPlate) {
+      return alert(
+        'Indique a quantidade de pratos que você deseja incluir ao carrinho.'
+      )
+    }
+    addPlateToCart(CardId, iAmountPlate, false, true)
   }
   /**
    * O Componente Card
@@ -170,9 +193,7 @@ export function Card({
         <p className="description">{description}</p>
         <h1 className="price-title">R$ {price}</h1>
         <div className="content-includes">
-          {isAdmin ? (
-            []
-          ) : (
+          {!isAdmin && (
             <>
               <button className="btn" onClick={handleMinusPlate}>
                 <AiOutlineMinus />

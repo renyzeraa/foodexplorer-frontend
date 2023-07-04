@@ -7,10 +7,13 @@ import { TbReceipt } from 'react-icons/tb'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { InputSearch } from '../InputSearch'
+import { shoppingCart } from '../../hooks/shoppingCart'
 
 export function Header({ fnChange, ...rest }) {
   const { signOut, user } = useAuth()
   const admin = user.isAdmin
+  const { productsCart } = shoppingCart()
+  const iQntDemand = [...productsCart].length
   /**
    * Método para modificar atributos para abrir o menu hamburger mobile
    */
@@ -108,7 +111,7 @@ export function Header({ fnChange, ...rest }) {
           []
         ) : (
           <Link className="icon-receipt" to="/demand">
-            <span className="count-itens">9</span>
+            <span className="count-itens">{iQntDemand}</span>
             <TbReceipt />
           </Link>
         )}
@@ -144,7 +147,11 @@ export function Header({ fnChange, ...rest }) {
             <Link to="/favorites">Meus Favoritos</Link>
             <Link to="/demand">Histórico de pedidos</Link>
             <Link to="/payment">
-              <Button icon={TbReceipt} title="Pedidos" count={3}></Button>
+              <Button
+                icon={TbReceipt}
+                title="Pedidos"
+                count={iQntDemand}
+              ></Button>
             </Link>
 
             <Link className="signout" onClick={handleSignOut} to={'/'}>

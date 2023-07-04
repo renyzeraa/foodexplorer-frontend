@@ -15,6 +15,7 @@ import 'swiper/swiper-bundle.css'
 SwiperCore.use([Navigation, Pagination])
 import { api } from '../../services/api'
 import { Loading } from '../../components/Loading'
+import { shoppingCart } from '../../hooks/shoppingCart'
 
 export function Home() {
   const { user } = useAuth()
@@ -26,6 +27,8 @@ export function Home() {
   const [bHasDessert, setBHasDessert] = useState(false)
   const [bHasCandy, setBHasCandy] = useState(false)
   const [bHasDrinks, setBHasDrinks] = useState(false)
+  const { productsCart } = shoppingCart()
+  const copyShoppingCart = [...productsCart]
 
   useEffect(() => {
     async function searchPlate() {
@@ -57,11 +60,17 @@ export function Home() {
     let aPlates = aData[0] || []
     let aFavPlates = aData[1] || []
     aPlates.forEach(oPlate => {
+      const [oPlateCart] = copyShoppingCart.filter(
+        oPlateCart => oPlate.id == oPlateCart.id
+      )
       const [plate] = aFavPlates.filter(oPlateFav => oPlate.id == oPlateFav.id)
       if (plate) {
         oPlate['favorite'] = true
       } else {
         oPlate['favorite'] = false
+      }
+      if (oPlateCart && oPlateCart.id) {
+        oPlate['amount'] = oPlateCart.qtd
       }
     })
     setPlates(aPlates)
