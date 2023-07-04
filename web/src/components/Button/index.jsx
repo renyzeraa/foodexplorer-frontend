@@ -5,7 +5,7 @@ export function Button({ icon: Icon, title, count, ...rest }) {
     <Container type="button" {...rest}>
       {Icon && <Icon size={20} />}
       {title}
-      {count && ` (${count})`}
+      {count >= 0 && ` (${count})`}
     </Container>
   )
 }
