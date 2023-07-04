@@ -1,27 +1,27 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useState } from 'react'
 
 export const CartContext = createContext({})
 
 function CartProvider({ children }) {
   const [productsCart, setProductsCart] = useState([])
 
-  const addProductToCart = (id, iQnt = 0) => {
+  const addProductToCart = (id, iQnt = 0, bCheckPlate = false) => {
     const copyProductsCart = [...productsCart]
-
     const item = copyProductsCart.find(product => product.id === id)
-
-    if (!item) {
-      copyProductsCart.push({ id: id, qtd: iQnt || 1 })
-    } else {
-      item.qtd = item.qtd + (1 || iQnt)
+    const iQuant = iQnt ? iQnt : 1
+    if ((item && item.qtd == iQuant) || (!item && bCheckPlate)) {
+      return
     }
-    console.log(copyProductsCart)
+    if (!item) {
+      copyProductsCart.push({ id: id, qtd: iQuant })
+    } else {
+      item.qtd = item.qtd + iQuant
+    }
     setProductsCart(copyProductsCart)
   }
 
   const removeProductToCart = id => {
     const copyProductsCart = [...productsCart]
-
     const item = copyProductsCart.find(product => product.id === id)
 
     if (item && item.qtd > 1) {
@@ -49,8 +49,7 @@ function CartProvider({ children }) {
 }
 
 const shoppingCart = () => {
-  const context = useContext(CartContext)
-  return context
+  return useContext(CartContext)
 }
 
 export { CartProvider, shoppingCart }
