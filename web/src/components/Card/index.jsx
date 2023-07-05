@@ -146,7 +146,7 @@ export function Card({
     let xValue = parseInt(countPlate)
     xValue++
     if (xValue >= 2) {
-      plusThePlate(CardId, xValue)
+      plusThePlate(CardId)
     }
     if (xValue <= 9) {
       xValue = String('0' + xValue)

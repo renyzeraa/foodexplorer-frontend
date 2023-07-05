@@ -28,6 +28,9 @@ function CartProvider({ children }) {
     const item = copyProductsCart.find(product => product.id === id)
 
     if (item && item.qtd > 1) {
+      if (item.qtd >= 99) {
+        item.qtd = 99
+      }
       item.qtd = item.qtd - 1
       setProductsCart(copyProductsCart)
     } else {
@@ -47,15 +50,17 @@ function CartProvider({ children }) {
     return true
   }
 
-  const plusProductCart = (id, qnt = 0) => {
+  const plusProductCart = id => {
     const copyProductsCart = [...productsCart]
     const item = copyProductsCart.find(product => product.id === id)
-    const iQuant = qnt ? qnt : 1
 
     if (!item) {
       return false
     } else {
-      item.qtd = item.qtd + iQuant
+      if (item.qtd >= 99) {
+        item.qtd = 98
+      }
+      item.qtd = item.qtd + 1
     }
     setProductsCart(copyProductsCart)
     return true
