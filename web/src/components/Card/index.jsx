@@ -25,10 +25,12 @@ export function Card({
   isFavorite = false,
   ...rest
 }) {
-  const { removeProductToCart, addProductToCart } = shoppingCart()
-  const addPlateToCart = (id, iQnt, bCheckPlate, bCheckQnt) =>
-    addProductToCart(id, iQnt, bCheckPlate, bCheckQnt)
+  const { removeProductToCart, addProductToCart, plusProductCart } =
+    shoppingCart()
+
+  const addPlateToCart = (id, iQnt) => addProductToCart(id, iQnt)
   const remPlateToCart = id => removeProductToCart(id)
+  const plusThePlate = (id, iQnt) => plusProductCart(id, iQnt)
 
   if (parseInt(amount) > 0) {
     amount = parseInt(amount)
@@ -144,7 +146,7 @@ export function Card({
     let xValue = parseInt(countPlate)
     xValue++
     if (xValue >= 2) {
-      addPlateToCart(CardId, xValue, true)
+      plusThePlate(CardId, xValue)
     }
     if (xValue <= 9) {
       xValue = String('0' + xValue)
@@ -163,7 +165,7 @@ export function Card({
         'Indique a quantidade de pratos que você deseja incluir ao carrinho.'
       )
     }
-    addPlateToCart(CardId, iAmountPlate, false, true)
+    addPlateToCart(CardId, iAmountPlate)
   }
   /**
    * O Componente Card

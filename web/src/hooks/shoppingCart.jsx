@@ -5,22 +5,18 @@ export const CartContext = createContext({})
 function CartProvider({ children }) {
   const [productsCart, setProductsCart] = useState([])
 
-  const addProductToCart = (
-    id,
-    iQnt = 0,
-    bCheckPlate = false,
-    bCheckQnt = false
-  ) => {
+  const addProductToCart = (id, iQnt) => {
     const copyProductsCart = [...productsCart]
     const item = copyProductsCart.find(product => product.id === id)
     const iQuant = iQnt ? iQnt : 1
-    if ((item && item.qtd == iQuant && !bCheckQnt) || (!item && bCheckPlate)) {
-      return false
-    }
+
     if (!item) {
       copyProductsCart.push({ id: id, qtd: iQuant })
     } else {
-      item.qtd = item.qtd + iQuant
+      if (iQuant == item.qtd) {
+        return false
+      }
+      item.qtd = iQuant
     }
 
     setProductsCart(copyProductsCart)
@@ -51,13 +47,33 @@ function CartProvider({ children }) {
     return true
   }
 
+  const plusProductCart = (id, qnt = 0) => {
+    const copyProductsCart = [...productsCart]
+    const item = copyProductsCart.find(product => product.id === id)
+    const iQuant = qnt ? qnt : 1
+
+    if (!item) {
+      return false
+    } else {
+      item.qtd = item.qtd + iQuant
+    }
+    setProductsCart(copyProductsCart)
+    return true
+  }
+
   const clearCart = () => {
     setProductsCart([])
   }
 
   return (
     <CartContext.Provider
-      value={{ clearCart, removeProductToCart, addProductToCart, productsCart }}
+      value={{
+        clearCart,
+        removeProductToCart,
+        addProductToCart,
+        plusProductCart,
+        productsCart
+      }}
     >
       {children}
     </CartContext.Provider>
