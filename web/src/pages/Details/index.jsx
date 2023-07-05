@@ -8,6 +8,7 @@ import { Link, useParams, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
+import { shoppingCart } from '../../hooks/shoppingCart'
 
 export function Details({}) {
   const params = useParams()
@@ -17,11 +18,25 @@ export function Details({}) {
   const [picture, setPicture] = useState()
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
-  const [value, setValue] = useState('')
   const [ingredients, setIngredients] = useState([])
+  const [countPlate, setCountPlate] = useState('00')
+  const [valuePlate, setValuePlate] = useState('R$ 00,00')
+  const [iCardId, setCardId] = useState(0)
+
   let aIngredientsBd = []
   let bIsActualized = false
   const navigate = useNavigate()
+  const {
+    removeProductToCart,
+    addProductToCart,
+    plusProductCart,
+    productsCart
+  } = shoppingCart()
+  const copyShoppingCart = [...productsCart]
+  const addPlateToCart = (id, iQnt) => addProductToCart(id, iQnt)
+  const remPlateToCart = id => removeProductToCart(id)
+  const plusThePlate = (id, iQnt) => plusProductCart(id, iQnt)
+
   useEffect(() => {
     async function fetchPlate() {
       try {
@@ -49,8 +64,24 @@ export function Details({}) {
     if (bIsActualized) {
       return
     }
+    const [oPlateCart] = copyShoppingCart.filter(
+      oPlateCart => oPlate.id == oPlateCart.id
+    )
+    if (oPlateCart && oPlateCart.id) {
+      let amount
+      if (oPlateCart.qtd > 0) {
+        amount = oPlateCart.qtd
+        if (amount <= 9) {
+          amount = String('0' + amount)
+        } else if (amount > 98) {
+          amount = '99'
+        }
+      }
+      setCountPlate(String(amount))
+    }
+    setCardId(oPlate.id)
     setTitle(oPlate.title)
-    setValue(oPlate.value)
+
     const aIngredients = JSON.parse(oPlate.ingredients)
     if (!ingredients.length && aIngredientsBd.length) {
       for (let item of aIngredients) {
@@ -70,6 +101,56 @@ export function Details({}) {
     setLoading(true)
     navigate(`/plates/${params.id}`)
     setLoading(false)
+  }
+
+  function handleValuePlate(iValue) {}
+
+  /**
+   * Diminui a quantidade de prato
+   */
+  function handleMinusPlate() {
+    let xValue = parseInt(countPlate)
+    xValue--
+    if (xValue < 1) {
+      xValue = '00'
+    } else if (xValue <= 9) {
+      xValue = '0' + xValue
+    }
+    const response = remPlateToCart(iCardId)
+    if (response) {
+      setCountPlate(String(xValue))
+    } else {
+      setCountPlate('01')
+    }
+  }
+
+  /**
+   * Aumenta a quantidade de prato
+   */
+  function handlePlusPlate() {
+    let xValue = parseInt(countPlate)
+    xValue++
+    if (xValue >= 2) {
+      plusThePlate(iCardId)
+    }
+    if (xValue <= 9) {
+      xValue = String('0' + xValue)
+    } else if (xValue > 98) {
+      xValue = '99'
+    } else {
+      String(xValue)
+    }
+    setCountPlate(xValue)
+  }
+
+  function handlePlateToCart() {
+    const iAmountPlate = parseInt(countPlate)
+    if (!iAmountPlate) {
+      return alert(
+        'Indique a quantidade de pratos que você deseja incluir ao carrinho.'
+      )
+    }
+    addPlateToCart(iCardId, iAmountPlate)
   }
 
   return (
@@ -95,14 +176,14 @@ export function Details({}) {
             <Button title="Editar prato" onClick={handleNavigate}></Button>
           ) : (
             <div className="content-includes">
-              <button className="btn">
+              <button className="btn" onClick={handleMinusPlate}>
                 <AiOutlineMinus />
               </button>
-              <span className="count-item">00</span>
-              <button className="btn">
+              <span className="count-item">{countPlate}</span>
+              <button className="btn" onClick={handlePlusPlate}>
                 <AiOutlinePlus />
               </button>
-              <Button title="Incluir"></Button>
+              <Button title={`Incluir ● `} onClick={handlePlateToCart}></Button>
             </div>
           )}
         </section>
