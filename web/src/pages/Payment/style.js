@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const Container = styled.div`
   height: 100vh;
-  main {
+  .main-content {
     display: grid;
     padding: 0 24px;
     justify-items: center;
@@ -145,7 +145,7 @@ export const Container = styled.div`
   }
 
   @media (min-width: 700px) {
-    main {
+    .main-content {
       .container {
         .action-buttons {
           display: flex;
@@ -154,7 +154,7 @@ export const Container = styled.div`
     }
   }
   @media (min-width: 800px) {
-    main {
+    .main-content {
       display: flex;
       max-width: 1120px;
       padding: 0 24px;
