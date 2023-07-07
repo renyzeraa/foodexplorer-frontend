@@ -6,10 +6,9 @@ export function ItemCart({
   sNamePlate,
   sValue,
   idPlate,
+  fnRemove,
   ...rest
 }) {
-  function handleRemoveCart(idPlate) {}
-
   return (
     <Container {...rest}>
       <div className="container">
@@ -21,7 +20,7 @@ export function ItemCart({
               <span className="price">{sValue}</span>
             </p>
           </div>
-          <button onClick={handleRemoveCart}>Excluir</button>
+          <button onClick={() => fnRemove(idPlate)}>Excluir</button>
         </section>
       </div>
     </Container>
