@@ -128,6 +128,9 @@ export const Container = styled.div`
 
         .content-includes {
           justify-content: left;
+          button:last-child {
+            margin-left: 33px;
+          }
         }
       }
     }

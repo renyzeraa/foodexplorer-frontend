@@ -22,6 +22,7 @@ export function Details({}) {
   const [countPlate, setCountPlate] = useState('00')
   const [valuePlate, setValuePlate] = useState('R$ 00,00')
   const [iCardId, setCardId] = useState(0)
+  const [initialValue, setInitialValue] = useState(0)
 
   let aIngredientsBd = []
   let bIsActualized = false
@@ -79,9 +80,14 @@ export function Details({}) {
       }
       setCountPlate(String(amount))
     }
+    setInitialValue(oPlate.value)
     setCardId(oPlate.id)
     setTitle(oPlate.title)
-
+    if (parseInt(countPlate) > 1) {
+      setValuePlate(formatValuePlate(oPlate.value))
+    } else {
+      setValuePlate(formatValuePlate(0))
+    }
     const aIngredients = JSON.parse(oPlate.ingredients)
     if (!ingredients.length && aIngredientsBd.length) {
       for (let item of aIngredients) {
@@ -97,13 +103,27 @@ export function Details({}) {
     bIsActualized = true
   }
 
+  function formatValuePlate(iValue) {
+    let numberString = String(iValue)
+    let number = Number(numberString.replace(/[.,]/g, '.'))
+    let formattedValue = number.toLocaleString('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    })
+    return formattedValue
+  }
+
   function handleNavigate() {
     setLoading(true)
     navigate(`/plates/${params.id}`)
     setLoading(false)
   }
 
-  function handleValuePlate(iValue) {}
+  function handleValuePlate(iQnt) {
+    let number = initialValue * iQnt
+    let formattedValue = formatValuePlate(number)
+    setValuePlate(formattedValue)
+  }
 
   /**
    * Diminui a quantidade de prato
@@ -120,8 +140,10 @@ export function Details({}) {
     if (response) {
       setCountPlate(String(xValue))
     } else {
-      setCountPlate('01')
+      xValue = '01'
+      setCountPlate(xValue)
     }
+    handleValuePlate(parseInt(xValue))
   }
 
   /**
@@ -140,6 +162,7 @@ export function Details({}) {
     } else {
       String(xValue)
     }
+    handleValuePlate(parseInt(xValue))
     setCountPlate(xValue)
   }
 
@@ -183,7 +206,11 @@ export function Details({}) {
               <button className="btn" onClick={handlePlusPlate}>
                 <AiOutlinePlus />
               </button>
-              <Button title={`Incluir ● `} onClick={handlePlateToCart}></Button>
+              <Button
+                title={`Incluir ● ${valuePlate}`}
+                onClick={handlePlateToCart}
+                style={{ padding: '12px' }}
+              ></Button>
             </div>
           )}
         </section>
