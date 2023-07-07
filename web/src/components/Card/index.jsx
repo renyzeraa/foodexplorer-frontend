@@ -32,6 +32,13 @@ export function Card({
   const remPlateToCart = id => removeProductToCart(id)
   const plusThePlate = (id, iQnt) => plusProductCart(id, iQnt)
 
+  let numberString = String(price)
+  let number = Number(numberString.replace(/[.,]/g, '.'))
+  let formattedValue = number.toLocaleString('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  })
+
   if (parseInt(amount) > 0) {
     amount = parseInt(amount)
     if (amount <= 9) {
@@ -193,7 +200,7 @@ export function Card({
 
         <h1 className="product-title">{title}</h1>
         <p className="description">{description}</p>
-        <h1 className="price-title">R$ {price}</h1>
+        <h1 className="price-title">{formattedValue}</h1>
         <div className="content-includes">
           {!isAdmin && (
             <>
