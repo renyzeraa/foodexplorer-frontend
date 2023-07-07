@@ -1,7 +1,7 @@
 import { Container } from './style'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
-import { Item } from '../../components/Item'
+import { ItemCart } from '../../components/ItemCart'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { TiThLargeOutline } from 'react-icons/ti'
@@ -29,19 +29,19 @@ export function Payment() {
           <div className="demand">
             <ul>
               <li>
-                <Item />
+                <ItemCart />
               </li>
               <li>
-                <Item />
+                <ItemCart />
               </li>
               <li>
-                <Item />
+                <ItemCart />
               </li>
               <li>
-                <Item />
+                <ItemCart />
               </li>
               <li>
-                <Item />
+                <ItemCart />
               </li>
             </ul>
           </div>
