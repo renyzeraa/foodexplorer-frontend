@@ -21,20 +21,16 @@ export const Container = styled.div`
         margin: 0 auto 32px;
       }
       h2 {
-        max-width: 550px;
-        margin: 24px auto 0;
-
+        margin-top: 24px;
         text-align: left;
         font-family: 'Poppins', sans-serif;
         font-weight: 500;
-        font-size: 20px;
       }
       .demand {
         display: grid;
-        height: 400px;
-        max-width: 550px;
+        height: auto;
+        max-height: 400px;
         overflow-y: auto;
-        margin: 0 auto;
         ul li {
           margin-bottom: 50px;
         }
@@ -60,6 +56,12 @@ export const Container = styled.div`
         ::-webkit-scrollbar-button:end:increment {
           height: 10px;
         }
+      }
+
+      .action-buttons {
+        margin-top: 32px;
+        display: grid;
+        gap: 12px;
       }
 
       .content-payment {
@@ -141,6 +143,16 @@ export const Container = styled.div`
       }
     }
   }
+
+  @media (min-width: 700px) {
+    main {
+      .container {
+        .action-buttons {
+          display: flex;
+        }
+      }
+    }
+  }
   @media (min-width: 800px) {
     main {
       display: flex;
@@ -149,11 +161,13 @@ export const Container = styled.div`
       margin: 64px auto 0;
       justify-content: space-between;
       height: 100vh;
+      gap: 32px;
       .container {
         padding: 0;
 
         .demand {
-          width: 410px;
+          max-height: 100%;
+          height: 485px;
           margin: 0;
         }
       }
