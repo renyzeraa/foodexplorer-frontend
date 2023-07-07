@@ -1,20 +1,27 @@
 import { Container } from './style'
 
-export function ItemCart() {
+export function ItemCart({
+  imgPlate,
+  iQuant,
+  sNamePlate,
+  sValue,
+  idPlate,
+  ...rest
+}) {
+  function handleRemoveCart(idPlate) {}
+
   return (
-    <Container>
+    <Container {...rest}>
       <div className="container">
-        <img src={''} alt="" />
+        <img src={imgPlate} alt="Imagem do Prato" />
         <section>
           <div className="content">
             <p>
-              <span className="count">1</span>x Salada Radish
-              <span className="price">
-                R$ <span className="value">25,97</span>
-              </span>
+              <span className="count">{iQuant}</span> x {sNamePlate}
+              <span className="price">{sValue}</span>
             </p>
           </div>
-          <button>Excluir</button>
+          <button onClick={handleRemoveCart}>Excluir</button>
         </section>
       </div>
     </Container>
