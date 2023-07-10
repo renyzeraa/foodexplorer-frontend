@@ -17,38 +17,55 @@ import { useEffect } from 'react'
 export function Payment() {
   const [loading, setLoading] = useState(false)
   const [plates, setPlates] = useState([])
+  const [platesDb, setPlatesDb] = useState([])
   const [totalValue, setTotalValue] = useState('R$ 0,00')
-  const { clearCart, removeProductToCart, productsCart } = shoppingCart()
+  const { clearCart, getProducts, removeProductToCart, removeAllFromId } =
+    shoppingCart()
+  const deleteOrder = id => removeAllFromId(id)
   const clearAll = () => clearCart()
-  let copyProductCart = [...productsCart]
   let iTotalPrice = 0
+
   useEffect(() => {
-    async function handleOrder() {
-      try {
-        setLoading(true)
-        const response = await api.get('/plates')
-        handlePlateToShow(response.data)
-        setLoading(false)
-      } catch (error) {
-        setLoading(false)
-        if (error.response) {
-          console.log(error.response.data.message)
-          alert(error.response.data.message)
-        } else {
-          alert('Não foi possível favoritar o Prato.')
-        }
-      }
-    }
-    handleOrder()
+    handleAllOrders()
   }, [])
 
-  function handlePlateToShow(aPlates) {
-    let plates = aPlates.filter(oPlateBd => {
+  async function handleAllOrders() {
+    try {
+      setLoading(true)
+      const response = await api.get('/plates')
+      handlePlates(response.data)
+      setLoading(false)
+    } catch (error) {
+      setLoading(false)
+      if (error.response) {
+        console.log(error.response.data.message)
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível encontrar seus pedidos.')
+      }
+    }
+  }
+
+  function handlePlates(aPlates) {
+    setPlatesDb(aPlates)
+    handlePlateToShow(aPlates)
+  }
+
+  function handlePlateToShow(aPlates = false, aPlatesCart = false) {
+    if (!aPlates) {
+      aPlates = [...platesDb]
+    }
+    let copyProductCart = aPlatesCart
+    if (!aPlatesCart) {
+      copyProductCart = getProducts()
+    }
+
+    let aPlatesFiltered = aPlates.filter(oPlateBd => {
       return copyProductCart.some(oPlateCart => {
         return oPlateCart.id == oPlateBd.id
       })
     })
-    plates = plates.map(oPlate => {
+    aPlates = aPlatesFiltered.map(oPlate => {
       let [plateCart] = copyProductCart.filter(oPlateCart => {
         return oPlateCart.id == oPlate.id
       })
@@ -68,7 +85,8 @@ export function Payment() {
     })
     setTotalValue(getFormattedValue(iTotalPrice))
     iTotalPrice = 0
-    setPlates(plates)
+    setPlates(aPlates)
+    aPlates = []
   }
 
   function getFormattedValue(iValue) {
@@ -97,6 +115,13 @@ export function Payment() {
     }
   }
 
+  function handleRemoveOrder(id) {
+    setLoading(true)
+    const newArrayCart = deleteOrder(id)
+    handlePlateToShow(false, newArrayCart)
+    setLoading(false)
+  }
+
   function handlePayment() {}
 
   return (
@@ -116,6 +141,7 @@ export function Payment() {
                     sNamePlate={oPlate.title}
                     sValue={oPlate.value}
                     idPlate={oPlate.id}
+                    fnRemove={handleRemoveOrder}
                   />
                 </li>
               ))}
