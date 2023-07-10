@@ -27,8 +27,8 @@ export function Home() {
   const [bHasDessert, setBHasDessert] = useState(false)
   const [bHasCandy, setBHasCandy] = useState(false)
   const [bHasDrinks, setBHasDrinks] = useState(false)
-  const { productsCart } = shoppingCart()
-  const copyShoppingCart = [...productsCart]
+  const { getProducts } = shoppingCart()
+  const copyShoppingCart = getProducts()
 
   useEffect(() => {
     async function searchPlate() {

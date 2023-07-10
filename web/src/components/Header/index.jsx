@@ -12,8 +12,8 @@ import { shoppingCart } from '../../hooks/shoppingCart'
 export function Header({ fnChange, ...rest }) {
   const { signOut, user } = useAuth()
   const admin = user.isAdmin
-  const { productsCart } = shoppingCart()
-  const iQntDemand = [...productsCart].length
+  const { getProducts } = shoppingCart()
+  const iQntDemand = getProducts().length
   /**
    * Método para modificar atributos para abrir o menu hamburger mobile
    */

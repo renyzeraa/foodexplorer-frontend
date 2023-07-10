@@ -31,9 +31,9 @@ export function Details({}) {
     removeProductToCart,
     addProductToCart,
     plusProductCart,
-    productsCart
+    getProducts
   } = shoppingCart()
-  const copyShoppingCart = [...productsCart]
+  const copyShoppingCart = getProducts()
   const addPlateToCart = (id, iQnt) => addProductToCart(id, iQnt)
   const remPlateToCart = id => removeProductToCart(id)
   const plusThePlate = (id, iQnt) => plusProductCart(id, iQnt)
