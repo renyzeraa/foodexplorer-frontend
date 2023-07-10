@@ -19,8 +19,7 @@ export function Payment() {
   const [plates, setPlates] = useState([])
   const [platesDb, setPlatesDb] = useState([])
   const [totalValue, setTotalValue] = useState('R$ 0,00')
-  const { clearCart, getProducts, removeProductToCart, removeAllFromId } =
-    shoppingCart()
+  const { clearCart, getProducts, removeAllFromId } = shoppingCart()
   const deleteOrder = id => removeAllFromId(id)
   const clearAll = () => clearCart()
   let iTotalPrice = 0
@@ -122,7 +121,31 @@ export function Payment() {
     setLoading(false)
   }
 
-  function handlePayment() {}
+  async function handlePayment() {
+    let sDetails = ''
+    plates.forEach(item => {
+      sDetails += `${item.qtd} x ${item.title}, `
+    })
+    sDetails = sDetails.slice(0, -2)
+    const oFormData = {
+      details: sDetails
+    }
+    try {
+      setLoading(true)
+      clearAll()
+      await api.post('/orders', oFormData)
+      setPlates([])
+      setLoading(false)
+    } catch (error) {
+      setLoading(false)
+      if (error.response) {
+        console.log(error.response.data.message)
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível realizar o pagamento, tente novamente.')
+      }
+    }
+  }
 
   return (
     <Container>
