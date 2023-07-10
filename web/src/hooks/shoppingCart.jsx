@@ -5,9 +5,22 @@ export const CartContext = createContext({})
 function CartProvider({ children }) {
   const [productsCart, setProductsCart] = useState([])
 
+  const getProducts = () => {
+    return [...productsCart]
+  }
+
+  const removeAllFromId = id => {
+    const aNewArray = productsCart.filter(item => {
+      return item.id !== id
+    })
+    setProductsCart(aNewArray)
+    return aNewArray
+  }
+
   const addProductToCart = (id, iQnt) => {
-    const copyProductsCart = [...productsCart]
-    const item = copyProductsCart.find(product => product.id === id)
+    const copyProductsCart = getProducts()
+
+    const item = copyProductsCart.find(product => product.id == id)
     const iQuant = iQnt ? iQnt : 1
 
     if (!item) {
@@ -20,13 +33,17 @@ function CartProvider({ children }) {
     }
 
     setProductsCart(copyProductsCart)
+
     return true
   }
 
   const removeProductToCart = id => {
-    const copyProductsCart = [...productsCart]
-    const item = copyProductsCart.find(product => product.id === id)
+    let copyProductsCart = getProducts()
+    const item = copyProductsCart.find(product => product.id == id)
 
+    function removeFromCart(id) {
+      return copyProductsCart.filter(product => product.id != id)
+    }
     if (item && item.qtd > 1) {
       if (item.qtd >= 99) {
         item.qtd = 99
@@ -42,16 +59,14 @@ function CartProvider({ children }) {
           return false
         }
       }
-      const arrayFiltered = copyProductsCart.filter(
-        product => product.id !== id
-      )
-      setProductsCart(arrayFiltered)
+      copyProductsCart = removeFromCart(id)
+      setProductsCart(copyProductsCart)
     }
     return true
   }
 
   const plusProductCart = id => {
-    const copyProductsCart = [...productsCart]
+    const copyProductsCart = getProducts()
     const item = copyProductsCart.find(product => product.id === id)
 
     if (!item) {
@@ -73,11 +88,12 @@ function CartProvider({ children }) {
   return (
     <CartContext.Provider
       value={{
+        getProducts,
         clearCart,
         removeProductToCart,
         addProductToCart,
         plusProductCart,
-        productsCart
+        removeAllFromId
       }}
     >
       {children}
