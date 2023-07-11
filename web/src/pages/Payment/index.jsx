@@ -122,6 +122,25 @@ export function Payment() {
   }
 
   async function handlePayment() {
+    const oFormData = getFormDataOrder()
+    try {
+      setLoading(true)
+      await api.post('/orders', oFormData)
+      // clearAll()
+      // setPlates([])
+      setLoading(false)
+    } catch (error) {
+      setLoading(false)
+      if (error.response) {
+        console.log(error.response.data.message)
+        alert(error.response.data.message)
+      } else {
+        alert('Não foi possível realizar o pedido, tente novamente.')
+      }
+    }
+  }
+
+  function getFormDataOrder() {
     let sDetails = ''
     plates.forEach(item => {
       sDetails += `${item.qtd} x ${item.title}, `
@@ -139,21 +158,7 @@ export function Payment() {
     const oFormData = new FormData()
     oFormData.append('details', sDetails)
     oFormData.append('plates', oPlatesToPost)
-    try {
-      setLoading(true)
-      clearAll()
-      // await api.post('/orders', oFormData)
-      // setPlates([])
-      setLoading(false)
-    } catch (error) {
-      setLoading(false)
-      if (error.response) {
-        console.log(error.response.data.message)
-        alert(error.response.data.message)
-      } else {
-        alert('Não foi possível realizar o pagamento, tente novamente.')
-      }
-    }
+    return oFormData
   }
 
   return (
@@ -182,7 +187,11 @@ export function Payment() {
           <h2>Total: {totalValue}</h2>
           <div className="action-buttons">
             <Button title="Excluir Todos" onClick={handleClearAll}></Button>
-            <Button title="Realizar Pagamento" onClick={handlePayment}></Button>
+            <Button
+              title="Realizar Pagamento"
+              icon={BiReceipt}
+              onClick={handlePayment}
+            ></Button>
           </div>
         </div>
         <div className="container">
@@ -216,7 +225,6 @@ export function Payment() {
                     <Input type="text" placeholder="999"></Input>
                   </div>
                 </div>
-                <Button icon={BiReceipt} title="Finalizar pagamento" />
               </div>
             </div>
           </div>
