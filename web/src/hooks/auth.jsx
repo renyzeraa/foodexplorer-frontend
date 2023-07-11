@@ -4,13 +4,14 @@ import { api } from '../services/api'
 export const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
+  /** Definir Valores */
   const [data, setData] = useState({})
 
   /**
-    Realiza o login no sistema
-    @param email    {String} 
-    @param password {String} 
-  */
+   * Realiza o login no sistema
+   * @param email    {String}
+   * @param password {String}
+   */
   async function signIn({ email, password }) {
     try {
       const response = await api.post('/sessions', { email, password })
@@ -30,12 +31,18 @@ function AuthProvider({ children }) {
     }
   }
 
+  /**
+   * Sai do sistema e limpa o local storage do login e token
+   */
   function signOut() {
     localStorage.removeItem('@foodexplorer:user')
     localStorage.removeItem('@foodexplorer:token')
     setData({})
   }
 
+  /**
+   * Ao iniciar busca do localStorage os valores necessários para autenticar
+   */
   useEffect(() => {
     const user = localStorage.getItem('@foodexplorer:user')
     const token = localStorage.getItem('@foodexplorer:token')
@@ -53,6 +60,9 @@ function AuthProvider({ children }) {
   )
 }
 
+/**
+ * Cria o contexto
+ */
 function useAuth() {
   const context = useContext(AuthContext)
   return context

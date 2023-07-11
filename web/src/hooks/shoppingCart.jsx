@@ -3,12 +3,22 @@ import { createContext, useContext, useState } from 'react'
 export const CartContext = createContext({})
 
 function CartProvider({ children }) {
+  /**  Definir valores */
   const [productsCart, setProductsCart] = useState([])
 
+  /**
+   * Retorna uma copia do carrinho de compras
+   * @returns {Array} productsCart
+   */
   const getProducts = () => {
     return [...productsCart]
   }
 
+  /**
+   * Remove todos deste id
+   * @param  {integer} id
+   * @returns {Array} productsCart
+   */
   const removeAllFromId = id => {
     const aNewArray = productsCart.filter(item => {
       return item.id !== id
@@ -17,6 +27,12 @@ function CartProvider({ children }) {
     return aNewArray
   }
 
+  /**
+   * Adiciona determinado item ao carrinho de compras com sua quantidade
+   * @param {integer} id
+   * @param {integer} iQnt
+   * @returns {boolean}
+   */
   const addProductToCart = (id, iQnt) => {
     const copyProductsCart = getProducts()
 
@@ -37,6 +53,11 @@ function CartProvider({ children }) {
     return true
   }
 
+  /**
+   * Remove determinado produto do carrinho com base no id
+   * @param {integer} id
+   * @returns {boolean}
+   */
   const removeProductToCart = id => {
     let copyProductsCart = getProducts()
     const item = copyProductsCart.find(product => product.id == id)
@@ -65,6 +86,11 @@ function CartProvider({ children }) {
     return true
   }
 
+  /**
+   * Adiciona quantidade a determinado produto do carrinho de compra
+   * @param {integer} id
+   * @returns {boolean}
+   */
   const plusProductCart = id => {
     const copyProductsCart = getProducts()
     const item = copyProductsCart.find(product => product.id === id)
@@ -81,6 +107,9 @@ function CartProvider({ children }) {
     return true
   }
 
+  /**
+   * Limpa todo o carrinho de compras
+   */
   const clearCart = () => {
     setProductsCart([])
   }
@@ -101,6 +130,10 @@ function CartProvider({ children }) {
   )
 }
 
+/**
+ * Cria o contexto
+ * @returns {Context}
+ */
 const shoppingCart = () => {
   return useContext(CartContext)
 }
