@@ -1,4 +1,10 @@
 import { Container } from './style'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+/** services & hooks */
+import { api } from '../../services/api'
+import { shoppingCart } from '../../hooks/shoppingCart'
+/** react-icons */
 import {
   AiOutlineHeart,
   AiFillHeart,
@@ -6,11 +12,8 @@ import {
   AiOutlineMinus
 } from 'react-icons/ai'
 import { TbPencil } from 'react-icons/tb'
+/** components */
 import { Button } from '../Button'
-import { Link, useNavigate } from 'react-router-dom'
-import { api } from '../../services/api'
-import { shoppingCart } from '../../hooks/shoppingCart'
-import React, { useState } from 'react'
 
 export function Card({
   CardId,
@@ -25,13 +28,14 @@ export function Card({
   isFavorite = false,
   ...rest
 }) {
+  /** Functions shoppingCart */
   const { removeProductToCart, addProductToCart, plusProductCart } =
     shoppingCart()
-
   const addPlateToCart = (id, iQnt) => addProductToCart(id, iQnt)
   const remPlateToCart = id => removeProductToCart(id)
   const plusThePlate = (id, iQnt) => plusProductCart(id, iQnt)
 
+  /** Formatting Value*/
   let numberString = String(price)
   let number = Number(numberString.replace(/[.,]/g, '.'))
   let formattedValue = number.toLocaleString('pt-BR', {
@@ -39,6 +43,7 @@ export function Card({
     currency: 'BRL'
   })
 
+  /** setAmount */
   if (parseInt(amount) > 0) {
     amount = parseInt(amount)
     if (amount <= 9) {
@@ -165,6 +170,7 @@ export function Card({
     setCountPlate(xValue)
   }
 
+  /** Seta o prato no carrinho de compras */
   function handlePlateToCart() {
     const iAmountPlate = parseInt(countPlate)
     if (!iAmountPlate) {

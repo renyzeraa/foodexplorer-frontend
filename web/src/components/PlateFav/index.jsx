@@ -1,9 +1,11 @@
-import { api } from '../../services/api'
 import { Container } from './style'
+import { api } from '../../services/api'
 
 export function PlateFav({ title, onClick, img, plateId, ...rest }) {
+  /** Capturar a imagem do banco de dados ou devolver uma string vazia */
   const imgPlate = img ? `${api.defaults.baseURL}files/${img}` : ''
 
+  /** Função de excluir dos favoritos o prato atual */
   function handleOnClickRem() {
     onClick && onClick(plateId)
   }

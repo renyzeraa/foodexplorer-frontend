@@ -127,14 +127,23 @@ export function Payment() {
       sDetails += `${item.qtd} x ${item.title}, `
     })
     sDetails = sDetails.slice(0, -2)
-    const oFormData = {
-      details: sDetails
-    }
+    const oPlatesToPost = platesDb.reduce((Accum, oPlate) => {
+      const oItem = plates.some(plate => {
+        return oPlate.id == plate.id
+      })
+      if (oItem) {
+        Accum[oPlate.id] = oPlate
+      }
+      return Accum
+    })
+    const oFormData = new FormData()
+    oFormData.append('details', sDetails)
+    oFormData.append('plates', oPlatesToPost)
     try {
       setLoading(true)
       clearAll()
-      await api.post('/orders', oFormData)
-      setPlates([])
+      // await api.post('/orders', oFormData)
+      // setPlates([])
       setLoading(false)
     } catch (error) {
       setLoading(false)

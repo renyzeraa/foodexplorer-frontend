@@ -9,9 +9,10 @@ export function RowDemand({
   sDemand = '',
   ...rest
 }) {
+  /** Definir para admin ou user normal*/
   const { user } = useAuth()
   const admin = user.isAdmin
-
+  /** Definir valores */
   const [value, setValue] = useState(iStatus)
   // ajustar cor e nome do status do pedido
   let sStatus = '🔴'
@@ -38,6 +39,8 @@ export function RowDemand({
   } else {
     sPedido = String(iPedido)
   }
+
+  /** Lidar com o status do pedido atual */
   function handleSelectValue(xValue) {
     setValue(xValue)
   }

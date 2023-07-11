@@ -1,6 +1,6 @@
+import { Container } from './style'
 import { useState } from 'react'
 import { useAuth } from '../../hooks/auth'
-import { Container } from './style'
 
 export function CardDemand({
   iPedido = 0,
@@ -9,9 +9,10 @@ export function CardDemand({
   sDemand = '',
   ...rest
 }) {
+  /** Definir para admin */
   const { user } = useAuth()
   const admin = user.isAdmin
-
+  /** definição de valores */
   const [value, setValue] = useState(iStatus)
 
   // ajustar cor e nome do status do pedido
@@ -40,6 +41,7 @@ export function CardDemand({
     sPedido = String(iPedido)
   }
 
+  /** Definir o status do pedido */
   function handleSelectValue(xValue) {
     setValue(xValue)
   }

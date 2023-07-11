@@ -1,17 +1,22 @@
 import { Container } from './style'
-import logo from '../../assets/logo.svg'
-import { Button } from '../Button'
+import { Link } from 'react-router-dom'
+/** react-icons */
 import { BiSearch } from 'react-icons/bi'
 import { GoSignOut } from 'react-icons/go'
 import { TbReceipt } from 'react-icons/tb'
-import { Link } from 'react-router-dom'
+/** components */
+import { Button } from '../Button'
 import { useAuth } from '../../hooks/auth'
 import { InputSearch } from '../InputSearch'
 import { shoppingCart } from '../../hooks/shoppingCart'
+/** assets */
+import logo from '../../assets/logo.svg'
 
 export function Header({ fnChange, ...rest }) {
+  /** Verificar para modificar para admin e user */
   const { signOut, user } = useAuth()
   const admin = user.isAdmin
+  /** Alterar a quantidade de pedidos no botão */
   const { getProducts } = shoppingCart()
   const iQntDemand = getProducts().length
   /**
@@ -32,12 +37,14 @@ export function Header({ fnChange, ...rest }) {
       document.getElementById('menu-bar').classList.toggle('change')
   }
 
+  /** Busca os pratos */
   function handleFnSearch(oEv) {
     if (typeof fnChange === 'function') {
       fnChange(oEv)
     }
   }
 
+  /** Sai do sistema e vai para a area de login*/
   function handleSignOut() {
     signOut()
   }
