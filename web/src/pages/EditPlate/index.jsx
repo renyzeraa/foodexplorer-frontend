@@ -59,7 +59,6 @@ export function EditPlate({}) {
       } catch (error) {
         setLoading(false)
         if (error.response) {
-          console.log(error.response.data.message)
           alert(error.response.data.message)
         } else {
           alert('Não foi possível atualizar o Prato atual !')
@@ -108,7 +107,6 @@ export function EditPlate({}) {
     } catch (error) {
       setLoading(false)
       if (error.response) {
-        console.log(error.response.data.message)
         alert(error.response.data.message)
       } else {
         alert('Erro ao enviar ao atualizar Prato1')
@@ -152,7 +150,6 @@ export function EditPlate({}) {
       } catch (error) {
         setLoading(false)
         if (error.response) {
-          console.log(error.response.data.message)
           alert(error.response.data.message)
         } else {
           alert('Não foi possível excluir o Prato.')

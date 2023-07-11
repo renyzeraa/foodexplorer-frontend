@@ -81,7 +81,6 @@ export function Card({
     } catch (error) {
       fnLoading && fnLoading(false)
       if (error.response) {
-        console.log(error.response.data.message)
         alert(error.response.data.message)
       } else {
         alert('Não foi possível favoritar o Prato.')

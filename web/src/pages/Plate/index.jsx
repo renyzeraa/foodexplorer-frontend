@@ -61,7 +61,6 @@ export function Plate({}) {
     } catch (error) {
       setLoading(false)
       if (error.response) {
-        console.log(error.response.data.message)
         alert(error.response.data.message)
       } else {
         alert('Erro ao salvar o Prato !')

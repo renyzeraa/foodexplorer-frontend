@@ -37,7 +37,6 @@ export function Payment() {
     } catch (error) {
       setLoading(false)
       if (error.response) {
-        console.log(error.response.data.message)
         alert(error.response.data.message)
       } else {
         alert('Não foi possível encontrar seus pedidos.')
@@ -132,8 +131,7 @@ export function Payment() {
     } catch (error) {
       setLoading(false)
       if (error.response) {
-        console.log(error.response.data.message)
-        alert(error.response.data.message)
+        alert(error.response.data.error)
       } else {
         alert('Não foi possível realizar o pedido, tente novamente.')
       }
@@ -156,6 +154,7 @@ export function Payment() {
       return Accum
     })
     const oFormData = new FormData()
+    oFormData.append('status', 'teste status')
     oFormData.append('details', sDetails)
     oFormData.append('plates', oPlatesToPost)
     return oFormData

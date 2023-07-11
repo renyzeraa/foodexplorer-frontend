@@ -23,7 +23,6 @@ export function Favorites() {
       } catch (error) {
         setLoading(false)
         if (error.response) {
-          console.log(error.response.data.message)
           alert(error.response.data.message)
         } else {
           alert('Não foi possível buscar seus Pratos favoritos.')
@@ -44,7 +43,6 @@ export function Favorites() {
     } catch (error) {
       setLoading(false)
       if (error.response) {
-        console.log(error.response.data.message)
         alert(error.response.data.message)
       } else {
         alert('Não foi possível remover o Prato atual dos favoritos.')
