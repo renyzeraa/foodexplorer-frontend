@@ -6,6 +6,11 @@ export const AuthContext = createContext({})
 function AuthProvider({ children }) {
   const [data, setData] = useState({})
 
+  /**
+    Realiza o login no sistema
+    @param email    {String} 
+    @param password {String} 
+  */
   async function signIn({ email, password }) {
     try {
       const response = await api.post('/sessions', { email, password })

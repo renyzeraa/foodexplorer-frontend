@@ -41,7 +41,10 @@ export function CardDemand({
     sPedido = String(iPedido)
   }
 
-  /** Definir o status do pedido */
+  /**
+   * Definir o status do pedido
+   * @param {Mixed} xValue
+   */
   function handleSelectValue(xValue) {
     setValue(xValue)
   }

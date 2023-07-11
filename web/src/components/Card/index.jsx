@@ -62,6 +62,7 @@ export function Card({
 
   /**
    * Para o admin, o prato poderá ser alterado
+   * * @param {integer} idCard
    */
   function handlePlate(idCard) {
     fnLoading && fnLoading(true)
@@ -91,6 +92,7 @@ export function Card({
   }
   /**
    * Remove o prato dos favoritos
+   * @return {boolean}
    */
   async function removeFavPlate() {
     try {
@@ -127,6 +129,7 @@ export function Card({
 
   /**
    * Ao clicar na imagem leva ate a página de detalhes do prato
+   * @param {integer} idCard
    */
   function handleDetails(idCard) {
     fnLoading && fnLoading(true)

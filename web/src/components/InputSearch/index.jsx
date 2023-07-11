@@ -6,6 +6,10 @@ import { Container } from './style'
  */
 
 export function InputSearch({ icon: Icon, fnChange, ...rest }) {
+  /**
+   * Lidar com as buscas de pratos
+   * @param {event} oEv
+   */
   function handleFnSearch(oEv) {
     fnChange(oEv)
   }

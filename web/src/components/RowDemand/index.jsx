@@ -40,7 +40,10 @@ export function RowDemand({
     sPedido = String(iPedido)
   }
 
-  /** Lidar com o status do pedido atual */
+  /**
+   * Lidar com o status do pedido atual
+   * @param {mixed} xValue
+   */
   function handleSelectValue(xValue) {
     setValue(xValue)
   }

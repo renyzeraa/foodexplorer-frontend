@@ -16,9 +16,11 @@ export function Header({ fnChange, ...rest }) {
   /** Verificar para modificar para admin e user */
   const { signOut, user } = useAuth()
   const admin = user.isAdmin
+
   /** Alterar a quantidade de pedidos no botão */
   const { getProducts } = shoppingCart()
   const iQntDemand = getProducts().length
+
   /**
    * Método para modificar atributos para abrir o menu hamburger mobile
    */
@@ -37,7 +39,10 @@ export function Header({ fnChange, ...rest }) {
       document.getElementById('menu-bar').classList.toggle('change')
   }
 
-  /** Busca os pratos */
+  /**
+   * Busca os pratos
+   * @param {event} oEv
+   */
   function handleFnSearch(oEv) {
     if (typeof fnChange === 'function') {
       fnChange(oEv)
