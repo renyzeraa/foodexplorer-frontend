@@ -13,22 +13,28 @@ import { api } from '../../services/api'
 import { useState } from 'react'
 import { Loading } from '../../components/Loading'
 import { useEffect } from 'react'
+import { InputMask } from '../../components/InputMask'
 
 export function Payment() {
   const [loading, setLoading] = useState(false)
   const [plates, setPlates] = useState([])
   const [platesDb, setPlatesDb] = useState([])
   const [totalValue, setTotalValue] = useState('R$ 0,00')
+
+  const [cardNumber, setCardNumber] = useState('')
+  const [cardValidate, setCardValidate] = useState('')
+  const [codeCard, setCodeCard] = useState('')
+
   const { clearCart, getProducts, removeAllFromId } = shoppingCart()
   const deleteOrder = id => removeAllFromId(id)
   const clearAll = () => clearCart()
   let iTotalPrice = 0
 
   useEffect(() => {
-    handleAllOrders()
+    handleAllPlates()
   }, [])
 
-  async function handleAllOrders() {
+  async function handleAllPlates() {
     try {
       setLoading(true)
       const response = await api.get('/plates')
@@ -120,7 +126,19 @@ export function Payment() {
     setLoading(false)
   }
 
+  function verificaValoresTela() {
+    if (!document.getElementById('credit').classList.contains('active')) {
+      if (!codeCard || !cardNumber || !cardValidate) {
+        return false
+      }
+    }
+    return true
+  }
+
   async function handlePayment() {
+    if (!verificaValoresTela()) {
+      return alert('Favor preencher todos os valores corretamente')
+    }
     const oFormData = getFormDataOrder()
     try {
       setLoading(true)
@@ -139,24 +157,29 @@ export function Payment() {
   }
 
   function getFormDataOrder() {
+    const oFormData = new FormData()
+    // string de detalhes do pedido
     let sDetails = ''
     plates.forEach(item => {
       sDetails += `${item.qtd} x ${item.title}, `
     })
     sDetails = sDetails.slice(0, -2)
-    const oPlatesToPost = platesDb.reduce((Accum, oPlate) => {
-      const oItem = plates.some(plate => {
+    oFormData.append('details', sDetails)
+
+    //pratos do pedido
+    const aPlates = platesDb.filter(oPlate => {
+      return plates.some(plate => {
         return oPlate.id == plate.id
       })
-      if (oItem) {
-        Accum[oPlate.id] = oPlate
-      }
-      return Accum
     })
-    const oFormData = new FormData()
-    oFormData.append('status', 'teste status')
-    oFormData.append('details', sDetails)
+    const oPlatesToPost = aPlates.reduce((Accum, oPlate) => {
+      Accum[oPlate.id] = oPlate
+      return Accum
+    }, {})
     oFormData.append('plates', oPlatesToPost)
+
+    oFormData.append('status', 'teste status')
+    oFormData.append('Content-Type', 'multipart/form-data')
     return oFormData
   }
 
@@ -213,15 +236,27 @@ export function Payment() {
               </div>
               <div className="credit active" id="credit">
                 <label htmlFor="">Número do Cartão</label>
-                <Input type="text" placeholder="0000 0000 0000 0000"></Input>
+                <InputMask
+                  sMask="9999 9999 9999 9999"
+                  placeholder="0000 0000 0000 0000"
+                  onChange={oEv => setCardNumber(oEv.target.value)}
+                ></InputMask>
                 <div className="wrapper">
                   <div className="validate">
                     <label htmlFor="">Validade</label>
-                    <Input type="text" placeholder="04/25"></Input>
+                    <InputMask
+                      sMask="99/99"
+                      placeholder="01/23"
+                      onChange={oEv => setCardValidate(oEv.target.value)}
+                    ></InputMask>
                   </div>
                   <div className="validate">
                     <label htmlFor="">CVC</label>
-                    <Input type="text" placeholder="999"></Input>
+                    <InputMask
+                      sMask="999"
+                      placeholder="999"
+                      onChange={oEv => setCodeCard(oEv.target.value)}
+                    ></InputMask>
                   </div>
                 </div>
               </div>
