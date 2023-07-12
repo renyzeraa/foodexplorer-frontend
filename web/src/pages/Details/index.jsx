@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { shoppingCart } from '../../hooks/shoppingCart'
 
-export function Details({}) {
+export function Details({ }) {
   const params = useParams()
   const { user } = useAuth()
   const admin = user.isAdmin
@@ -45,7 +45,12 @@ export function Details({}) {
         const oResIng = await api.get('/ingredients')
         aIngredientsBd = oResIng.data
         const response = await api.get(`/plates/${params.id}`)
-        handlePlate(response.data)
+
+
+        const plateData = response.data
+        console.log("DADOS DO BACK CHEGANDO um =>", plateData)
+        handlePlate(plateData)
+        console.log("DADOS DO BACK CHEGANDO dois =>", plateData)
         setLoading(false)
       } catch (error) {
         setLoading(false)
