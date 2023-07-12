@@ -3,6 +3,7 @@ import { Container } from './style'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { Input } from '../../components/Input'
+import { InputMask } from '../../components/InputMask'
 import { Ingredient } from '../../components/Ingredient'
 import { TextArea } from '../../components/TextArea'
 import { Link, useNavigate, useParams } from 'react-router-dom'
@@ -90,7 +91,7 @@ export function EditPlate({}) {
     const formData = new FormData()
     formData.append('title', title)
     formData.append('description', description)
-    formData.append('value', value)
+    formData.append('value', value.slice(3).replace(',', '.'))
     formData.append('ingredients', ingredients.join(','))
     formData.append('category_id', String(categories))
     if (typeof picture == 'object') {
@@ -156,22 +157,6 @@ export function EditPlate({}) {
         }
       }
     }
-  }
-
-  const handleInputChange = event => {
-    const { value } = event.target
-
-    // Remove tudo exceto dígitos e ponto decimal
-    const numericValue = value.replace(/[^\d.]/g, '')
-
-    // Formata o valor para o formato de moeda
-    const formattedValue = new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(numericValue)
-
-    // Atualiza o campo de input com o valor formatado
-    event.target.value = formattedValue
   }
 
   return (
@@ -246,11 +231,14 @@ export function EditPlate({}) {
             </div>
             <div className="price">
               <label htmlFor="">Preço</label>
-              <Input
-                type="text"
+
+              <InputMask
+                sMask="R$ 99,99"
+                placeholder="R$ 99,99"
+                maskPlaceholder="0"
                 value={value}
                 onChange={oEv => setValue(oEv.target.value)}
-              />
+              ></InputMask>
             </div>
           </div>
 
