@@ -76,9 +76,10 @@ export function Payment() {
       const imgPlate = oPlate.picture
         ? `${api.defaults.baseURL}files/${oPlate.picture}`
         : ''
-      let value = plateCart.qtd * oPlate.value
+      let plateValue = Number(oPlate.value.replace(/[.,]/g, '.'))
+      let value = plateCart.qtd * plateValue
       iTotalPrice += value
-      value = getFormattedValue(plateCart.qtd * oPlate.value)
+      value = getFormattedValue(plateCart.qtd * plateValue)
       return {
         id: oPlate.id,
         img: imgPlate,

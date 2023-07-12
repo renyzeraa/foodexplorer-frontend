@@ -68,6 +68,8 @@ export function Details({}) {
     const [oPlateCart] = copyShoppingCart.filter(
       oPlateCart => oPlate.id == oPlateCart.id
     )
+    setInitialValue(oPlate.value)
+    handleValuePlate(0)
     if (oPlateCart && oPlateCart.id) {
       let amount
       if (oPlateCart.qtd > 0) {
@@ -79,15 +81,10 @@ export function Details({}) {
         }
       }
       setCountPlate(String(amount))
+      handleValuePlate(oPlateCart.qtd, oPlate.value)
     }
-    setInitialValue(oPlate.value)
     setCardId(oPlate.id)
     setTitle(oPlate.title)
-    if (parseInt(countPlate) > 1) {
-      setValuePlate(formatValuePlate(oPlate.value))
-    } else {
-      setValuePlate(formatValuePlate(0))
-    }
     const aIngredients = JSON.parse(oPlate.ingredients)
     if (!ingredients.length && aIngredientsBd.length) {
       for (let item of aIngredients) {
@@ -119,8 +116,10 @@ export function Details({}) {
     setLoading(false)
   }
 
-  function handleValuePlate(iQnt) {
-    let number = initialValue * iQnt
+  function handleValuePlate(iQnt, iInitialValue = 0) {
+    iQnt = iQnt == 0 ? 1 : iQnt
+    const newValue = iInitialValue == 0 ? initialValue : iInitialValue
+    let number = Number(newValue.replace(/[.,]/g, '.')) * iQnt
     let formattedValue = formatValuePlate(number)
     setValuePlate(formattedValue)
   }
