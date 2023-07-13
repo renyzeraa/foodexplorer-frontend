@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { api } from '../services/api'
+import { getReactToastify, oTiposToastify } from '../methods/toastify'
 
 export const AuthContext = createContext({})
 
@@ -23,11 +24,10 @@ function AuthProvider({ children }) {
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`
       setData({ user, token })
     } catch (error) {
-      if (error.response) {
-        alert(error.response.data.message)
-      } else {
-        alert('Não foi possível realizar o login no sistema.')
-      }
+      getReactToastify(
+        oTiposToastify.TIPO_ERROR,
+        'Não foi possível realizar o login no sistema.'
+      )
     }
   }
 

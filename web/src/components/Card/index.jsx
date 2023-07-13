@@ -14,6 +14,7 @@ import {
 import { TbPencil } from 'react-icons/tb'
 /** components */
 import { Button } from '../Button'
+import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
 export function Card({
   CardId,
@@ -53,6 +54,7 @@ export function Card({
     }
     String(amount)
   }
+
   /**
    * Constantes do Card
    */
@@ -69,6 +71,7 @@ export function Card({
     navigate(`/plates/${idCard}`)
     fnLoading && fnLoading(false)
   }
+
   /**
    * Adiciona o prato aos favoritos do usuário
    */
@@ -77,18 +80,21 @@ export function Card({
       fnLoading && fnLoading(true)
       await api.post(`/favorites/favorite_plates/${CardId}`)
       fnLoading && fnLoading(false)
-      alert('Prato favoritado com sucesso!')
+      getReactToastify(
+        oTiposToastify.TIPO_SUCCESS,
+        'Prato favoritado com sucesso!'
+      )
     } catch (error) {
       fnLoading && fnLoading(false)
-      if (error.response) {
-        alert(error.response.data.message)
-      } else {
-        alert('Não foi possível favoritar o Prato.')
-      }
+      getReactToastify(
+        oTiposToastify.TIPO_ERROR,
+        'Não foi possível favoritar o Prato.'
+      )
       return false
     }
     return true
   }
+
   /**
    * Remove o prato dos favoritos
    * @return {boolean}
@@ -98,18 +104,21 @@ export function Card({
       fnLoading && fnLoading(true)
       await api.delete(`/favorites/favorite_plates/${CardId}`)
       fnLoading && fnLoading(false)
-      alert('Prato removido dos favoritos com sucesso!')
+      getReactToastify(
+        oTiposToastify.TIPO_SUCCESS,
+        'Prato removido dos favoritos com sucesso!'
+      )
     } catch (error) {
       fnLoading && fnLoading(false)
-      if (error.response) {
-        alert(error.response.data.message)
-      } else {
-        alert('Não foi possível remover o prato.')
-      }
+      getReactToastify(
+        oTiposToastify.TIPO_ERROR,
+        'Não foi possível remover o prato.'
+      )
       return false
     }
     return true
   }
+
   /**
    * Altera o prato como favoritado ou não
    */
@@ -135,6 +144,7 @@ export function Card({
     navigate(`/details/${idCard}`)
     fnLoading && fnLoading(false)
   }
+
   /**
    * Diminui a quantidade de prato
    */
@@ -153,6 +163,7 @@ export function Card({
       setCountPlate('01')
     }
   }
+
   /**
    * Aumenta a quantidade de prato
    */
@@ -176,12 +187,14 @@ export function Card({
   function handlePlateToCart() {
     const iAmountPlate = parseInt(countPlate)
     if (!iAmountPlate) {
-      return alert(
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
         'Indique a quantidade de pratos que você deseja incluir ao carrinho.'
       )
     }
     addPlateToCart(CardId, iAmountPlate)
   }
+
   /**
    * O Componente Card
    */

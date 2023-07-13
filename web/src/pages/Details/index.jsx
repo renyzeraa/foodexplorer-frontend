@@ -9,6 +9,7 @@ import { useAuth } from '../../hooks/auth'
 import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { shoppingCart } from '../../hooks/shoppingCart'
+import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
 export function Details({}) {
   const params = useParams()
@@ -49,13 +50,11 @@ export function Details({}) {
         setLoading(false)
       } catch (error) {
         setLoading(false)
-        if (error.response) {
-          alert(error.response.data.message)
-        } else {
-          alert(
-            'Opsss, algo deu de errado e não foi possível carregar os detalhes do Prato.'
-          )
-        }
+
+        getReactToastify(
+          oTiposToastify.TIPO_ERROR,
+          'Opsss, algo deu de errado e não foi possível carregar os detalhes do Prato.'
+        )
       }
     }
     fetchPlate()
@@ -171,7 +170,8 @@ export function Details({}) {
   function handlePlateToCart() {
     const iAmountPlate = parseInt(countPlate)
     if (!iAmountPlate) {
-      return alert(
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
         'Indique a quantidade de pratos que você deseja incluir ao carrinho.'
       )
     }

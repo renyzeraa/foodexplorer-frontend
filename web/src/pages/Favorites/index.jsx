@@ -8,6 +8,7 @@ import { api } from '../../services/api'
 import { useEffect, useState } from 'react'
 import { Loading } from '../../components/Loading'
 import { MdDoNotDisturbAlt } from 'react-icons/md'
+import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
 export function Favorites() {
   const [loading, setLoading] = useState(false)
@@ -22,11 +23,10 @@ export function Favorites() {
         setLoading(false)
       } catch (error) {
         setLoading(false)
-        if (error.response) {
-          alert(error.response.data.message)
-        } else {
-          alert('Não foi possível buscar seus Pratos favoritos.')
-        }
+        getReactToastify(
+          oTiposToastify.TIPO_ERROR,
+          'Não foi possível buscar seus Pratos favoritos.'
+        )
       }
     }
     searchPlatesFav()
@@ -39,15 +39,16 @@ export function Favorites() {
       const response = await api.get('/favorites/favorite_plates/')
       setPlatesFav(response.data)
       setLoading(false)
-      alert('Prato removido dos favoritos com sucesso!')
+      getReactToastify(
+        oTiposToastify.TIPO_SUCCESS,
+        'Prato removido dos favoritos com sucesso!'
+      )
     } catch (error) {
       setLoading(false)
-      if (error.response) {
-        alert(error.response.data.message)
-      } else {
-        alert('Não foi possível remover o Prato atual dos favoritos.')
-      }
-      alert(error.message)
+      getReactToastify(
+        oTiposToastify.TIPO_ERROR,
+        'Não foi possível remover o Prato atual dos favoritos.'
+      )
     }
   }
 

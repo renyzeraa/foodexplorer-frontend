@@ -16,6 +16,7 @@ SwiperCore.use([Navigation, Pagination])
 import { api } from '../../services/api'
 import { Loading } from '../../components/Loading'
 import { shoppingCart } from '../../hooks/shoppingCart'
+import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
 export function Home() {
   const { user } = useAuth()
@@ -45,11 +46,10 @@ export function Home() {
         setLoading(false)
       } catch (error) {
         setLoading(false)
-        if (error.response) {
-          alert(error.response.data.message)
-        } else {
-          alert('Não foi possível buscar os Pratos corretamente.')
-        }
+        getReactToastify(
+          oTiposToastify.TIPO_ERROR,
+          'Não foi possível buscar os Pratos corretamente.'
+        )
       }
     }
     searchPlate()

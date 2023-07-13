@@ -10,6 +10,7 @@ import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
 import { Button } from '../../components/Button'
+import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
 export function Plate({}) {
   const navigate = useNavigate()
@@ -28,19 +29,34 @@ export function Plate({}) {
     e.preventDefault()
 
     if (!title) {
-      return alert('É necessário inserir um nome ao Prato!')
+      return getReactToastify(
+        oTiposToastify.TIPO_ERROR,
+        'É necessário inserir um nome ao Prato!'
+      )
     }
     if (newIngredients) {
-      return alert('Possui um ingrediente não inserido!')
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
+        'Possui um ingrediente não inserido!'
+      )
     }
     if (!ingredients.length) {
-      return alert('É necessário inserir pelo menos um ingrediente ao Prato!')
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
+        'É necessário inserir pelo menos um ingrediente ao Prato!'
+      )
     }
     if (!value) {
-      return alert('É valor do Prato é obrigatório!')
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
+        'É valor do Prato é obrigatório!'
+      )
     }
     if (!description) {
-      return alert('É obrigatório ter uma descrição do Prato!')
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
+        'É obrigatório ter uma descrição do Prato!'
+      )
     }
 
     const oFormData = new FormData()
@@ -57,14 +73,13 @@ export function Plate({}) {
       await api.post('/plates', oFormData)
       navigate('/')
       setLoading(false)
-      alert('Prato criado com sucesso !')
+      getReactToastify(
+        oTiposToastify.TIPO_SUCCESS,
+        'Prato criado com sucesso !'
+      )
     } catch (error) {
       setLoading(false)
-      if (error.response) {
-        alert(error.response.data.message)
-      } else {
-        alert('Erro ao salvar o Prato !')
-      }
+      getReactToastify(oTiposToastify.TIPO_ERROR, 'Erro ao salvar o Prato !')
     }
   }
 

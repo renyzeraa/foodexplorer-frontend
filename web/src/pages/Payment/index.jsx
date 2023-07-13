@@ -14,6 +14,7 @@ import { Loading } from '../../components/Loading'
 import { useEffect } from 'react'
 import { InputMask } from '../../components/InputMask'
 import { useAuth } from '../../hooks/auth'
+import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
 export function Payment() {
   /** Verificar para modificar para admin e user */
@@ -46,11 +47,10 @@ export function Payment() {
       setLoading(false)
     } catch (error) {
       setLoading(false)
-      if (error.response) {
-        alert(error.response.data.message)
-      } else {
-        alert('Não foi possível encontrar seus pedidos.')
-      }
+      getReactToastify(
+        oTiposToastify.TIPO_ERROR,
+        'Não foi possível encontrar seus pedidos.'
+      )
     }
   }
 
@@ -173,7 +173,10 @@ export function Payment() {
 
   async function handlePayment() {
     if (!verificaValoresTela()) {
-      return alert('Favor preencher todos os valores corretamente')
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
+        'Favor preencher todos os valores corretamente'
+      )
     }
     const oFormData = getFormDataOrder()
     try {
@@ -184,11 +187,10 @@ export function Payment() {
       setLoading(false)
     } catch (error) {
       setLoading(false)
-      if (error.response) {
-        alert(error.response.data.error)
-      } else {
-        alert('Não foi possível realizar o pedido, tente novamente.')
-      }
+      getReactToastify(
+        oTiposToastify.TIPO_ERROR,
+        'Não foi possível realizar o pedido, tente novamente.'
+      )
     }
   }
 

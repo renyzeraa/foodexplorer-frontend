@@ -11,6 +11,7 @@ import { AiOutlineLeft, AiOutlineUpload } from 'react-icons/ai'
 import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
 import { Button } from '../../components/Button'
+import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
 export function EditPlate({}) {
   const params = useParams()
@@ -59,11 +60,10 @@ export function EditPlate({}) {
         bIsActualized = true
       } catch (error) {
         setLoading(false)
-        if (error.response) {
-          alert(error.response.data.message)
-        } else {
-          alert('Não foi possível atualizar o Prato atual !')
-        }
+        getReactToastify(
+          oTiposToastify.TIPO_ERROR,
+          'Não foi possível atualizar o Prato atual !'
+        )
       }
     }
     fetchPlate()
@@ -73,19 +73,34 @@ export function EditPlate({}) {
     e.preventDefault()
 
     if (!title) {
-      return alert('É necessário inserir um nome ao Prato!')
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
+        'É necessário inserir um nome ao Prato!'
+      )
     }
     if (newIngredients) {
-      return alert('Possui um ingrediente não inserido!')
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
+        'Possui um ingrediente não inserido!'
+      )
     }
     if (!ingredients.length) {
-      return alert('É necessário inserir pelo menos um ingrediente ao Prato!')
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
+        'É necessário inserir pelo menos um ingrediente ao Prato!'
+      )
     }
     if (!value) {
-      return alert('É valor do Prato é obrigatório!')
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
+        'É valor do Prato é obrigatório!'
+      )
     }
     if (!description) {
-      return alert('É obrigatório ter uma descrição do Prato!')
+      return getReactToastify(
+        oTiposToastify.TIPO_ALERT,
+        'É obrigatório ter uma descrição do Prato!'
+      )
     }
 
     const formData = new FormData()
@@ -97,21 +112,23 @@ export function EditPlate({}) {
     if (typeof picture == 'object') {
       formData.append('picture', picture)
     }
-    oFormData.append('Content-Type', 'application/json')
+    formData.append('Content-Type', 'application/json')
 
     try {
       setLoading(true)
       await api.put(`/plates/${params.id}`, formData)
       navigate('/')
       setLoading(false)
-      alert('Prato atualizado com sucesso!')
+      getReactToastify(
+        oTiposToastify.TIPO_SUCCESS,
+        'Prato atualizado com sucesso!'
+      )
     } catch (error) {
       setLoading(false)
-      if (error.response) {
-        alert(error.response.data.message)
-      } else {
-        alert('Erro ao enviar ao atualizar Prato1')
-      }
+      getReactToastify(
+        oTiposToastify.TIPO_ERROR,
+        'Erro ao enviar ao atualizar Prato!'
+      )
     }
   }
 
@@ -145,16 +162,18 @@ export function EditPlate({}) {
       try {
         setLoading(true)
         await api.delete(`/plates/${params.id}`)
-        alert('Prato excluído com sucesso !')
+        getReactToastify(
+          oTiposToastify.TIPO_SUCCESS,
+          'Prato excluído com sucesso !'
+        )
         navigate('/')
         setLoading(false)
       } catch (error) {
         setLoading(false)
-        if (error.response) {
-          alert(error.response.data.message)
-        } else {
-          alert('Não foi possível excluir o Prato.')
-        }
+        getReactToastify(
+          oTiposToastify.TIPO_ERROR,
+          'Não foi possível excluir o Prato.'
+        )
       }
     }
   }
