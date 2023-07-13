@@ -37,8 +37,10 @@ export function Payment() {
   async function handleAllPlates() {
     try {
       setLoading(true)
-      const response = await api.get('/orders')
-      handlePlates(response.data)
+      console.log("HandlePlates chegandoo")
+      const response = await api.get(`/orders/card/32`)  // Dá um confere aqui, chegando os pratos tudo certo no console, só não sei renderizar na tela
+      console.log("Response =>>", response.data.plates)
+      handlePlates(response.data.plates)
       setLoading(false)
     } catch (error) {
       setLoading(false)
