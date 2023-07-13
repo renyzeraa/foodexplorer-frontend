@@ -2,7 +2,6 @@ import { Container } from './style'
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
 import { ItemCart } from '../../components/ItemCart'
-import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'
 import { TiThLargeOutline } from 'react-icons/ti'
 import { BsCreditCard2Back } from 'react-icons/bs'
@@ -14,8 +13,13 @@ import { useState } from 'react'
 import { Loading } from '../../components/Loading'
 import { useEffect } from 'react'
 import { InputMask } from '../../components/InputMask'
+import { useAuth } from '../../hooks/auth'
 
 export function Payment() {
+  /** Verificar para modificar para admin e user */
+  const { user } = useAuth()
+  const [userId, setUserId] = useState(user.id)
+
   const [loading, setLoading] = useState(false)
   const [plates, setPlates] = useState([])
   const [platesDb, setPlatesDb] = useState([])
@@ -37,11 +41,9 @@ export function Payment() {
   async function handleAllPlates() {
     try {
       setLoading(true)
-      console.log("HandlePlates chegandoo")
-      const response = await api.get(`/shopping/32`)  // Dá um confere aqui, chegando os pratos tudo certo no console, só não sei renderizar na tela
-      // pedidos só podem ser acessados pelo usuario criado, usuario de teste foi, email = ana1@pix.com ; senha = anadopix
-      console.log("Response =>>", response.data)
       handlePlates(response.data.plates)
+      const response = await api.get('/plates')
+      handlePlates(response.data)
       setLoading(false)
     } catch (error) {
       setLoading(false)
@@ -79,7 +81,7 @@ export function Payment() {
       const imgPlate = oPlate.picture
         ? `${api.defaults.baseURL}files/${oPlate.picture}`
         : ''
-      let plateValue = Number(oPlate.value.replace(/[.,]/g, '.'))
+      let plateValue = Number(String(oPlate.value).replace(/[.,]/g, '.'))
       let value = plateCart.qtd * plateValue
       iTotalPrice += value
       value = getFormattedValue(plateCart.qtd * plateValue)
