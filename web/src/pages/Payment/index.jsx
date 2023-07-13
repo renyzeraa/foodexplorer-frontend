@@ -39,6 +39,7 @@ export function Payment() {
       setLoading(true)
       console.log("HandlePlates chegandoo")
       const response = await api.get(`/shopping/32`)  // Dá um confere aqui, chegando os pratos tudo certo no console, só não sei renderizar na tela
+      // pedidos só podem ser acessados pelo usuario criado, usuario de teste foi, email = ana1@pix.com ; senha = anadopix
       console.log("Response =>>", response.data)
       handlePlates(response.data.plates)
       setLoading(false)
