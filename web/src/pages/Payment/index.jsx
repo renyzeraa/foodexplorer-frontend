@@ -41,7 +41,6 @@ export function Payment() {
   async function handleAllPlates() {
     try {
       setLoading(true)
-      handlePlates(response.data.plates)
       const response = await api.get('/plates')
       handlePlates(response.data)
       setLoading(false)
