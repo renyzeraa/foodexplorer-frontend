@@ -50,7 +50,7 @@ export function Plate({}) {
     oFormData.append('ingredients', ingredients.join(','))
     oFormData.append('categories', String(categories))
     oFormData.append('picture', picture)
-    oFormData.append('Content-Type', 'multipart/form-data')
+    oFormData.append('Content-Type', 'application/json')
 
     try {
       setLoading(true)
