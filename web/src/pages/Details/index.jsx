@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react'
 import { api } from '../../services/api'
 import { shoppingCart } from '../../hooks/shoppingCart'
 
-export function Details({ }) {
+export function Details({}) {
   const params = useParams()
   const { user } = useAuth()
   const admin = user.isAdmin
@@ -45,12 +45,7 @@ export function Details({ }) {
         const oResIng = await api.get('/ingredients')
         aIngredientsBd = oResIng.data
         const response = await api.get(`/plates/${params.id}`)
-
-
-        const plateData = response.data
-        console.log("DADOS DO BACK CHEGANDO um =>", plateData)
-        handlePlate(plateData)
-        console.log("DADOS DO BACK CHEGANDO dois =>", plateData)
+        handlePlate(response.data)
         setLoading(false)
       } catch (error) {
         setLoading(false)
@@ -74,7 +69,7 @@ export function Details({ }) {
       oPlateCart => oPlate.id == oPlateCart.id
     )
     setInitialValue(oPlate.value)
-    handleValuePlate(0)
+    handleValuePlate(0, oPlate.value)
     if (oPlateCart && oPlateCart.id) {
       let amount
       if (oPlateCart.qtd > 0) {
@@ -123,9 +118,12 @@ export function Details({ }) {
 
   function handleValuePlate(iQnt, iInitialValue = 0) {
     iQnt = iQnt == 0 ? 1 : iQnt
-    const newValue = iInitialValue == 0 ? initialValue : iInitialValue
-    let number = Number(newValue.replace(/[.,]/g, '.')) * iQnt
-    let formattedValue = formatValuePlate(number)
+    let newValue = iInitialValue == 0 ? initialValue : iInitialValue
+    let formattedValue = 'R$ 00,00'
+    if (newValue) {
+      let number = Number(String(newValue).replace(/[.,]/g, '.')) * iQnt
+      formattedValue = formatValuePlate(number)
+    }
     setValuePlate(formattedValue)
   }
 
