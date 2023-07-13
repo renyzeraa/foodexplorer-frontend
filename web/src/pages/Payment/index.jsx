@@ -140,6 +140,37 @@ export function Payment() {
     return true
   }
 
+  function getFormDataOrder() {
+    // const oFormData = new FormData()
+    // string de detalhes do pedido
+    let sDetails = ''
+    plates.forEach(item => {
+      sDetails += `${item.qtd} x ${item.title}, `
+    })
+    sDetails = sDetails.slice(0, -2)
+    // oFormData.append('details', sDetails)
+    //pratos do pedido
+    const aPlates = platesDb.filter(oPlate => {
+      return plates.some(plate => {
+        return oPlate.id == plate.id
+      })
+    })
+    const oPlatesToPost = aPlates.reduce((Accum, oPlate) => {
+      Accum[oPlate.id] = oPlate
+      return Accum
+    }, {})
+    // oFormData.append('plates', oPlatesToPost)
+    // oFormData.append('user_id', String(userId))
+    // oFormData.append('Content-Type', 'application/json')
+    // return oFormData
+    return JSON.stringify({
+      status: 'success',
+      details: sDetails,
+      plates: oPlatesToPost,
+      user_id: userId
+    })
+  }
+
   async function handlePayment() {
     if (!verificaValoresTela()) {
       return alert('Favor preencher todos os valores corretamente')
@@ -159,33 +190,6 @@ export function Payment() {
         alert('Não foi possível realizar o pedido, tente novamente.')
       }
     }
-  }
-
-  function getFormDataOrder() {
-    const oFormData = new FormData()
-    // string de detalhes do pedido
-    let sDetails = ''
-    plates.forEach(item => {
-      sDetails += `${item.qtd} x ${item.title}, `
-    })
-    sDetails = sDetails.slice(0, -2)
-    oFormData.append('details', sDetails)
-
-    //pratos do pedido
-    const aPlates = platesDb.filter(oPlate => {
-      return plates.some(plate => {
-        return oPlate.id == plate.id
-      })
-    })
-    const oPlatesToPost = aPlates.reduce((Accum, oPlate) => {
-      Accum[oPlate.id] = oPlate
-      return Accum
-    }, {})
-    oFormData.append('plates', oPlatesToPost)
-
-    oFormData.append('status', 'teste status')
-    oFormData.append('Content-Type', 'multipart/form-data')
-    return oFormData
   }
 
   return (
