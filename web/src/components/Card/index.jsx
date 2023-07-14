@@ -46,9 +46,11 @@ export function Card({
 
   /** Formatting Value*/
   let number = price
-  if (typeof price != 'number') {
-    const numberString = number.slice(3)
-    number = Number(numberString.replace(/[.,]/g, '.'))
+  if (typeof number != 'number') {
+    if (number.includes('R$')) {
+      number = number.slice(3)
+    }
+    number = Number(number.replace(/[.,]/g, '.'))
   }
   const formattedValue = number.toLocaleString('pt-BR', {
     style: 'currency',
