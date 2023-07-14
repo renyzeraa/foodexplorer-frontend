@@ -6,7 +6,7 @@ export function RowDemand({
   iPedido = 0,
   iStatus = 0,
   sTimeStamp = '',
-  sDemand = '',
+  sDetails = '',
   ...rest
 }) {
   /** Definir para admin ou user normal*/
@@ -68,7 +68,7 @@ export function RowDemand({
         )}
       </td>
       <td>{sPedido}</td>
-      <td>{sDemand}</td>
+      <td>{sDetails}</td>
       <td>{sTimeStamp}</td>
     </Row>
   )

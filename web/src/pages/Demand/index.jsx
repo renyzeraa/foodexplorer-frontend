@@ -43,7 +43,7 @@ export function Demand() {
               iPedido={order.code}
               iStatus={order.status}
               sTimeStamp={order.created_at}
-              sDemand={order.details}
+              sDetails={order.details}
             />
           ))}
         </div>
@@ -65,7 +65,7 @@ export function Demand() {
                   iPedido={order.code}
                   iStatus={order.status}
                   sTimeStamp={order.created_at}
-                  sDemand={order.details}
+                  sDetails={order.details}
                 />
               ))}
             </tbody>

@@ -6,7 +6,7 @@ export function CardDemand({
   iPedido = 0,
   iStatus = 0,
   sTimeStamp = '',
-  sDemand = '',
+  sDetails = '',
   ...rest
 }) {
   /** Definir para admin */
@@ -60,7 +60,7 @@ export function CardDemand({
         )}
         <span>{sTimeStamp}</span>
       </header>
-      <span className={admin ? 'demand-text' : ''}>{sDemand}</span>
+      <span className={admin ? 'demand-text' : ''}>{sDetails}</span>
       {admin && (
         <select
           className="status-demand"
