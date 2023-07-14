@@ -13,14 +13,9 @@ import { useState } from 'react'
 import { Loading } from '../../components/Loading'
 import { useEffect } from 'react'
 import { InputMask } from '../../components/InputMask'
-import { useAuth } from '../../hooks/auth'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
 export function Payment() {
-  /** Verificar para modificar para admin e user */
-  const { user } = useAuth()
-  const [userId, setUserId] = useState(user.id)
-
   const [loading, setLoading] = useState(false)
   const [plates, setPlates] = useState([])
   const [platesDb, setPlatesDb] = useState([])
@@ -141,34 +136,32 @@ export function Payment() {
   }
 
   function getFormDataOrder() {
-    // const oFormData = new FormData()
+    const oFormData = new FormData()
     // string de detalhes do pedido
     let sDetails = ''
     plates.forEach(item => {
       sDetails += `${item.qtd} x ${item.title}, `
     })
     sDetails = sDetails.slice(0, -2)
-    // oFormData.append('details', sDetails)
+    oFormData.append('details', sDetails)
     //pratos do pedido
-    const aPlates = platesDb.filter(oPlate => {
-      return plates.some(plate => {
-        return oPlate.id == plate.id
-      })
-    })
-    const oPlatesToPost = aPlates.reduce((Accum, oPlate) => {
-      Accum[oPlate.id] = oPlate
-      return Accum
-    }, {})
-    // oFormData.append('plates', oPlatesToPost)
-    // oFormData.append('user_id', String(userId))
-    // oFormData.append('Content-Type', 'application/json')
-    // return oFormData
-    return JSON.stringify({
-      status: 'success',
-      details: sDetails,
-      plates: oPlatesToPost,
-      user_id: userId
-    })
+    // const aPlates = platesDb.filter(oPlate => {
+    //   return plates.some(plate => {
+    //     return oPlate.id == plate.id
+    //   })
+    // })
+    // const oPlatesToPost = aPlates.reduce((Accum, oPlate) => {
+    //   Accum[oPlate.id] = oPlate
+    //   return Accum
+    // }, {})
+    oFormData.append('plates', [1, 2, 3])
+    oFormData.append('Content-Type', 'application/json')
+    return oFormData
+    // return JSON.stringify({
+    //   details: sDetails,
+    //   plates: [1, 2, 3],
+    //   user_id: userId
+    // })
   }
 
   async function handlePayment() {
@@ -249,24 +242,24 @@ export function Payment() {
                 <label htmlFor="">Número do Cartão</label>
                 <InputMask
                   sMask="9999 9999 9999 9999"
-                  placeholder="0000 0000 0000 0000"
-                  onChange={oEv => setCardNumber(oEv.target.value)}
+                  placeHolder="0000 0000 0000 0000"
+                  fnOnChange={setCardNumber}
                 ></InputMask>
                 <div className="wrapper">
                   <div className="validate">
                     <label htmlFor="">Validade</label>
                     <InputMask
                       sMask="99/99"
-                      placeholder="01/23"
-                      onChange={oEv => setCardValidate(oEv.target.value)}
+                      placeHolder="01/23"
+                      fnOnChange={setCardValidate}
                     ></InputMask>
                   </div>
                   <div className="validate">
                     <label htmlFor="">CVC</label>
                     <InputMask
                       sMask="999"
-                      placeholder="999"
-                      onChange={oEv => setCodeCard(oEv.target.value)}
+                      placeHolder="999"
+                      fnOnChange={setCodeCard}
                     ></InputMask>
                   </div>
                 </div>

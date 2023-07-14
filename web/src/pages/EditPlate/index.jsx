@@ -36,7 +36,16 @@ export function EditPlate({}) {
     }
     setTitle(plate.title)
     setCategories(plate.category_id)
-    setValue(plate.value)
+    let xValue = plate.value
+    if (typeof xValue == 'string') {
+      if (!xValue.includes('R$')) {
+        if (parseInt(xValue) < 10) {
+          xValue = `0${xValue}`
+        }
+        xValue = `R$ ${xValue}`
+      }
+    }
+    setValue(xValue)
     if (!ingredients.length) {
       const aIngredients = JSON.parse(plate.ingredients)
       for (let item of aIngredients) {
@@ -102,11 +111,14 @@ export function EditPlate({}) {
         'É obrigatório ter uma descrição do Prato!'
       )
     }
-
     const formData = new FormData()
     formData.append('title', title)
     formData.append('description', description)
-    formData.append('value', value.slice(3).replace(',', '.'))
+    let iValue = value
+    if (typeof iValue == 'string') {
+      iValue = Number(iValue.slice(3).replace(',', '.'))
+    }
+    formData.append('value', value)
     formData.append('ingredients', ingredients.join(','))
     formData.append('category_id', String(categories))
     if (typeof picture == 'object') {
@@ -250,13 +262,12 @@ export function EditPlate({}) {
             </div>
             <div className="price">
               <label htmlFor="">Preço</label>
-
               <InputMask
                 sMask="R$ 99,99"
-                placeholder="R$ 99,99"
+                placeHolder="R$ 99,99"
                 maskPlaceholder="0"
                 value={value}
-                onChange={oEv => setValue(oEv.target.value)}
+                fnOnChange={setValue}
               ></InputMask>
             </div>
           </div>

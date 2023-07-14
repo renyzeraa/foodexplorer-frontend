@@ -259,6 +259,7 @@ export function Home() {
                         title={plate.title}
                         description={plate.description}
                         price={plate.value}
+                        img={plate.picture}
                         isAdmin={admin}
                         fnLoading={loadingCard}
                         isFavorite={plate.favorite}

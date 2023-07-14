@@ -29,6 +29,14 @@ export function Card({
   isFavorite = false,
   ...rest
 }) {
+  /**
+   * Constantes do Card
+   */
+  const [countPlate, setCountPlate] = useState(amount || '00')
+  const [favorite, setFavorite] = useState(isFavorite)
+  const [priceCard, setPriceCard] = useState('R$ 0,00')
+  const navigate = useNavigate()
+
   /** Functions shoppingCart */
   const { removeProductToCart, addProductToCart, plusProductCart } =
     shoppingCart()
@@ -37,9 +45,12 @@ export function Card({
   const plusThePlate = (id, iQnt) => plusProductCart(id, iQnt)
 
   /** Formatting Value*/
-  let numberString = String(price)
-  let number = Number(numberString.replace(/[.,]/g, '.'))
-  let formattedValue = number.toLocaleString('pt-BR', {
+  let number = price
+  if (typeof price != 'number') {
+    const numberString = number.slice(3)
+    number = Number(numberString.replace(/[.,]/g, '.'))
+  }
+  const formattedValue = number.toLocaleString('pt-BR', {
     style: 'currency',
     currency: 'BRL'
   })
@@ -52,15 +63,8 @@ export function Card({
     } else if (amount > 98) {
       amount = '99'
     }
-    String(amount)
+    setCountPlate(String(amount))
   }
-
-  /**
-   * Constantes do Card
-   */
-  const [countPlate, setCountPlate] = useState(amount || '00')
-  const [favorite, setFavorite] = useState(isFavorite)
-  const navigate = useNavigate()
 
   /**
    * Para o admin, o prato poderá ser alterado

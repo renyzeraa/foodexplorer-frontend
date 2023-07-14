@@ -11,6 +11,7 @@ import { Loading } from '../../components/Loading'
 import { api } from '../../services/api'
 import { Button } from '../../components/Button'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
+import { InputMask } from '../../components/InputMask'
 
 export function Plate({}) {
   const navigate = useNavigate()
@@ -62,7 +63,11 @@ export function Plate({}) {
     const oFormData = new FormData()
     oFormData.append('title', title)
     oFormData.append('description', description)
-    oFormData.append('value', value)
+    let iValue = value
+    if (typeof iValue == 'string') {
+      iValue = Number(iValue.slice(3).replace(',', '.'))
+    }
+    oFormData.append('value', iValue)
     oFormData.append('ingredients', ingredients.join(','))
     oFormData.append('categories', String(categories))
     oFormData.append('picture', picture)
@@ -179,12 +184,13 @@ export function Plate({}) {
             </div>
             <div className="price">
               <label htmlFor="">Preço</label>
-              <Input
-                className="price"
-                type="text"
-                placeholder="R$ 00.00"
-                onChange={oEv => setValue(oEv.target.value)}
-              />
+              <InputMask
+                sMask="R$ 99,99"
+                placeHolder="R$ 99,99"
+                maskPlaceholder="0"
+                value={value}
+                fnOnChange={setValue}
+              ></InputMask>
             </div>
           </div>
 

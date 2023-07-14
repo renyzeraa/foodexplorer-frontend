@@ -212,7 +212,7 @@ export const Container = styled.main`
         }
         .name-category {
           margin-top: 0;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 3fr 1fr;
           gap: 8px 32px;
           :nth-child(2) {
             grid-area: 2;
