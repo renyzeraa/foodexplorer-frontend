@@ -76,6 +76,10 @@ export const Container = styled.main`
             border-right: none;
           }
 
+          thead tr td:first-child {
+            width: 130px;
+          }
+
           tbody td {
             text-align: left;
             padding: 12px;
@@ -86,6 +90,10 @@ export const Container = styled.main`
               ${({ theme }) => theme.COLORS.BACKGROUND_700};
             border-bottom: 2px solid
               ${({ theme }) => theme.COLORS.BACKGROUND_700};
+          }
+
+          tbody td:first-child {
+            width: 130px;
           }
 
           tbody td:last-child {
