@@ -5,8 +5,26 @@ import { AiOutlineLeft } from 'react-icons/ai'
 import { Link } from 'react-router-dom'
 import { CardDemand } from '../../components/CardDemand'
 import { RowDemand } from '../../components/RowDemand'
+import { useState, useEffect } from 'react'
+import { api } from '../../services/api'
+import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
 export function Demand() {
+  const [orders, setOrders] = useState([])
+
+  useEffect(() => {
+    fetchOrders()
+  }, [])
+
+  async function fetchOrders() {
+    try {
+      const response = await api.get(`/orders`)
+      setOrders(response.data)
+    } catch (error) {
+      getReactToastify(oTiposToastify.TIPO_ERROR, 'Erro ao buscar os pedidos.')
+    }
+  }
+
   return (
     <Container>
       <Header />
@@ -19,14 +37,15 @@ export function Demand() {
         </div>
         {/* /** mobile */}
         <div className="cards-wrapper">
-          <CardDemand
-            iPedido={99}
-            iStatus={0}
-            sTimeStamp={'22/07 às 8h00'}
-            sDemand={
-              '1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá'
-            }
-          />
+          {orders.map(order => (
+            <CardDemand
+              key={order.id}
+              iPedido={order.code}
+              iStatus={order.status}
+              sTimeStamp={order.created_at}
+              sDemand={order.details}
+            />
+          ))}
         </div>
         {/* /** desktop */}
         <div className="table-wrapper">
@@ -40,14 +59,15 @@ export function Demand() {
               </tr>
             </thead>
             <tbody>
-              <RowDemand
-                iPedido={3}
-                iStatus={0}
-                sTimeStamp={'12/09 às 12h00'}
-                sDemand={
-                  '1 x Salada Radish, 1 x Torradas de Parma, 1 x Chá de Canela, 1 x Suco de Maracujá'
-                }
-              />
+              {orders.map(order => (
+                <RowDemand
+                  key={order.id}
+                  iPedido={order.code}
+                  iStatus={order.status}
+                  sTimeStamp={order.created_at}
+                  sDemand={order.details}
+                />
+              ))}
             </tbody>
           </table>
         </div>
