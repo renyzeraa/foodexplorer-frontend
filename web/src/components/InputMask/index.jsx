@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import { Container } from './style'
 import InputWithMask from 'react-input-mask'
 
@@ -8,13 +9,18 @@ export function InputMask({
   fnOnChange = false,
   ...rest
 }) {
-  const handleChange = oEv => {
-    fnOnChange && fnOnChange(oEv.target.value)
+  const inputRef = useRef(null)
+  const handleChange = () => {
+    if (inputRef.current) {
+      const inputElement = inputRef.current
+      fnOnChange && fnOnChange(inputElement.value)
+    }
   }
 
   return (
     <Container>
       <InputWithMask
+        inputRef={inputRef}
         placeholder={placeHolder}
         mask={sMask}
         maskChar={maskPlaceholder}
