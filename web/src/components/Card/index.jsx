@@ -15,6 +15,7 @@ import { TbPencil } from 'react-icons/tb'
 /** components */
 import { Button } from '../Button'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
+import { useEffect } from 'react'
 
 export function Card({
   CardId,
@@ -36,6 +37,7 @@ export function Card({
    */
   const [countPlate, setCountPlate] = useState('00')
   const [favorite, setFavorite] = useState(isFavorite)
+  const [valuePlate, setValuePlate] = useState('R$ 0,00')
   const navigate = useNavigate()
 
   /** Functions shoppingCart */
@@ -44,33 +46,41 @@ export function Card({
   const addPlateToCart = (id, iQnt) => addProductToCart(id, iQnt)
   const remPlateToCart = id => removeProductToCart(id)
   const plusThePlate = (id, iQnt) => plusProductCart(id, iQnt)
-  /** Formatting Value*/
-  let number = price
-  if (typeof number != 'number') {
-    if (number.includes('R$')) {
-      number = number.slice(3)
-    }
-    number = Number(number.replace(/[.,]/g, '.'))
-  }
-  const formattedValue = number.toLocaleString('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  })
 
-  function handleAmount() {
-    /** setAmount */
-    if (parseInt(amount) > 0) {
-      amount = parseInt(amount)
-      if (amount <= 9) {
-        amount = String('0' + amount)
-      } else if (amount > 98) {
-        amount = '99'
+  useEffect(() => {
+    function handleValuePlate() {
+      /** Formatting Value*/
+      let number = price
+      if (typeof number != 'number') {
+        if (number.includes('R$')) {
+          number = number.slice(3)
+        }
+        number = Number(number.replace(/[.,]/g, '.'))
       }
-      amount = String(amount)
-    } else {
-      amount = '00'
+      const formattedValue = number.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      })
+      setValuePlate(formattedValue)
     }
-  }
+
+    function handleAmount() {
+      /** setAmount */
+      if (parseInt(amount) > 0) {
+        amount = parseInt(amount)
+        if (amount <= 9) {
+          amount = String('0' + amount)
+        } else if (amount > 98) {
+          amount = '99'
+        }
+        amount = String(amount)
+      } else {
+        amount = '00'
+      }
+    }
+    handleValuePlate()
+    handleAmount()
+  }, [])
 
   /**
    * Para o admin, o prato poderá ser alterado
@@ -204,7 +214,6 @@ export function Card({
     }
     addPlateToCart(CardId, iAmountPlate)
   }
-  handleAmount()
 
   /**
    * O Componente Card
@@ -232,7 +241,7 @@ export function Card({
 
         <h1 className="product-title">{title}</h1>
         <p className="description">{description}</p>
-        <h1 className="price-title">{formattedValue}</h1>
+        <h1 className="price-title">{valuePlate}</h1>
         <div className="content-includes">
           {!isAdmin && (
             <>
