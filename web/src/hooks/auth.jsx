@@ -26,7 +26,7 @@ function AuthProvider({ children }) {
     } catch (error) {
       getReactToastify(
         oTiposToastify.TIPO_ERROR,
-        'Não foi possível realizar o login no sistema.'
+        'Senha e/ou e-mail incorreto.'
       )
     }
   }
