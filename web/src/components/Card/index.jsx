@@ -25,16 +25,17 @@ export function Card({
   onFavorite,
   isAdmin,
   fnLoading,
-  amount = 0,
+  amount,
   isFavorite = false,
   ...rest
 }) {
+  // tratar a quantidade
+  amount = amount ? amount : 0
   /**
    * Constantes do Card
    */
-  const [countPlate, setCountPlate] = useState(amount || '00')
+  const [countPlate, setCountPlate] = useState('00')
   const [favorite, setFavorite] = useState(isFavorite)
-  const [priceCard, setPriceCard] = useState('R$ 0,00')
   const navigate = useNavigate()
 
   /** Functions shoppingCart */
@@ -43,7 +44,6 @@ export function Card({
   const addPlateToCart = (id, iQnt) => addProductToCart(id, iQnt)
   const remPlateToCart = id => removeProductToCart(id)
   const plusThePlate = (id, iQnt) => plusProductCart(id, iQnt)
-
   /** Formatting Value*/
   let number = price
   if (typeof number != 'number') {
@@ -57,15 +57,19 @@ export function Card({
     currency: 'BRL'
   })
 
-  /** setAmount */
-  if (parseInt(amount) > 0) {
-    amount = parseInt(amount)
-    if (amount <= 9) {
-      amount = String('0' + amount)
-    } else if (amount > 98) {
-      amount = '99'
+  function handleAmount() {
+    /** setAmount */
+    if (parseInt(amount) > 0) {
+      amount = parseInt(amount)
+      if (amount <= 9) {
+        amount = String('0' + amount)
+      } else if (amount > 98) {
+        amount = '99'
+      }
+      amount = String(amount)
+    } else {
+      amount = '00'
     }
-    setCountPlate(String(amount))
   }
 
   /**
@@ -200,6 +204,7 @@ export function Card({
     }
     addPlateToCart(CardId, iAmountPlate)
   }
+  handleAmount()
 
   /**
    * O Componente Card
@@ -234,7 +239,7 @@ export function Card({
               <button className="btn" onClick={handleMinusPlate}>
                 <AiOutlineMinus />
               </button>
-              <span className="count-item">{countPlate}</span>
+              <span className="count-item">{amount || countPlate}</span>
               <button className="btn" onClick={handlePlusPlate}>
                 <AiOutlinePlus />
               </button>
