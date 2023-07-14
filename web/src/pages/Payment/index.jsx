@@ -136,14 +136,14 @@ export function Payment() {
   }
 
   function getFormDataOrder() {
-    const oFormData = new FormData()
+    // const oFormData = new FormData()
     // string de detalhes do pedido
     let sDetails = ''
     plates.forEach(item => {
       sDetails += `${item.qtd} x ${item.title}, `
     })
     sDetails = sDetails.slice(0, -2)
-    oFormData.append('details', sDetails)
+    // oFormData.append('details', sDetails)
     //pratos do pedido
     // const aPlates = platesDb.filter(oPlate => {
     //   return plates.some(plate => {
@@ -154,14 +154,13 @@ export function Payment() {
     //   Accum[oPlate.id] = oPlate
     //   return Accum
     // }, {})
-    oFormData.append('plates', [1, 2, 3])
-    oFormData.append('Content-Type', 'application/json')
-    return oFormData
-    // return JSON.stringify({
-    //   details: sDetails,
-    //   plates: [1, 2, 3],
-    //   user_id: userId
-    // })
+    // oFormData.append('plates', '[1, 2, 3]')
+    // oFormData.append('Content-Type', 'application/json')
+    // return oFormData
+    return {
+      details: sDetails,
+      plates: [1, 2, 3]
+    }
   }
 
   async function handlePayment() {

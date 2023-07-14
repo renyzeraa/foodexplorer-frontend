@@ -160,7 +160,6 @@ export const Container = styled.div`
       padding: 0 24px;
       margin: 64px auto 0;
       justify-content: space-between;
-      height: 100vh;
       gap: 32px;
       .container {
         padding: 0;
