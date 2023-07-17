@@ -8,6 +8,7 @@ import { RowDemand } from '../../components/RowDemand'
 import { useState, useEffect } from 'react'
 import { api } from '../../services/api'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
+import { format, parseISO } from 'date-fns'
 
 export function Demand() {
   const [orders, setOrders] = useState([])
@@ -19,10 +20,26 @@ export function Demand() {
   async function fetchOrders() {
     try {
       const response = await api.get(`/orders`)
-      setOrders(response.data)
+      handleOrders(response.data)
     } catch (error) {
       getReactToastify(oTiposToastify.TIPO_ERROR, 'Erro ao buscar os pedidos.')
     }
+  }
+
+  function handleOrders(aOrders) {
+    aOrders = aOrders.map(oOrder => {
+      const sData = parseISO(oOrder.created_at)
+      const sDataFormatada = format(sData, "dd/MM 'às' HH'h'mm")
+
+      let sDetails = ''
+      oOrder.plates.forEach(item => {
+        sDetails += `${1} x ${item.title}, `
+      })
+      sDetails = sDetails.slice(0, -2)
+
+      return { ...oOrder, details: sDetails, sData: sDataFormatada }
+    })
+    setOrders(aOrders)
   }
 
   return (
@@ -42,7 +59,7 @@ export function Demand() {
               key={order.id}
               iPedido={order.code}
               iStatus={order.status}
-              sTimeStamp={order.created_at}
+              sTimeStamp={order.sData}
               sDetails={order.details}
             />
           ))}
@@ -64,7 +81,7 @@ export function Demand() {
                   key={order.id}
                   iPedido={order.code}
                   iStatus={order.status}
-                  sTimeStamp={order.created_at}
+                  sTimeStamp={order.sData}
                   sDetails={order.details}
                 />
               ))}
