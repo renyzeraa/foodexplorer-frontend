@@ -1,7 +1,7 @@
 import { Container } from './style'
 import { useState } from 'react'
 
-export const ConfirmationModal = ({ message = '', onConfirm }) => {
+export const ConfirmationModal = ({ message = '', onConfirm = false }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleOpen = () => {
@@ -13,12 +13,14 @@ export const ConfirmationModal = ({ message = '', onConfirm }) => {
   }
 
   const handleConfirm = () => {
-    onConfirm()
     handleClose()
+    onConfirm && onConfirm()
+    return true
   }
 
   const handleCancel = () => {
     handleClose()
+    return false
   }
 
   return (
