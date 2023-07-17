@@ -20,7 +20,7 @@ export function InputMask({
   return (
     <Container>
       <InputWithMask
-        inputRef={inputRef}
+        ref={inputRef}
         placeholder={placeHolder}
         mask={sMask}
         maskChar={maskPlaceholder}
