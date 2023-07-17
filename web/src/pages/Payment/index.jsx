@@ -136,30 +136,16 @@ export function Payment() {
   }
 
   function getFormDataOrder() {
-    // const oFormData = new FormData()
-    // string de detalhes do pedido
-    let sDetails = ''
-    plates.forEach(item => {
-      sDetails += `${item.qtd} x ${item.title}, `
-    })
-    sDetails = sDetails.slice(0, -2)
-    // oFormData.append('details', sDetails)
     //pratos do pedido
-    // const aPlates = platesDb.filter(oPlate => {
-    //   return plates.some(plate => {
-    //     return oPlate.id == plate.id
-    //   })
-    // })
-    // const oPlatesToPost = aPlates.reduce((Accum, oPlate) => {
-    //   Accum[oPlate.id] = oPlate
-    //   return Accum
-    // }, {})
-    // oFormData.append('plates', '[1, 2, 3]')
-    // oFormData.append('Content-Type', 'application/json')
-    // return oFormData
+    let aPlatesCart = []
+    platesDb.forEach(oPlate => {
+      aPlatesCart.push(oPlate.id)
+      return plates.some(plate => {
+        return oPlate.id == plate.id
+      })
+    })
     return {
-      details: sDetails,
-      plates: [1, 2, 3]
+      plates: aPlatesCart
     }
   }
 
@@ -174,9 +160,13 @@ export function Payment() {
     try {
       setLoading(true)
       await api.post('/orders', oFormData)
-      // clearAll()
-      // setPlates([])
+      clearAll()
+      setPlates([])
       setLoading(false)
+      getReactToastify(
+        oTiposToastify.TIPO_SUCCESS,
+        'Pedido realizado com sucesso!.'
+      )
     } catch (error) {
       setLoading(false)
       getReactToastify(
