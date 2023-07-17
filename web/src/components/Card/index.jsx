@@ -30,8 +30,6 @@ export function Card({
   isFavorite = false,
   ...rest
 }) {
-  // tratar a quantidade
-  amount = amount ? amount : 0
   /**
    * Constantes do Card
    */
@@ -77,6 +75,7 @@ export function Card({
       } else {
         amount = '00'
       }
+      setCountPlate(amount)
     }
     handleValuePlate()
     handleAmount()
@@ -248,7 +247,7 @@ export function Card({
               <button className="btn" onClick={handleMinusPlate}>
                 <AiOutlineMinus />
               </button>
-              <span className="count-item">{amount || countPlate}</span>
+              <span className="count-item">{countPlate}</span>
               <button className="btn" onClick={handlePlusPlate}>
                 <AiOutlinePlus />
               </button>
