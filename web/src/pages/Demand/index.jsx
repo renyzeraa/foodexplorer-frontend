@@ -31,13 +31,7 @@ export function Demand() {
       const sData = parseISO(oOrder.created_at)
       const sDataFormatada = format(sData, "dd/MM 'às' HH'h'mm")
 
-      let sDetails = ''
-      oOrder.plates.forEach(item => {
-        sDetails += `${1} x ${item.title}, `
-      })
-      sDetails = sDetails.slice(0, -2)
-
-      return { ...oOrder, details: sDetails, sData: sDataFormatada }
+      return { ...oOrder, sData: sDataFormatada }
     })
     setOrders(aOrders)
   }
