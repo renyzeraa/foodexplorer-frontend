@@ -130,7 +130,7 @@ export function EditPlate({}) {
     if (typeof picture == 'object') {
       formData.append('picture', picture)
     }
-    formData.append('Content-Type', 'application/json')
+    formData.append('Content-Type', 'multipart/form-data')
 
     try {
       setLoading(true)

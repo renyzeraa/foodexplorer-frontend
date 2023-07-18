@@ -70,7 +70,7 @@ export function Plate({}) {
     oFormData.append('ingredients', ingredients.join(', '))
     oFormData.append('categories', String(categories).toLocaleLowerCase())
     oFormData.append('picture', picture)
-    oFormData.append('Content-Type', 'application/json')
+    oFormData.append('Content-Type', 'multipart/form-data')
 
     try {
       setLoading(true)
