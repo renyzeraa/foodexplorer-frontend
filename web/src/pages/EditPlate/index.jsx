@@ -40,11 +40,17 @@ export function EditPlate({}) {
     if (typeof xValue == 'string') {
       if (!xValue.includes('R$')) {
         if (parseInt(xValue) < 10) {
-          xValue = `0${xValue}`
+          xValue = `0${xValue}`.replace('.', ',')
         }
         xValue = `R$ ${xValue}`
       }
+    } else {
+      if (xValue < 10) {
+        xValue = `0${xValue}`.replace('.', ',')
+      }
+      xValue = `R$ ${xValue}`
     }
+
     setValue(xValue)
     if (!ingredients.length) {
       const aIngredients = JSON.parse(plate.ingredients)
@@ -118,7 +124,7 @@ export function EditPlate({}) {
     if (typeof iValue == 'string') {
       iValue = Number(iValue.slice(3).replace(',', '.'))
     }
-    formData.append('value', value)
+    formData.append('value', iValue)
     formData.append('ingredients', ingredients.join(','))
     formData.append('category_id', String(categories))
     if (typeof picture == 'object') {
