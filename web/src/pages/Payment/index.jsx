@@ -14,6 +14,7 @@ import { Loading } from '../../components/Loading'
 import { useEffect } from 'react'
 import { InputMask } from '../../components/InputMask'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
+import { useNavigate } from 'react-router-dom'
 
 export function Payment() {
   const [loading, setLoading] = useState(false)
@@ -29,6 +30,8 @@ export function Payment() {
   const deleteOrder = id => removeAllFromId(id)
   const clearAll = () => clearCart()
   let iTotalPrice = 0
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     handleAllPlates()
@@ -137,15 +140,26 @@ export function Payment() {
 
   function getFormDataOrder() {
     //pratos do pedido
-    let aPlatesCart = []
+    let aPlatesOrder = []
     platesDb.forEach(oPlate => {
-      aPlatesCart.push(oPlate.id)
+      aPlatesOrder.push(oPlate.id)
       return plates.some(plate => {
         return oPlate.id == plate.id
       })
     })
+    let sDetails = ''
+    plates.forEach(item => {
+      sDetails += `${item.qtd} x ${item.title}, `
+    })
+    sDetails = sDetails.slice(0, -2)
+    let iTotalValue = 0
+    if (totalValue) {
+      iTotalValue = Number(totalValue.slice(3).replace(',', '.'))
+    }
     return {
-      plates: aPlatesCart
+      plates: aPlatesOrder,
+      details: sDetails,
+      total_value: iTotalValue
     }
   }
 
@@ -167,6 +181,7 @@ export function Payment() {
         oTiposToastify.TIPO_SUCCESS,
         'Pedido realizado com sucesso!.'
       )
+      navigate('/demand')
     } catch (error) {
       setLoading(false)
       getReactToastify(
