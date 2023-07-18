@@ -1,9 +1,18 @@
+import { useEffect } from 'react'
 import { Container } from './style'
+import { useState } from 'react'
 
-export function Input({ Icon = false, ...rest }) {
+export function Input({ Icon, ...rest }) {
+  const [oIcon, setIcon] = useState(false)
+  useEffect(() => {
+    if (Icon) {
+      setIcon(Icon)
+    }
+  }, [])
+
   return (
     <Container>
-      {Icon && <Icon size={20} />}
+      {oIcon && <Icon size={20} />}
       <input {...rest} />
     </Container>
   )
