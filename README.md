@@ -42,7 +42,7 @@ Tanto o admin quanto o usuário poderão buscar os pratos por nome e/ou ingredie
 
       npm run dev
 
-_`Isso irá iniciar o servidor de desenvolvimento e abrirá o aplicativo em seu navegador padrão. Agora você pode ver seu projeto React em execução!`_
+_`Isso irá iniciar o servidor de desenvolvimento e criará um link para rodar em sua maquina loca, copie o link que ira gerar no terminal, abra um navegador e cole o link. Agora você pode ver o projeto em execução!`_
 
 ### Deploy do Projeto 🚀
 
