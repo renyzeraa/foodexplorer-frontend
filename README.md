@@ -1,6 +1,6 @@
 # Food Explorer 🥗🍽
 
-Projeto final do Curso Explorer da RocketSeat
+Projeto final do Curso Explorer da RocketSeat, neste desafio, desenvolvi o food explorer, um menu interativo para um restaurante fictício, que funciona com layout mobile, tablet e desktop.
 
 ## Sobre:
 
@@ -14,9 +14,39 @@ Tanto o admin quanto o usuário poderão buscar os pratos por nome e/ou ingredie
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white) ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
+### Instruções de uso
+
+##### - Pré-requisitos
+
+`Certifique-se de ter o npm instalado em sua máquina. Você pode verificar a versão do npm executando o seguinte comando no terminal:`
+
+      npm -v
+
+##### - Instalação
+
+`Clone este repositório para sua máquina local:`
+
+      git clone https://github.com/renyzeraa/foodexplorer-frontend.git
+
+`Navegue até o diretório do projeto:`
+
+      cd /web/src
+
+`Instale as dependências do projeto usando o npm:`
+
+      npm install
+
+##### - Executando o Projeto
+
+`Para iniciar o projeto, execute o seguinte comando:`
+
+      npm run dev
+
+_`Isso irá iniciar o servidor de desenvolvimento e abrirá o aplicativo em seu navegador padrão. Agora você pode ver seu projeto React em execução!`_
+
 ### Deploy do Projeto 🚀
 
-<a href='https://foodexplorer-eight.vercel.app/' target='_blank'>FoodExplorer 🥙</a>
+<a href='https://foodexplorer-eight.vercel.app/' target='_blank'>foodexplorer-eight.vercel.app/</a>
 
 ### Contato
 
@@ -26,11 +56,10 @@ Tanto o admin quanto o usuário poderão buscar os pratos por nome e/ou ingredie
 
 🛠 `FullStack` Developer Jr. <br>
 💼 [**IPM Sistemas**](https://www.ipm.com/) <br>
-📍 Santa Catarina - Brazil 
+📍 Santa Catarina - Brazil
 
 <a href="https://www.linkedin.com/in/renyzeraa" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn Badge" height="25"></a>&nbsp;<a href="mailto:renansilvaytb@gmail.com" target="_blank"><img src="https://img.shields.io/badge/Gmail-D14836?style=flat&logo=gmail&logoColor=white" alt="Gmail Badge" height="25"></a>&nbsp;<a href="#"><img src="https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white" title="renan_s#7826" alt="Discord Badge" height="25"></a>&nbsp;<a href="https://www.github.com/renyzeraa" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white" alt="GitHub Badge" height="25"></a>&nbsp;
 
 <br clear="left"/>
-
 
 <!-- Teste -->
