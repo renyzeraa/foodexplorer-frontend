@@ -42,7 +42,9 @@ Tanto o admin quanto o usuário poderão buscar os pratos por nome e/ou ingredie
 
       npm run dev
 
-_`Isso irá iniciar o servidor de desenvolvimento e criará um link para rodar em sua maquina loca, copie o link que ira gerar no terminal, abra um navegador e cole o link. Agora você pode ver o projeto em execução!`_
+_`Isso irá iniciar o servidor de desenvolvimento do FRONT-END, e criará um link para rodar em sua maquina local, copie o link que ira gerar no terminal, abra um navegador e cole o link. Agora você pode ver o projeto em execução!`_
+
+`No arquivo *api.js* tem o base url da api que esta utilizando atualmente`
 
 _`Login Admin: renan@gmail.com`_
 _`Senha : renan123`_
