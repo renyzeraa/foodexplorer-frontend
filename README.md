@@ -1,4 +1,4 @@
-# Food Explorer 🥗🍽
+# Food Explorer Front-end 🥗🍽
 
 Projeto final do Curso Explorer da RocketSeat, neste desafio, desenvolvi o food explorer, um menu interativo para um restaurante fictício, que funciona com layout mobile, tablet e desktop.
 
@@ -44,6 +44,9 @@ Tanto o admin quanto o usuário poderão buscar os pratos por nome e/ou ingredie
 
 _`Isso irá iniciar o servidor de desenvolvimento e criará um link para rodar em sua maquina loca, copie o link que ira gerar no terminal, abra um navegador e cole o link. Agora você pode ver o projeto em execução!`_
 
+_`Login Admin: renan@gmail.com`_
+_`Senha : renan123`_
+
 ### Deploy do Projeto 🚀
 
 <a href='https://foodexplorer-eight.vercel.app/' target='_blank'>foodexplorer-eight.vercel.app/</a>
@@ -61,5 +64,3 @@ _`Isso irá iniciar o servidor de desenvolvimento e criará um link para rodar e
 <a href="https://www.linkedin.com/in/renyzeraa" target="_blank"><img src="https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white" alt="LinkedIn Badge" height="25"></a>&nbsp;<a href="mailto:renansilvaytb@gmail.com" target="_blank"><img src="https://img.shields.io/badge/Gmail-D14836?style=flat&logo=gmail&logoColor=white" alt="Gmail Badge" height="25"></a>&nbsp;<a href="#"><img src="https://img.shields.io/badge/Discord-%237289DA.svg?logo=discord&logoColor=white" title="renan_s#7826" alt="Discord Badge" height="25"></a>&nbsp;<a href="https://www.github.com/renyzeraa" target="_blank"><img src="https://img.shields.io/badge/GitHub-100000?style=flat&logo=github&logoColor=white" alt="GitHub Badge" height="25"></a>&nbsp;
 
 <br clear="left"/>
-
-<!-- Teste -->
