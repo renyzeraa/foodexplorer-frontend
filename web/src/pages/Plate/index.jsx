@@ -21,7 +21,7 @@ export function Plate({}) {
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [value, setValue] = useState()
-  const [category, setCategory] = useState('refeicao')
+  const [category, setCategory] = useState(1)
 
   const [ingredients, setIngredients] = useState([])
   const [newIngredients, setNewIngredients] = useState('')
