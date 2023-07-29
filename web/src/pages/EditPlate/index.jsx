@@ -125,7 +125,7 @@ export function EditPlate({}) {
       iValue = Number(iValue.slice(3).replace(',', '.'))
     }
     formData.append('value', iValue)
-    formData.append('ingredients', ingredients.join(', '))
+    formData.append('ingredients', ingredients.join(','))
     formData.append('category_id', String(categories))
     if (typeof picture == 'object') {
       formData.append('picture', picture)

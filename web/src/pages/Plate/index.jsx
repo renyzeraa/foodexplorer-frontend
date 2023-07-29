@@ -67,7 +67,7 @@ export function Plate({}) {
       iValue = Number(iValue.slice(3).replace(',', '.'))
     }
     oFormData.append('value', iValue)
-    oFormData.append('ingredients', ingredients.join(', '))
+    oFormData.append('ingredients', ingredients.join(','))
     oFormData.append('categories', String(categories).toLocaleLowerCase())
     oFormData.append('picture', picture)
     oFormData.append('Content-Type', 'multipart/form-data')
