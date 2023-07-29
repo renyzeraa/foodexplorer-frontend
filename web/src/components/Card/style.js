@@ -33,6 +33,9 @@ export const Container = styled.div`
       color: ${({ theme }) => theme.COLORS.WHITE};
       font-family: 'Poppins', sans-serif;
       margin-bottom: 16px;
+      overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     }
 
     .description {

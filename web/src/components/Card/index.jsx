@@ -238,7 +238,7 @@ export function Card({
           onClick={() => handleDetails(CardId)}
         />
 
-        <h1 className="product-title">{title}</h1>
+        <h1 className="product-title" title={title}>{title}</h1>
         <p className="description">{description}</p>
         <h1 className="price-title">{valuePlate}</h1>
         <div className="content-includes">
