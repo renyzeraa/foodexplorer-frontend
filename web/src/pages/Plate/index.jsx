@@ -21,7 +21,7 @@ export function Plate({}) {
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [value, setValue] = useState()
-  const [categories, setCategories] = useState('refeicao')
+  const [category, setCategory] = useState('refeicao')
 
   const [ingredients, setIngredients] = useState([])
   const [newIngredients, setNewIngredients] = useState('')
@@ -68,7 +68,7 @@ export function Plate({}) {
     }
     oFormData.append('value', iValue)
     oFormData.append('ingredients', ingredients.join(','))
-    oFormData.append('categories', String(categories).toLocaleLowerCase())
+    oFormData.append('category', category)
     oFormData.append('picture', picture)
     oFormData.append('Content-Type', 'multipart/form-data')
 
@@ -151,12 +151,12 @@ export function Plate({}) {
               <select
                 name=""
                 id=""
-                onChange={oEv => setCategories(oEv.target.value || 'Refeicao')}
+                onChange={oEv => setCategory(oEv.target.value || 1)}
               >
-                <option value="refeicao">Refeição</option>
-                <option value="sobremesa">Sobremesa</option>
-                <option value="doces">Doces</option>
-                <option value="bebidas">Bebidas</option>
+                <option value="1">Refeição</option>
+                <option value="2">Sobremesa</option>
+                <option value="3">Doces</option>
+                <option value="4">Bebidas</option>
               </select>
             </div>
           </div>

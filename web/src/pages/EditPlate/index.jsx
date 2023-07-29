@@ -23,7 +23,7 @@ export function EditPlate({}) {
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [value, setValue] = useState()
-  const [categories, setCategories] = useState()
+  const [category, setCategory] = useState()
 
   const [ingredients, setIngredients] = useState([])
   const [newIngredients, setNewIngredients] = useState('')
@@ -55,7 +55,7 @@ export function EditPlate({}) {
         return
       }
       setTitle(plate.title)
-      setCategories(plate.category_id)
+      setCategory(plate.category_id)
       let xValue = plate.value
       if (typeof xValue == 'string') {
         if (!xValue.includes('R$')) {
@@ -128,7 +128,7 @@ export function EditPlate({}) {
     }
     formData.append('value', iValue)
     formData.append('ingredients', ingredients.join(','))
-    formData.append('category_id', String(categories))
+    formData.append('category', category)
     if (typeof picture == 'object') {
       formData.append('picture', picture)
     }
@@ -237,8 +237,8 @@ export function EditPlate({}) {
               />
               <label htmlFor="">Categoria</label>
               <select
-                value={categories}
-                onChange={oEv => setCategories(oEv.target.value)}
+                value={category}
+                onChange={oEv => setCategory(oEv.target.value)}
               >
                 <option value="1">Refeição</option>
                 <option value="2">Sobremesa</option>
