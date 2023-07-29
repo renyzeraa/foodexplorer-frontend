@@ -99,7 +99,8 @@ export const Container = styled.div`
       margin: 0 auto;
       gap: 40px;
       align-items: center;
-
+      margin: 100px auto 60px;
+      
       a {
         position: absolute;
         top: 120px;
