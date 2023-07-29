@@ -30,39 +30,6 @@ export function EditPlate({}) {
 
   const [loading, setLoading] = useState(false)
 
-  function handlePlate(plate) {
-    if (bIsActualized) {
-      return
-    }
-    setTitle(plate.title)
-    setCategories(plate.category_id)
-    let xValue = plate.value
-    if (typeof xValue == 'string') {
-      if (!xValue.includes('R$')) {
-        if (parseInt(xValue) < 10) {
-          xValue = `0${xValue}`.replace('.', ',')
-        }
-        xValue = `R$ ${xValue}`
-      }
-    } else {
-      if (xValue < 10) {
-        xValue = `0${xValue}`.replace('.', ',')
-      }
-      xValue = `R$ ${xValue}`
-    }
-
-    setValue(xValue)
-    if (!ingredients.length) {
-      const aIngredients = JSON.parse(plate.ingredients)
-      for (let item of aIngredients) {
-        const sName = ingredientsBd[item].name
-        setIngredients(prevState => [...prevState, sName])
-      }
-    }
-    const sDescricao = String(plate.description)
-    setDescription(sDescricao)
-  }
-
   useEffect(() => {
     async function fetchPlate() {
       try {
@@ -82,6 +49,41 @@ export function EditPlate({}) {
       }
     }
     fetchPlate()
+
+    function handlePlate(plate) {
+      if (bIsActualized) {
+        return
+      }
+      setTitle(plate.title)
+      setCategories(plate.category_id)
+      let xValue = plate.value
+      if (typeof xValue == 'string') {
+        if (!xValue.includes('R$')) {
+          if (parseInt(xValue) < 10) {
+            xValue = `0${xValue}`.replace('.', ',')
+          }
+          xValue = `R$ ${xValue}`
+        }
+      } else {
+        if (xValue < 10) {
+          xValue = `0${xValue}`.replace('.', ',')
+        }
+        xValue = `R$ ${xValue}`
+      }
+  
+      setValue(xValue)
+      let aNewIngredients = []
+      if (!ingredients.length) {
+        const aIngredients = JSON.parse(plate.ingredients)
+        for (let item of aIngredients) {
+          const sName = ingredientsBd[item - 1].name
+          aNewIngredients.push(sName)
+        }
+      }
+      setIngredients(aNewIngredients)
+      const sDescricao = String(plate.description)
+      setDescription(sDescricao)
+    }
   }, [])
 
   async function handleUpdate(e) {
