@@ -24,9 +24,9 @@ export function Details({}) {
   const [valuePlate, setValuePlate] = useState('R$ 00,00')
   const [iCardId, setCardId] = useState(0)
   const [initialValue, setInitialValue] = useState(0)
+  const [bIsUpdated, setIsUpdated] = useState(false)
 
   let aIngredientsBd = []
-  let bIsActualized = false
   const navigate = useNavigate()
   const {
     removeProductToCart,
@@ -58,46 +58,50 @@ export function Details({}) {
       }
     }
     fetchPlate()
-  }, [])
 
-  function handlePlate(oPlate) {
-    if (bIsActualized) {
-      return
-    }
-    const [oPlateCart] = copyShoppingCart.filter(
-      oPlateCart => oPlate.id == oPlateCart.id
-    )
-    setInitialValue(oPlate.value)
-    handleValuePlate(0, oPlate.value)
-    if (oPlateCart && oPlateCart.id) {
-      let amount
-      if (oPlateCart.qtd > 0) {
-        amount = oPlateCart.qtd
-        if (amount <= 9) {
-          amount = String('0' + amount)
-        } else if (amount > 98) {
-          amount = '99'
+    function handlePlate(oPlate) {
+      if (bIsUpdated) {
+        return
+      }
+      setIsUpdated(true)
+      const [oPlateCart] = copyShoppingCart.filter(
+        oPlateCart => oPlate.id == oPlateCart.id
+      )
+      setInitialValue(oPlate.value)
+      handleValuePlate(0, oPlate.value)
+      if (oPlateCart && oPlateCart.id) {
+        let amount
+        if (oPlateCart.qtd > 0) {
+          amount = oPlateCart.qtd
+          if (amount <= 9) {
+            amount = String('0' + amount)
+          } else if (amount > 98) {
+            amount = '99'
+          }
+        }
+        setCountPlate(String(amount))
+        handleValuePlate(oPlateCart.qtd, oPlate.value)
+      }
+      setCardId(oPlate.id)
+      setTitle(oPlate.title)
+      const aIngredients = JSON.parse(oPlate.ingredients)
+      let aNewIngredients = [];
+      if (!ingredients.length && aIngredientsBd.length) {
+        for (let item of aIngredients) {
+          const sName = aIngredientsBd[item - 1].name
+          aNewIngredients.push(sName)
         }
       }
-      setCountPlate(String(amount))
-      handleValuePlate(oPlateCart.qtd, oPlate.value)
+      setIngredients(aNewIngredients)
+      setDescription(oPlate.description)
+      const imgPlate = oPlate.picture
+        ? `${api.defaults.baseURL}files/${oPlate.picture}`
+        : ''
+      setPicture(imgPlate)
     }
-    setCardId(oPlate.id)
-    setTitle(oPlate.title)
-    const aIngredients = JSON.parse(oPlate.ingredients)
-    if (!ingredients.length && aIngredientsBd.length) {
-      for (let item of aIngredients) {
-        const sName = aIngredientsBd[item].name
-        setIngredients(prevState => [...prevState, sName])
-      }
-    }
-    setDescription(oPlate.description)
-    const imgPlate = oPlate.picture
-      ? `${api.defaults.baseURL}files/${oPlate.picture}`
-      : ''
-    setPicture(imgPlate)
-    bIsActualized = true
-  }
+  }, [])
+
+
 
   function formatValuePlate(iValue) {
     let numberString = String(iValue)
