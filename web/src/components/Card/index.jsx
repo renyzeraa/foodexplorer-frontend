@@ -17,6 +17,22 @@ import { Button } from '../Button'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 import { useEffect } from 'react'
 
+/**
+ * Componente que representa um cartão de prato que pode ser exibido em uma lista de pratos.
+ * @param {Object} props - As propriedades do componente.
+ * @param {number} props.CardId - O ID do prato.
+ * @param {string} props.title - O título do prato.
+ * @param {string} props.price - O preço do prato.
+ * @param {string} props.img - A URL da imagem do prato.
+ * @param {string} props.description - A descrição do prato.
+ * @param {Function} props.onFavorite - Função de callback chamada quando o prato é marcado como favorito.
+ * @param {boolean} props.isAdmin - Indica se o usuário atual é um administrador.
+ * @param {Function} props.fnLoading - Função para exibir um indicador de carregamento.
+ * @param {number} props.amount - A quantidade de pratos selecionados.
+ * @param {boolean} props.isFavorite - Indica se o prato já está marcado como favorito.
+ * @param {Object} rest - Outras propriedades passadas para o componente.
+ * @returns {JSX.Element} - O componente React para renderização.
+ */
 export function Card({
   CardId,
   title,
@@ -46,6 +62,9 @@ export function Card({
   const plusThePlate = (id, iQnt) => plusProductCart(id, iQnt)
 
   useEffect(() => {
+    /**
+     * Realiza alguns tratamentos no valor do prato
+     */
     function handleValuePlate() {
       /** Formatting Value*/
       let number = price
@@ -62,6 +81,9 @@ export function Card({
       setValuePlate(formattedValue)
     }
 
+    /**
+     * Realiza tratamentos na quantidade do prato
+     */
     function handleAmount() {
       /** setAmount */
       if (parseInt(amount) > 0) {
@@ -156,7 +178,7 @@ export function Card({
 
   /**
    * Ao clicar na imagem leva ate a página de detalhes do prato
-   * @param {integer} idCard
+   * @param {integer} idCard - identificador do prato
    */
   function handleDetails(idCard) {
     fnLoading && fnLoading(true)
