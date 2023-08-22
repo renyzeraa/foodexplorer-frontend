@@ -12,6 +12,15 @@ import { shoppingCart } from '../../hooks/shoppingCart'
 /** assets */
 import logo from '../../assets/logo.svg'
 
+/**
+ * Componente Header para exibir o cabeçalho da página.
+ *
+ * Este componente renderiza o cabeçalho da página, que inclui um logotipo, um campo de pesquisa, ícones de ação (logout e carrinho de compras) e outros elementos de interface do usuário.
+ *
+ * @param {function} fnChange - Função para manipular eventos de mudança.
+ * @param {object} rest - Outras propriedades passadas para o componente.
+ * @returns {JSX.Element} Um componente de cabeçalho.
+ */
 export function Header({ fnChange, ...rest }) {
   /** Verificar para modificar para admin e user */
   const { signOut, user } = useAuth()
@@ -53,6 +62,7 @@ export function Header({ fnChange, ...rest }) {
   function handleSignOut() {
     signOut()
   }
+  
   return (
     <Container {...rest}>
       <main className="mobile">
