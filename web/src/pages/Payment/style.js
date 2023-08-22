@@ -149,6 +149,9 @@ export const Container = styled.div`
       .container {
         .action-buttons {
           display: flex;
+          >:nth-child(2) {
+            white-space: nowrap;
+          }
         }
       }
     }

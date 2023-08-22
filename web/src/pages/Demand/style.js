@@ -10,6 +10,8 @@ export const Container = styled.main`
     height: 100vh;
     padding: 0 24px;
     margin-top: 48px;
+    margin-bottom: 48px;
+
     .header {
       display: flex;
       align-items: center;
@@ -47,6 +49,7 @@ export const Container = styled.main`
     section {
       max-width: 1120px;
       margin: 48px auto;
+
 
       .table-wrapper {
         display: block;
