@@ -18,7 +18,7 @@ export function Favorites() {
     async function searchPlatesFav() {
       try {
         setLoading(true)
-        const response = await api.get('/favorites/favorite_plates/')
+        const response = await api.get('/favorites')
         setPlatesFav(response.data)
         setLoading(false)
       } catch (error) {
@@ -35,8 +35,8 @@ export function Favorites() {
   async function removeFavPlate(plateId) {
     try {
       setLoading(true)
-      await api.delete(`/favorites/favorite_plates/${plateId}`)
-      const response = await api.get('/favorites/favorite_plates/')
+      await api.delete(`/favorites/${plateId}`)
+      const response = await api.get('/favorites')
       setPlatesFav(response.data)
       setLoading(false)
       getReactToastify(

@@ -97,7 +97,7 @@ export function Card({
   async function addFavPlate() {
     try {
       fnLoading && fnLoading(true)
-      await api.post(`/favorites/favorite_plates/${CardId}`)
+      await api.post(`/favorites/${CardId}`)
       fnLoading && fnLoading(false)
       getReactToastify(
         oTiposToastify.TIPO_SUCCESS,
@@ -121,7 +121,7 @@ export function Card({
   async function removeFavPlate() {
     try {
       fnLoading && fnLoading(true)
-      await api.delete(`/favorites/favorite_plates/${CardId}`)
+      await api.delete(`/favorites/${CardId}`)
       fnLoading && fnLoading(false)
       getReactToastify(
         oTiposToastify.TIPO_SUCCESS,

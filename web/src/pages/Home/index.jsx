@@ -40,7 +40,7 @@ export function Home() {
         response = await api.get(`/plates/search?title=${search}`)
         arrayData.push([...response.data])
         handleTitlePlates(response.data)
-        response = await api.get(`/favorites/favorite_plates/`)
+        response = await api.get(`/favorites`)
         arrayData.push([...response.data])
         handleViewPlates(arrayData)
         setLoading(false)

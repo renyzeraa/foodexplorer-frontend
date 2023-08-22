@@ -28,7 +28,7 @@ export function Plate({}) {
 
   async function handleNewPlate(e) {
     e.preventDefault()
-
+    
     if (!title) {
       return getReactToastify(
         oTiposToastify.TIPO_ERROR,
