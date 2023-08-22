@@ -49,7 +49,7 @@ export const Container = styled.main`
     section {
       max-width: 1120px;
       margin: 48px auto;
-
+      height: auto;
 
       .table-wrapper {
         display: block;
@@ -80,7 +80,7 @@ export const Container = styled.main`
           }
 
           thead tr td:first-child {
-            width: 130px;
+            width: 170px;
           }
 
           tbody td {
@@ -96,7 +96,7 @@ export const Container = styled.main`
           }
 
           tbody td:first-child {
-            width: 130px;
+            width: 170px;
           }
 
           tbody td:last-child {
@@ -105,6 +105,10 @@ export const Container = styled.main`
 
           tbody tr:last-child td {
             border-bottom: none;
+          }
+
+          .rows-demands {
+
           }
         }
       }
@@ -117,6 +121,7 @@ export const Container = styled.main`
   @media (min-width: 1120px) {
     section {
       width: 1120px;
+      
     }
   }
 `

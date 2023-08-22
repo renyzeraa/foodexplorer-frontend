@@ -69,7 +69,7 @@ export function Demand() {
                 <td>Data e hora</td>
               </tr>
             </thead>
-            <tbody>
+            <tbody className='rows-demands'>
               {orders.map(order => (
                 <RowDemand
                   key={order.id}
