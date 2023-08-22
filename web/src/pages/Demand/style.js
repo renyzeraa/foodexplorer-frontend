@@ -11,7 +11,8 @@ export const Container = styled.main`
     padding: 0 24px;
     margin-top: 48px;
     margin-bottom: 48px;
-
+    height: auto;
+    
     .header {
       display: flex;
       align-items: center;
@@ -41,7 +42,6 @@ export const Container = styled.main`
     .cards-wrapper {
       display: grid;
       gap: 17px;
-      justify-content: center;
     }
   }
 
@@ -49,7 +49,7 @@ export const Container = styled.main`
     section {
       max-width: 1120px;
       margin: 48px auto;
-      height: auto;
+      
 
       .table-wrapper {
         display: block;
