@@ -8,7 +8,6 @@ export const Container = styled.div`
   font-size: 14px;
   font-family: 'Roboto', sans-serif;
   line-height: 160%;
-  max-width: 450px;
 
   .infos-demand {
     display: flex;
@@ -18,8 +17,9 @@ export const Container = styled.div`
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-between;
+
     &.admin {
-      justify-content: flex-start;
+      justify-content: space-between;
     }
   }
   .demand-text {

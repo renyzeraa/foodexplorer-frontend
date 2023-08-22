@@ -1,7 +1,17 @@
-import { Container } from './style'
-import { useState } from 'react'
-import { useAuth } from '../../hooks/auth'
+import { Container } from './style';
+import { useState } from 'react';
+import { useAuth } from '../../hooks/auth';
 
+/**
+ * Componente `CardDemand` para exibir informações de um pedido.
+ *
+ * @param {number} iPedido - O número do pedido.
+ * @param {number} iStatus - O status do pedido (1 - Pendente, 2 - Preparando, 3 - Pronto).
+ * @param {string} sTimeStamp - O carimbo de data/hora do pedido.
+ * @param {string} sDetails - Detalhes do pedido.
+ * @param {object} rest - Outras propriedades passadas para o componente.
+ * @returns {JSX.Element} Um componente de card de pedido.
+ */
 export function CardDemand({
   iPedido = 0,
   iStatus = 0,
@@ -9,53 +19,36 @@ export function CardDemand({
   sDetails = '',
   ...rest
 }) {
-  /** Definir para admin */
-  const { user } = useAuth()
-  const admin = user.isAdmin
-  /** definição de valores */
-  const [value, setValue] = useState(iStatus)
+  const { user } = useAuth();
+  const admin = user.isAdmin;
 
-  // ajustar cor e nome do status do pedido
-  let sStatus = '🔴'
-  let sStatusName = 'Pendente'
-  if (iStatus == 2) {
-    sStatus = '🟡'
-    sStatusName = 'Preparando'
-  } else if (iStatus == 3) {
-    sStatus = '🟢'
-    sStatusName = 'Pronto'
-  }
-  // ajustar número do pedido
-  let sPedido = ''
-  if (iPedido <= 9) {
-    sPedido = `00000${iPedido}`
-  } else if (iPedido <= 99) {
-    sPedido = `0000${iPedido}`
-  } else if (iPedido <= 999) {
-    sPedido = `000${iPedido}`
-  } else if (iPedido <= 9999) {
-    sPedido = `00${iPedido}`
-  } else if (iPedido <= 99999) {
-    sPedido = `0${iPedido}`
-  } else {
-    sPedido = String(iPedido)
-  }
+  // Definição de valores usando padStart para formatar o número do pedido
+  const formattedPedido = iPedido.toString().padStart(6, '0');
+
+  // Mapeamento do status do pedido para um objeto
+  const statusOptions = {
+    1: { emoji: '🔴', name: 'Pendente' },
+    2: { emoji: '🟡', name: 'Preparando' },
+    3: { emoji: '🟢', name: 'Pronto' },
+  };
+
+  const [value, setValue] = useState(iStatus);
 
   /**
    * Definir o status do pedido
-   * @param {Mixed} xValue
+   * @param {mixed} xValue - O valor do novo status.
    */
   function handleSelectValue(xValue) {
-    setValue(xValue)
+    setValue(xValue);
   }
 
   return (
     <Container {...rest}>
       <header className={admin ? 'infos-demand admin' : 'infos-demand'}>
-        <span>{sPedido}</span>
+        <span>{formattedPedido}</span>
         {!admin && (
           <span>
-            <span>{sStatus}</span> {sStatusName}
+            <span>{statusOptions[iStatus].emoji}</span> {statusOptions[iStatus].name}
           </span>
         )}
         <span>{sTimeStamp}</span>
@@ -65,13 +58,15 @@ export function CardDemand({
         <select
           className="status-demand"
           value={value}
-          onChange={e => handleSelectValue(e.target.value)}
+          onChange={(e) => handleSelectValue(e.target.value)}
         >
-          <option value="1">🔴 Pendente</option>
-          <option value="2">🟡 Preparando</option>
-          <option value="3">🟢 Pronto</option>
+          {Object.keys(statusOptions).map((statusKey) => (
+            <option key={statusKey} value={statusKey}>
+              {statusOptions[statusKey].emoji} {statusOptions[statusKey].name}
+            </option>
+          ))}
         </select>
       )}
     </Container>
-  )
+  );
 }
