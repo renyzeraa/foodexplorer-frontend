@@ -4,7 +4,7 @@ export const Container = styled.footer`
   width: 100%;
   background: ${({ theme }) => theme.COLORS.BACKGROUND_800};
 
-  footer {
+  .container-footer {
     height: 77px;
     max-width: 1120px;
     padding: 0 24px;
@@ -13,7 +13,8 @@ export const Container = styled.footer`
     justify-content: space-between;
     margin: 0 auto;
     gap: 10px;
-    p {
+
+    .text-area-footer {
       color: ${({ theme }) => theme.COLORS.WHITE};
       font-family: 'DM Sans', sans-serif;
       font-weight: 400;
