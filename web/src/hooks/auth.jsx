@@ -4,6 +4,15 @@ import { getReactToastify, oTiposToastify } from '../methods/toastify'
 
 export const AuthContext = createContext({})
 
+/**
+ * Componente de provedor de autenticação.
+ *
+ * Este componente fornece um contexto de autenticação que pode ser usado
+ * para gerenciar o estado de autenticação e realizar operações relacionadas à autenticação.
+ *
+ * @param {object} children - Os componentes filho que serão envolvidos pelo provedor de autenticação.
+ * @returns {JSX.Element} Um componente de provedor de autenticação.
+ */
 function AuthProvider({ children }) {
   /** Definir Valores */
   const [data, setData] = useState({})
