@@ -13,6 +13,13 @@ import { api } from '../../services/api'
 import { Button } from '../../components/Button'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
+/**
+ * Componente de edição de prato.
+ *
+ * Este componente é usado para editar os detalhes de um prato.
+ *
+ * @returns {JSX.Element} Um componente de edição de prato.
+ */
 export function EditPlate({}) {
   const params = useParams()
   const navigate = useNavigate()
@@ -31,12 +38,23 @@ export function EditPlate({}) {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    /**
+     * Função para buscar os detalhes de um prato e a lista de ingredientes da API.
+     *
+     * Esta função realiza uma série de operações assíncronas para buscar informações
+     * sobre um prato específico e a lista de ingredientes disponíveis na API.
+     *
+     * @param {boolean} bIsActualized - Uma variável booleana que indica se os detalhes
+     * do prato foram atualizados com sucesso.
+     * @returns {void}
+     */
     async function fetchPlate() {
       try {
         setLoading(true)
         let response = await api.get('/ingredients')
         ingredientsBd = response.data
         response = await api.get(`/plates/${params.id}`)
+        // Chama a função handlePlate para lidar com os detalhes do prato obtidos
         handlePlate(response.data)
         setLoading(false)
         bIsActualized = true
@@ -50,6 +68,16 @@ export function EditPlate({}) {
     }
     fetchPlate()
 
+    /**
+     * Atualiza o estado do componente com os detalhes do prato.
+     *
+     * Esta função recebe os detalhes de um prato e atualiza o estado do componente
+     * com esses detalhes. Os detalhes incluem título, categoria, valor, ingredientes
+     * e descrição do prato.
+     *
+     * @param {object} plate - Os detalhes do prato a serem atualizados no estado.
+     * @returns {void}
+     */
     function handlePlate(plate) {
       if (bIsActualized) {
         return
@@ -86,6 +114,18 @@ export function EditPlate({}) {
     }
   }, [])
 
+  /**
+   * Função para lidar com a atualização de um prato.
+   *
+   * Esta função é chamada quando o formulário de edição de um prato é enviado.
+   * Ela executa várias verificações de validação nos campos do formulário antes
+   * de fazer uma solicitação de atualização para o servidor. Se todos os campos
+   * forem válidos, a função faz uma solicitação PUT para atualizar os detalhes do
+   * prato no servidor e redireciona o usuário para a página inicial.
+   *
+   * @param {object} e - O evento do formulário.
+   * @returns {void}
+   */
   async function handleUpdate(e) {
     e.preventDefault()
 
@@ -152,30 +192,85 @@ export function EditPlate({}) {
     }
   }
 
+  /**
+   * Função para adicionar um novo ingrediente à lista de ingredientes do prato.
+   *
+   * Esta função é chamada quando o usuário clica no botão de adicionar ingrediente.
+   * Ela adiciona o valor do novo ingrediente à lista de ingredientes existente e
+   * em seguida, limpa o campo do novo ingrediente.
+   *
+   * @returns {void}
+   */
   function handleAddIngredient() {
     setIngredients(prevState => [...prevState, newIngredients])
     setNewIngredients('')
   }
 
+  /**
+   * Função para atualizar o valor do novo ingrediente conforme o usuário digita.
+   *
+   * Esta função é chamada quando o usuário digita no campo de novo ingrediente.
+   * Ela atualiza o estado 'newIngredients' com o valor digitado pelo usuário.
+   *
+   * @param {object} oEv - O evento do campo de input.
+   * @returns {void}
+   */
   function handleNewIngredient(oEv) {
     setNewIngredients(oEv.target.value)
   }
 
+  /**
+   * Função para lidar com a seleção de uma imagem.
+   *
+   * Esta função é chamada quando o usuário seleciona uma imagem para carregar.
+   * Ela atualiza o estado 'picture' com o arquivo de imagem selecionado pelo usuário.
+   *
+   * @param {object} oEv - O evento do input de arquivo.
+   * @returns {void}
+   */
   function handleChangeImg(oEv) {
     const file = oEv.target.files[0]
     setPicture(file)
   }
 
+  /**
+   * Função para remover um ingrediente da lista de ingredientes.
+   *
+   * Esta função é chamada quando o usuário deseja remover um ingrediente da lista.
+   * Ela atualiza a lista de ingredientes removendo o ingrediente selecionado.
+   *
+   * @param {string} deleted - O ingrediente a ser removido.
+   * @returns {void}
+   */
   function handleRemoveIngredient(deleted) {
     setIngredients(prevState =>
       prevState.filter(ingredient => ingredient !== deleted)
     )
   }
 
+  /**
+   * Função para selecionar um item da lista de ingredientes existentes.
+   *
+   * Esta função é chamada quando o usuário seleciona um item da lista de sugestões.
+   * Ela atualiza o estado 'newIngredients' com o valor do item selecionado.
+   *
+   * @param {object} oItem - O item selecionado.
+   * @returns {void}
+   */
   function handleSelectItem(oItem) {
     setNewIngredients(oItem.value)
   }
 
+  /**
+   * Função para remover um prato da lista.
+   *
+   * Esta função é chamada quando o usuário clica no botão de remover prato.
+   * Ela exibe um diálogo de confirmação e, se o usuário confirmar, envia uma
+   * solicitação para excluir o prato da API. Após a exclusão bem-sucedida, ela
+   * exibe uma notificação de sucesso e redireciona o usuário para a página inicial.
+   *
+   * @returns {void}
+   */
   async function handleRemovePlate() {
     const confirm = window.confirm('Deseja realmente deletar este prato?')
     if (confirm) {

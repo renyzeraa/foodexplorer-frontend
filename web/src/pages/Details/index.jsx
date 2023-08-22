@@ -11,6 +11,15 @@ import { api } from '../../services/api'
 import { shoppingCart } from '../../hooks/shoppingCart'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
+/**
+ * Componente de Detalhes de Produto.
+ *
+ * Este componente é usado para exibir os detalhes de um produto específico.
+ * Ele exibe informações como nome, descrição, preço, quantidade disponível e
+ * fornece opções para adicionar ou remover o produto do carrinho de compras.
+ *
+ * @component
+ */
 export function Details({}) {
   const params = useParams()
   const { user } = useAuth()
@@ -101,8 +110,12 @@ export function Details({}) {
     }
   }, [])
 
-
-
+  /**
+   * Formata um valor numérico como uma string de moeda no formato 'R$ 0,00'.
+   *
+   * @param {number} iValue - O valor numérico a ser formatado.
+   * @returns {string} A string formatada como moeda.
+   */
   function formatValuePlate(iValue) {
     let numberString = String(iValue)
     let number = Number(numberString.replace(/[.,]/g, '.'))
@@ -113,12 +126,21 @@ export function Details({}) {
     return formattedValue
   }
 
+  /**
+   * Navega para a página de detalhes do prato com um determinado ID.
+   */
   function handleNavigate() {
     setLoading(true)
     navigate(`/plates/${params.id}`)
     setLoading(false)
   }
 
+  /**
+   * Calcula o valor total do prato baseado na quantidade selecionada.
+   *
+   * @param {number} iQnt - A quantidade selecionada do prato.
+   * @param {number} iInitialValue - O valor inicial do prato (opcional).
+   */
   function handleValuePlate(iQnt, iInitialValue = 0) {
     iQnt = iQnt == 0 ? 1 : iQnt
     let newValue = iInitialValue == 0 ? initialValue : iInitialValue
@@ -171,6 +193,9 @@ export function Details({}) {
     setCountPlate(xValue)
   }
 
+  /**
+   * Adiciona o prato selecionado ao carrinho de compras.
+   */
   function handlePlateToCart() {
     const iAmountPlate = parseInt(countPlate)
     if (!iAmountPlate) {

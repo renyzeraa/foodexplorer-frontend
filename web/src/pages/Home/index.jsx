@@ -18,6 +18,15 @@ import { Loading } from '../../components/Loading'
 import { shoppingCart } from '../../hooks/shoppingCart'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
+/**
+ * Componente Home para a página inicial da aplicação.
+ *
+ * Este componente representa a página inicial da aplicação e exibe uma lista de pratos
+ * disponíveis. Ele busca os pratos na API, renderiza um carrossel de pratos usando a
+ * biblioteca Swiper e permite que o usuário adicione pratos ao carrinho de compras.
+ *
+ * @returns {JSX.Element} Um componente React que representa a página inicial.
+ */
 export function Home() {
   const { user } = useAuth()
   const admin = user.isAdmin
@@ -55,6 +64,17 @@ export function Home() {
     searchPlate()
   }, [search])
 
+  /**
+   * Função para preparar os dados dos pratos a serem exibidos na página inicial.
+   *
+   * Esta função recebe dois arrays de dados, `aData[0]` e `aData[1]`, que contêm informações
+   * sobre os pratos disponíveis e os pratos favoritos do usuário. Ela adiciona informações
+   * adicionais aos pratos disponíveis, como se são favoritos ou a quantidade no carrinho de
+   * compras, com base nos dados dos pratos favoritos e no carrinho de compras.
+   *
+   * @param {Array} aData - Um array com dois elementos: [pratosDisponiveis, pratosFavoritos].
+   * @returns {void} Esta função não retorna nada, mas atualiza o estado dos pratos disponíveis.
+   */
   function handleViewPlates(aData) {
     let aPlates = aData[0] || []
     let aFavPlates = aData[1] || []
@@ -93,10 +113,28 @@ export function Home() {
     }
   }
 
+  /**
+   * Função para controlar o estado de carregamento da página.
+   *
+   * Esta função recebe um parâmetro `bLoad` que determina se a página está em processo de carregamento.
+   * Ela atualiza o estado de carregamento para `true` ou `false` com base no valor de `bLoad`.
+   *
+   * @param {boolean} bLoad - Um valor booleano que indica se a página está em processo de carregamento.
+   * @returns {void} Esta função não retorna nada, mas atualiza o estado de carregamento.
+   */
   function loadingCard(bLoad) {
     setLoading(bLoad)
   }
 
+  /**
+   * Função para atualizar o estado de pesquisa.
+   *
+   * Esta função recebe um evento `oEv` que contém informações sobre a pesquisa realizada pelo usuário.
+   * Ela atualiza o estado de pesquisa (`search`) com o valor digitado pelo usuário no campo de pesquisa.
+   *
+   * @param {Event} oEv - O evento de input que contém informações sobre a pesquisa.
+   * @returns {void} Esta função não retorna nada, mas atualiza o estado de pesquisa.
+   */
   function handleSearchPlate(oEv) {
     setSearch(oEv.target.value)
   }

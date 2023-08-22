@@ -13,6 +13,15 @@ import { Button } from '../../components/Button'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 import { InputMask } from '../../components/InputMask'
 
+/**
+ * Componente Plate para criar ou editar um prato.
+ *
+ * Este componente é usado para criar ou editar um prato, permitindo que o usuário
+ * insira detalhes como título, categoria, valor, ingredientes e descrição do prato.
+ * Ele também lida com a submissão de formulários para criar ou editar pratos.
+ *
+ * @returns {JSX.Element} Um componente para criar ou editar pratos.
+ */
 export function Plate({}) {
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
@@ -26,6 +35,16 @@ export function Plate({}) {
   const [ingredients, setIngredients] = useState([])
   const [newIngredients, setNewIngredients] = useState('')
 
+  /**
+   * Função para criar um novo prato.
+   *
+   * Esta função é usada para criar um novo prato com base nas informações fornecidas,
+   * como título, ingredientes, valor, descrição e imagem. Ela realiza validações
+   * para garantir que todas as informações necessárias sejam fornecidas e envia uma
+   * solicitação de criação do prato para a API.
+   *
+   * @param {Event} e - O evento de submissão do formulário.
+   */
   async function handleNewPlate(e) {
     e.preventDefault()
     
@@ -87,26 +106,64 @@ export function Plate({}) {
     }
   }
 
+  /**
+   * Adiciona um novo ingrediente à lista de ingredientes.
+   *
+   * Esta função adiciona o valor contido em `newIngredients` à lista de ingredientes existente.
+   * Ela atualiza o estado de `ingredients` com a nova lista de ingredientes e limpa o valor em `newIngredients`.
+   */
   function handleAddIngredient() {
     setIngredients(prevState => [...prevState, newIngredients])
     setNewIngredients('')
   }
 
+  /**
+   * Atualiza o estado `newIngredients` com o valor do evento.
+   *
+   * Esta função é chamada quando há uma mudança em um campo de entrada de novo ingrediente.
+   * Ela atualiza o estado `newIngredients` com o valor do evento, que normalmente é o valor do campo de entrada.
+   *
+   * @param {object} oEv - O evento de mudança ocorrido no campo de entrada.
+   */
   function handleNewIngredient(oEv) {
     setNewIngredients(oEv.target.value)
   }
 
+  /**
+   * Atualiza o estado `picture` com o arquivo de imagem selecionado.
+   *
+   * Esta função é chamada quando um arquivo de imagem é selecionado por meio de um campo de entrada de arquivo.
+   * Ela atualiza o estado `picture` com o arquivo de imagem selecionado.
+   *
+   * @param {object} oEv - O evento de mudança ocorrido no campo de entrada de arquivo.
+   */
   function handleChangeImg(oEv) {
     const file = oEv.target.files[0]
     setPicture(file)
   }
 
+  /**
+   * Remove um ingrediente da lista de ingredientes.
+   *
+   * Esta função recebe um ingrediente a ser removido e atualiza o estado `ingredients`
+   * removendo o ingrediente da lista atual.
+   *
+   * @param {string} deleted - O ingrediente a ser removido.
+   */
   function handleRemoveIngredient(deleted) {
     setIngredients(prevState =>
       prevState.filter(ingredient => ingredient !== deleted)
     )
   }
 
+  /**
+   * Atualiza o estado `newIngredients` com o valor de um item selecionado.
+   *
+   * Esta função é usada quando um item é selecionado, como em uma lista de seleção.
+   * Ela atualiza o estado `newIngredients` com o valor do item selecionado.
+   *
+   * @param {object} oItem - O item selecionado.
+   */
   function handleSelectItem(oItem) {
     setNewIngredients(oItem.value)
   }

@@ -7,6 +7,14 @@ import { useState } from 'react'
 import { api } from '../../services/api'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 
+/**
+ * Componente SignUp para a página de registro.
+ *
+ * Este componente representa a página de registro onde os usuários podem criar
+ * uma nova conta fornecendo suas informações, como nome de usuário, email e senha.
+ *
+ * @returns {JSX.Element} Um componente de página de registro.
+ */
 export function SignUp() {
   const [name, setName] = useState()
   const [email, setEmail] = useState()
@@ -15,6 +23,14 @@ export function SignUp() {
 
   const navigate = useNavigate()
 
+  /**
+   * Função para realizar o cadastro de um novo usuário.
+   *
+   * Esta função é responsável por validar os campos de entrada, como nome, email e senha,
+   * e em seguida, enviar uma solicitação POST para a API para criar um novo usuário.
+   *
+   * @returns {void}
+   */
   function handleSignUp() {
     if (!name || !email || !password) {
       return getReactToastify(

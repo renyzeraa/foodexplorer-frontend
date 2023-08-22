@@ -8,6 +8,15 @@ import { EditPlate } from '../pages/EditPlate'
 import { Favorites } from '../pages/Favorites'
 import { CartProvider } from '../hooks/shoppingCart'
 
+/**
+ * Componente de roteamento principal da aplicação.
+ *
+ * O componente `AppRoutes` define as rotas da aplicação usando o pacote de roteamento `react-router-dom`.
+ * Ele mapeia URLs para os componentes correspondentes que devem ser renderizados.
+ * Também envolve os componentes que precisam de acesso ao carrinho de compras usando o contexto `CartProvider`.
+ *
+ * @returns {JSX.Element} Um elemento JSX que contém as rotas da aplicação.
+ */
 export function AppRoutes() {
   return (
     <CartProvider>

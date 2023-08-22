@@ -10,6 +10,13 @@ import { api } from '../../services/api'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 import { format, parseISO } from 'date-fns'
 
+/**
+ * Página de exibição de pedidos.
+ *
+ * Esta página exibe uma lista de pedidos, incluindo detalhes como número do pedido,
+ * status, horário e detalhes. Os pedidos são recuperados da API e exibidos em
+ * componentes de cartão (CardDemand) e linhas (RowDemand).
+ */
 export function Demand() {
   const [orders, setOrders] = useState([])
 
@@ -17,6 +24,13 @@ export function Demand() {
     fetchOrders()
   }, [])
 
+  /**
+   * Função assíncrona para buscar pedidos da API e lidar com a resposta.
+   *
+   * Esta função utiliza a biblioteca Axios para fazer uma solicitação GET à API para buscar pedidos.
+   * Se a solicitação for bem-sucedida, ela chama a função `handleOrders` para lidar com os dados dos pedidos.
+   * Se a solicitação falhar, uma notificação de erro é exibida usando a função `getReactToastify`.
+   */
   async function fetchOrders() {
     try {
       const response = await api.get(`/orders`)
@@ -26,6 +40,13 @@ export function Demand() {
     }
   }
 
+  /**
+   * Função para processar e formatar a data e hora de pedidos.
+   *
+   * Esta função recebe uma matriz de pedidos `aOrders` e formata a data e hora de cada pedido.
+   *
+   * @param {array} aOrders - Uma matriz de objetos de pedido, cada um contendo uma propriedade `created_at` com um valor de data e hora.
+   */
   function handleOrders(aOrders) {
     aOrders = aOrders.map(oOrder => {
       const sData = parseISO(oOrder.created_at)

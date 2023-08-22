@@ -16,6 +16,13 @@ import { InputMask } from '../../components/InputMask'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 import { useNavigate } from 'react-router-dom'
 
+/**
+ * Componente Payment para a página de pagamento.
+ *
+ * Este componente representa a página de pagamento onde o usuário pode revisar e concluir seu pedido.
+ *
+ * @returns {JSX.Element} Um componente de página de pagamento.
+ */
 export function Payment() {
   const [loading, setLoading] = useState(false)
   const [plates, setPlates] = useState([])
@@ -32,11 +39,21 @@ export function Payment() {
   let iTotalPrice = 0
 
   const navigate = useNavigate()
-
+  /**
+   * Este é um efeito colateral que é executado quando o componente é montado. 
+   * Ele chama a função handleAllPlates para buscar todos os pratos disponíveis. 
+   * O segundo argumento, [], indica que este efeito deve ser executado apenas uma vez, após o componente ser montado.
+   */
   useEffect(() => {
     handleAllPlates()
   }, [])
 
+  /**
+   * Função para buscar e lidar com todos os pratos disponíveis.
+   *
+   * Esta função é usada para buscar todos os pratos disponíveis na API e
+   * manipular os dados dos pratos para exibição ou processamento adicional.
+   */
   async function handleAllPlates() {
     try {
       setLoading(true)
@@ -52,11 +69,32 @@ export function Payment() {
     }
   }
 
+  /**
+   * Função para manipular os pratos.
+   *
+   * Esta função recebe um array de pratos e atualiza o estado `platesDb` com esses pratos.
+   * Em seguida, chama a função `handlePlateToShow` para atualizar os pratos exibidos.
+   *
+   * @param {Array} aPlates - Um array de objetos de prato.
+   */
   function handlePlates(aPlates) {
     setPlatesDb(aPlates)
     handlePlateToShow(aPlates)
   }
 
+  /**
+   * Função para atualizar os pratos a serem exibidos.
+   *
+   * Esta função recebe dois arrays opcionais, `aPlates` e `aPlatesCart`. Se `aPlates` não for fornecido,
+   * ele usará o estado `platesDb` como fonte de pratos. Se `aPlatesCart` não for fornecido,
+   * ele usará a função `getProducts` para obter os pratos do carrinho.
+   *
+   * Em seguida, ele filtra os pratos a serem exibidos com base na interseção entre `aPlates` e `aPlatesCart`.
+   * Ele calcula o preço total e formata os valores dos pratos exibidos e, em seguida, atualiza os estados `totalValue` e `plates`.
+   *
+   * @param {Array} aPlates - Um array de objetos de prato (opcional).
+   * @param {Array} aPlatesCart - Um array de objetos de prato do carrinho (opcional).
+   */
   function handlePlateToShow(aPlates = false, aPlatesCart = false) {
     if (!aPlates) {
       aPlates = [...platesDb]
@@ -96,6 +134,14 @@ export function Payment() {
     aPlates = []
   }
 
+  /**
+   * Função para formatar um valor em moeda.
+   *
+   * Esta função recebe um valor numérico e o formata em moeda brasileira.
+   *
+   * @param {number} iValue - O valor numérico a ser formatado.
+   * @returns {string} Uma string formatada no estilo de moeda brasileira.
+   */
   function getFormattedValue(iValue) {
     return iValue.toLocaleString('pt-BR', {
       style: 'currency',
@@ -103,15 +149,34 @@ export function Payment() {
     })
   }
 
+  /**
+   * Função para selecionar a forma de pagamento com cartão de crédito.
+   *
+   * Esta função remove a classe 'active' do elemento com id 'credit' e adiciona
+   * a classe 'active' ao elemento com id 'qrcode'.
+   */
   function selectCredit() {
     document.getElementById('credit').classList.remove('active')
     document.getElementById('qrcode').classList.add('active')
   }
+
+  /**
+   * Função para selecionar a forma de pagamento com Pix.
+   *
+   * Esta função remove a classe 'active' do elemento com id 'qrcode' e adiciona
+   * a classe 'active' ao elemento com id 'credit'.
+   */
   function selectPix() {
     document.getElementById('qrcode').classList.remove('active')
     document.getElementById('credit').classList.add('active')
   }
 
+  /**
+   * Função para limpar todos os itens dos pedidos.
+   *
+   * Esta função exibe um prompt de confirmação para o usuário e, se a resposta for positiva,
+   * limpa todos os itens dos pedidos (clearAll) e redefine o estado 'plates' como um array vazio.
+   */
   function handleClearAll() {
     const response = window.confirm(
       'Você deseja remover todos os items dos pedidos?'
@@ -121,7 +186,14 @@ export function Payment() {
       setPlates([])
     }
   }
-
+  
+  /**
+   * Função para remover um pedido pelo seu ID.
+   *
+   * Esta função remove um pedido pelo seu ID e atualiza o array de pedidos no carrinho.
+   *
+   * @param {number} id - O ID do pedido a ser removido.
+   */
   function handleRemoveOrder(id) {
     setLoading(true)
     const newArrayCart = deleteOrder(id)
@@ -129,6 +201,14 @@ export function Payment() {
     setLoading(false)
   }
 
+  /**
+   * Função para verificar se os valores necessários na tela foram preenchidos.
+   *
+   * Esta função verifica se os valores necessários na tela foram preenchidos
+   * com base na forma de pagamento selecionada (cartão de crédito ou Pix).
+   *
+   * @returns {boolean} true se os valores necessários foram preenchidos, false caso contrário.
+   */
   function verificaValoresTela() {
     if (!document.getElementById('credit').classList.contains('active')) {
       if (!codeCard || !cardNumber || !cardValidate) {
@@ -138,6 +218,14 @@ export function Payment() {
     return true
   }
 
+  /**
+   * Função para obter os dados do pedido em um objeto FormData.
+   *
+   * Esta função é usada para criar um objeto de dados do pedido em formato FormData
+   * com base nos pratos selecionados e no valor total do pedido.
+   *
+   * @returns {FormData|false} Um objeto FormData com os dados do pedido ou false se não houver pratos no pedido.
+   */
   function getFormDataOrder() {
     //pratos do pedido
     let aPlatesOrder = []
@@ -167,6 +255,15 @@ export function Payment() {
     }
   }
 
+  /**
+   * Função para lidar com o processo de pagamento e criação de um novo pedido.
+   *
+   * Esta função é chamada quando o usuário deseja concluir o pagamento e criar um novo pedido.
+   * Ela executa a validação dos valores na tela, cria um objeto de dados do pedido e faz uma solicitação
+   * POST ao servidor para criar o pedido.
+   *
+   * @returns {void}
+   */
   async function handlePayment() {
     if (!verificaValoresTela()) {
       return getReactToastify(
