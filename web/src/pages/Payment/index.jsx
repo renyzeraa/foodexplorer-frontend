@@ -142,11 +142,15 @@ export function Payment() {
     //pratos do pedido
     let aPlatesOrder = []
     platesDb.forEach(oPlate => {
-      aPlatesOrder.push(oPlate.id)
-      return plates.some(plate => {
+      if (plates.some(plate => {
         return oPlate.id == plate.id
-      })
+      })) {
+        aPlatesOrder.push(oPlate.id)
+      }
     })
+    if(!aPlatesOrder.length) {
+      return false;
+    }
     let sDetails = ''
     plates.forEach(item => {
       sDetails += `${item.qtd} x ${item.title}, `
@@ -170,8 +174,15 @@ export function Payment() {
         'Favor preencher todos os valores corretamente'
       )
     }
-    const oFormData = getFormDataOrder()
+    
     try {
+      const oFormData = getFormDataOrder()
+      if (!oFormData) {
+        return getReactToastify(
+          oTiposToastify.TIPO_ALERT,
+          'Não é possível criar pedido sem pratos.'
+        )
+      }
       setLoading(true)
       await api.post('/orders', oFormData)
       clearAll()
