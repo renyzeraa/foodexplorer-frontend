@@ -18,10 +18,10 @@ export function CardDemand({
   // ajustar cor e nome do status do pedido
   let sStatus = '🔴'
   let sStatusName = 'Pendente'
-  if (iStatus == 1) {
+  if (iStatus == 2) {
     sStatus = '🟡'
     sStatusName = 'Preparando'
-  } else if (iStatus == 2) {
+  } else if (iStatus == 3) {
     sStatus = '🟢'
     sStatusName = 'Pronto'
   }
@@ -67,9 +67,9 @@ export function CardDemand({
           value={value}
           onChange={e => handleSelectValue(e.target.value)}
         >
-          <option value="0">🔴 Pendente</option>
-          <option value="1">🟡 Preparando</option>
-          <option value="2">🟢 Pronto</option>
+          <option value="1">🔴 Pendente</option>
+          <option value="2">🟡 Preparando</option>
+          <option value="3">🟢 Pronto</option>
         </select>
       )}
     </Container>

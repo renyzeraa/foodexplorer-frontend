@@ -52,7 +52,7 @@ export function Demand() {
             <CardDemand
               key={order.id}
               iPedido={order.code}
-              iStatus={order.status}
+              iStatus={order.status_id}
               sTimeStamp={order.sData}
               sDetails={order.details}
             />
@@ -74,7 +74,7 @@ export function Demand() {
                 <RowDemand
                   key={order.id}
                   iPedido={order.code}
-                  iStatus={order.status}
+                  iStatus={order.status_id}
                   sTimeStamp={order.sData}
                   sDetails={order.details}
                 />
