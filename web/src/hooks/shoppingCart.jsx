@@ -2,6 +2,15 @@ import { createContext, useContext, useState } from 'react'
 
 export const CartContext = createContext({})
 
+/**
+ * Componente de provedor de carrinho de compras.
+ *
+ * Este componente fornece um contexto para gerenciar o estado do carrinho de compras
+ * e realizar operações relacionadas ao carrinho de compras, como adicionar ou remover itens.
+ *
+ * @param {object} children - Os componentes filho que serão envolvidos pelo provedor do carrinho de compras.
+ * @returns {JSX.Element} Um componente de provedor do carrinho de compras.
+ */
 function CartProvider({ children }) {
   /**  Definir valores */
   const [productsCart, setProductsCart] = useState([])
