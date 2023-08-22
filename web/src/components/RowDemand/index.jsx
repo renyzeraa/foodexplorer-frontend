@@ -2,6 +2,19 @@ import { useState } from 'react'
 import { useAuth } from '../../hooks/auth'
 import { Row } from './style'
 
+/**
+ * Componente RowDemand para exibir uma linha de informações de um pedido.
+ *
+ * Este componente é usado para representar uma linha de informações de um pedido,
+ * incluindo o número do pedido, o status, o horário e detalhes.
+ *
+ * @param {number} iPedido - O número do pedido.
+ * @param {number} iStatus - O status do pedido.
+ * @param {string} sTimeStamp - O horário do pedido.
+ * @param {string} sDetails - Os detalhes do pedido.
+ * @param {object} rest - Outras propriedades passadas para o componente.
+ * @returns {JSX.Element} Um componente de linha de informações de pedido.
+ */
 export function RowDemand({
   iPedido = 0,
   iStatus = 0,
@@ -15,37 +28,21 @@ export function RowDemand({
   /** Definir valores */
   const [value, setValue] = useState(iStatus)
   // ajustar cor e nome do status do pedido
-  let sStatus = '🔴'
-  let sStatusName = 'Pendente'
-  if (iStatus == 2) {
-    sStatus = '🟡'
-    sStatusName = 'Preparando'
-  } else if (iStatus == 3) {
-    sStatus = '🟢'
-    sStatusName = 'Pronto'
-  }
-  // ajustar número do pedido
-  let sPedido = ''
-  if (iPedido <= 9) {
-    sPedido = `00000${iPedido}`
-  } else if (iPedido <= 99) {
-    sPedido = `0000${iPedido}`
-  } else if (iPedido <= 999) {
-    sPedido = `000${iPedido}`
-  } else if (iPedido <= 9999) {
-    sPedido = `00${iPedido}`
-  } else if (iPedido <= 99999) {
-    sPedido = `0${iPedido}`
-  } else {
-    sPedido = String(iPedido)
-  }
+  // Formatar o número do pedido com zeros à esquerda
+  const formattedPedido = iPedido.toString().padStart(6, '0')
+
+  const statusOptions = [
+    { value: 1, emoji: '🔴', name: 'Pendente' },
+    { value: 2, emoji: '🟡', name: 'Preparando' },
+    { value: 3, emoji: '🟢', name: 'Entregue' },
+  ]
 
   /**
-   * Lidar com o status do pedido atual
-   * @param {mixed} xValue
+   * Lidar com a mudança de status do pedido
+   * @param {number} newValue - O novo valor de status selecionado.
    */
-  function handleSelectValue(xValue) {
-    setValue(xValue)
+  function handleSelectValue(newValue) {
+    setValue(newValue)
   }
 
   return (
@@ -54,20 +51,22 @@ export function RowDemand({
         {admin ? (
           <select
             value={value}
-            onChange={e => handleSelectValue(e.target.value)}
+            onChange={(e) => handleSelectValue(e.target.value)}
             className="select-status"
           >
-            <option value="1">🔴 Pendente</option>
-            <option value="2">🟡 Preparando</option>
-            <option value="3">🟢 Entregue</option>
+            {statusOptions.map((option) => (
+              <option key={option.value} value={option.value}>
+                {`${option.emoji} ${option.name}`}
+              </option>
+            ))}
           </select>
         ) : (
-          <span>
-            {sStatus} {sStatusName}
-          </span>
+          `${statusOptions.find((option) => option.value === iStatus)?.emoji} ${
+            statusOptions.find((option) => option.value === iStatus)?.name
+          }`
         )}
       </td>
-      <td>{sPedido}</td>
+      <td>{formattedPedido}</td>
       <td>{sDetails}</td>
       <td>{sTimeStamp}</td>
     </Row>
