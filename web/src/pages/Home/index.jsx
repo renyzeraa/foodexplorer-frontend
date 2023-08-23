@@ -297,6 +297,7 @@ export function Home() {
                         title={plate.title}
                         description={plate.description}
                         price={plate.value}
+                        amount={plate.amount}
                         img={plate.picture}
                         isAdmin={admin}
                         fnLoading={loadingCard}
