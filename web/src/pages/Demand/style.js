@@ -12,6 +12,7 @@ export const Container = styled.main`
     margin-top: 48px;
     margin-bottom: 48px;
     height: auto;
+    min-height: 100%;
     
     .header {
       display: flex;
