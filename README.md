@@ -53,6 +53,8 @@ _`Senha : renan123`_
 
 <a href='https://foodexplorer-eight.vercel.app/' target='_blank'>foodexplorer-eight.vercel.app/</a>
 
+![image](https://github.com/user-attachments/assets/534ef0b3-f09f-4bde-aa66-9c77524e1f1f)
+
 ### Contato
 
 <img align="left" src="https://www.github.com/renyzeraa.png?size=150">
