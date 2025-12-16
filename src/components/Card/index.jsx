@@ -104,16 +104,6 @@ export function Card({
   }, [])
 
   /**
-   * Para o admin, o prato poderá ser alterado
-   * * @param {integer} idCard
-   */
-  function handlePlate(idCard) {
-    fnLoading && fnLoading(true)
-    navigate(`/plates/${idCard}`)
-    fnLoading && fnLoading(false)
-  }
-
-  /**
    * Adiciona o prato aos favoritos do usuário
    */
   async function addFavPlate() {
@@ -243,7 +233,7 @@ export function Card({
     <Container {...rest} CardId={CardId}>
       <button className="btn-fav ">
         {isAdmin ? (
-          <Link onClick={() => handlePlate(CardId)}>
+          <Link to={`/plates/${CardId}`}>
             <TbPencil />
           </Link>
         ) : (

@@ -12,6 +12,7 @@ import { api } from '../../services/api'
 import { Button } from '../../components/Button'
 import { getReactToastify, oTiposToastify } from '../../methods/toastify'
 import { InputMask } from '../../components/InputMask'
+import { useAuth } from '../../hooks/auth'
 
 /**
  * Componente Plate para criar ou editar um prato.
@@ -23,6 +24,7 @@ import { InputMask } from '../../components/InputMask'
  * @returns {JSX.Element} Um componente para criar ou editar pratos.
  */
 export function Plate({}) {
+  const { signOut } = useAuth()
   const navigate = useNavigate()
   const [loading, setLoading] = useState(false)
   const [picture, setPicture] = useState()
@@ -103,6 +105,11 @@ export function Plate({}) {
     } catch (error) {
       setLoading(false)
       getReactToastify(oTiposToastify.TIPO_ERROR, 'Erro ao salvar o Prato !')
+
+      if (error.status === 401) {
+          signOut()
+          navigate('/')
+      }
     }
   }
 

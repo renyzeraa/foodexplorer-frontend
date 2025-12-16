@@ -14,6 +14,8 @@ Tanto o admin quanto o usuário poderão buscar os pratos por nome e/ou ingredie
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white) ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white)
 
+[figma do projeto](https://www.figma.com/design/8iYJqGXut2gyq70LCJv6tm/food-explorer-v2--Community-?node-id=201-1532&p=f&t=fqkf2x9M84ESWEn3-0)
+
 ### Instruções de uso
 
 ##### - Pré-requisitos
@@ -30,13 +32,16 @@ Tanto o admin quanto o usuário poderão buscar os pratos por nome e/ou ingredie
 
 `Navegue até o diretório do projeto:`
 
-      cd /web/src
+      cd foodexplorer-frontend
 
 `Instale as dependências do projeto usando o npm:`
 
       npm install
 
 ##### - Executando o Projeto
+
+**Lembre-se de rodar o backend localmente tambem**
+**Crie o arquivo .env igual o .env.example e coloque a url do backend**
 
 `Para iniciar o projeto, execute o seguinte comando:`
 
