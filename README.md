@@ -56,7 +56,7 @@ _`Senha : renan123`_
 
 ### Deploy do Projeto 🚀
 
-<a href='https://foodexplorer-eight.vercel.app/' target='_blank'>foodexplorer-eight.vercel.app/</a>
+<a href='https://foodexplorer-new.vercel.app/' target='_blank'>foodexplorer-new.vercel.app/</a>
 
 ![image](https://github.com/user-attachments/assets/872a5987-2352-4032-a2d5-fbd59fc684f1)
 
